@@ -1,0 +1,102 @@
+\documentclass[times, utf8, diplomski]{fer}
+\usepackage{booktabs}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{listings}
+\usepackage{longtable}
+
+
+\begin{document}
+
+% TODO: Navedite broj rada.
+\thesisnumber{1720}
+
+% TODO: Navedite naslov rada.
+\title{Projektiranje sustava praćenja trajektorije bespilotne letjelice u sustavu globalne vizije}
+
+% TODO: Navedite vaše ime i prezime.
+\author{Luka Galović}
+
+\maketitle
+
+% Ispis stranice s napomenom o umetanju izvornika rada. Uklonite naredbu \izvornik ako želite izbaciti tu stranicu.
+\izvornik
+
+% Dodavanje zahvale ili prazne stranice. Ako ne želite dodati zahvalu, naredbu ostavite radi prazne stranice.
+\zahvala{Svima koji žele naučiti koristiti \LaTeX{}.}
+
+\tableofcontents
+% Tu možete staviti popis slika i tablica
+
+\chapter{Uvod}
+Uvod rada. Nakon uvoda dolaze poglavlja u kojima se obrađuje tema.
+
+\chapter{Proba}
+Uvod rada. Nakon uvoda dolaze poglavlja u kojima se obrađuje tema.
+\section{Odjeljak 1.1}
+Tekst o odjeljku
+\subsection{Pododjeljak}
+\emph{How can we eat?}
+Popis fusnota\footnote{Objašnjenja koja se prikazuju
+na dnu stranice} nije potreban.
+\section{Dodavanje posvete}
+\label{sec:posveta}
+Za navedeno pogledajte odjeljke \ref{sec:posveta}
+\begin{itemize}
+	\item prva stavka,
+	\item druga stavka,
+	\begin{enumerate}
+		\item druga razina.
+	\end{enumerate}
+\end{itemize}
+
+\begin{table}[htb]
+\caption{Konstante}
+\label{tbl:konstante}
+\centering
+\begin{tabular}{llr} \toprule
+Konstanta & Opis & Vrijednost\\ \midrule
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=5cm]{img/fer_logo.jpg}
+\caption{Logo FER-a}
+\label{fig:fer-logo}
+\end{figure}
+
+‘Prva dama: $\sin^2 \varphi + \cos^2 \varphi = 1$.’ \citep{ungar2002uvod} \cite{oetiket2007lshort}
+
+Dodatak dokumenta \engl{appendix}.
+
+Primjer korištenja enumitem paketa dan je u \citep{collins2008enum}.
+\citet{collins2008enum} opisuje korištenje enumitem paketa.
+jos daj
+\cite{greenwade93}
+Text ... citation: \cite{greenwade93}.
+
+\chapter{Zaključak}
+Zaključak.
+
+\bibliographystyle{fer}
+\bibliography{literatura}
+
+\begin{sazetak}
+Sažetak na hrvatskom jeziku.
+
+\kljucnerijeci{Ključne riječi, odvojene zarezima.}
+\end{sazetak}
+
+% TODO: Navedite naslov na engleskom jeziku.
+\engtitle{Title}
+\begin{abstract}
+Abstract.
+
+\keywords{Keywords.}
+\end{abstract}
+
+\end{document}
