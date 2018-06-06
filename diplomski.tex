@@ -6,8 +6,11 @@
 \usepackage{longtable}
 \usepackage{graphicx}
 \usepackage{array}
-\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multirow}
 
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 
 \begin{document}
 
@@ -34,40 +37,243 @@
 \chapter{Uvod}
 Ulaskom u novo stoljeće svjedočimo nastavku razvoja, usavršavanja i stvaranja novih tehnologija koja su pomoć u različitim ljudskim aktivnostima. Iako pojam bespilotnih letjelica postoji već dugi niz godina, one su tek u bliskoj prošlosti postale pojam svakodnevnice. Dugi niz godina bespilotne letjelice su se koristile, nažalost, samo u vojnim svrhama zbog čega su stradavali i nedužni civili zbog čega se njihov razvoj držao u tajnosti. Samo saznanje da se koriste u vojsci upućuje na to da je puno vremena i novaca uloženo u njihov razvoj, preciznost, nosivost te izdržljivost.\\
 Danas se uz nagli tred upoznavanja s tehnologijama bespilotnih letjelica, kao i digitalnih zapisa i pohranjivanja memorije svakodnevnih događaja namjena korištenja promijenila te su uvedeni novi pojmovi poput \glqq dronovi\grqq --- suvremena riječ koja zapravo opisuje nekoliko vrsta bespilotnih letjelica. Glavna područja njihovih korištenja su: javna sigurnost, zabava, nadzor i inspekcija, informacije, znanost o Zemlji.\\
-Korištenje  bespilotnih letjelica, naročito u civilne svrhe, bilježi eksponencijalan rast, kako u pogledu njihovog broja, veličine i težine, tako i u pogledu sve brojnijih mogućnosti njihove primjene \citep{EUR-Lex}.\\
+Korištenje  bespilotnih letjelica, naročito u civilne svrhe, bilježi eksponencijalan rast, kako u pogledu njihovog broja, veličine i težine, tako i u pogledu sve brojnijih mogućnosti njihove primjene \citep{EUR-Lex}. U skoroj budućnosti tehnologija će se usavršiti pa će manje letjelice moći prenositi sve veću opremu, tako npr.~poštanski paketi će se dostavljati pomoću letjelica.\\
 Motiv izrade ovog rada je shvatiti rad bespilotne letjelice te izrada sustava za slijeđenje željene trajektorije. Izazov je kretati se zadanom trajektorijom znajući da postoje razne vanjske smetnje koje utjeću na upravljanje. U teorijskom dijelu će se opisati razvoj, svrha odnosno tipovi bespilotnih letjelica, dok će se detaljnije razraditi njezin model te odrediti matematički model prikladan za sintezu sustava upravljanja. Projektirat će se regulator za slijeđenje reference, uz pretpostavku raspoloživosti informacije o trenutnoj poziciji te orijentaciji. Provjera projektiranog sustava je u simulaciji odnosno eksperimentalno u laboratorijskim uvjetima.
 
 \chapter{Razrada}
 \section{Bespilotne letjelice}
-Bespilotne letjelice su, najjednostavnije rečeno, letjelice koje su sposobne izvršiti kontinuirani let bez pilota\citep{UAV}. Definiranjem pojma bespilotnih letjelica\footnote{UAV \engl{Unmanned Aerial Vehicle} – opći je pojam koji označava zapravo sve vrste bespilotnih letjelica koje se kolokvijalno najčešće nazivaju dronovima. Pod tim se obično spominju dvije vrste letjelica kojima ne trebaju ljudski piloti, prve su tzv. kvadrikopteri \engl{quadcopter}, letjelice s četiri elise pomoću kojih dron može lebdjeti na mjestu i kretati se u raznim smjerovima. Drugi tip bespilotnih letjelica su izgleda projektila ili zrakoplova kojim se upravlja iz baze i povezani su uglavnom s vojnim operacijama.} nailazi se na bogat izbor objašnjenja jer imaju široku primjenu. \\
+Bespilotne letjelice (UAV\footnote{UAV \engl{Unmanned Aerial Vehicle} – opći je pojam koji označava zapravo sve vrste bespilotnih letjelica koje se kolokvijalno najčešće nazivaju dronovima. Pod tim se obično spominju dvije vrste letjelica kojima ne trebaju ljudski piloti, prve su tzv. kvadrikopteri \engl{quadcopter}, letjelice s četiri elise pomoću kojih dron može lebdjeti na mjestu i kretati se u raznim smjerovima. Drugi tip bespilotnih letjelica su izgleda projektila ili zrakoplova kojim se upravlja iz baze i povezani su uglavnom s vojnim operacijama.}) su, najjednostavnije rečeno, letjelice koje su sposobne izvršiti kontinuirani let bez prisutnosti pilota \citep{UAV}. Postoje razni oblici i veličine, no najčešće su dizajnirane za točno specifične uloge.\\
+U nastavku bit će navedeni kratak pregled bespilotnih letjelica kroz povijest, njihova definicija, vrste te primjena.\\
+Današnji dronovi su opremljeni raznim senzorima (akcelometri, giroskopi, kamere) koji olakšavaju njihovo upravljanje i točnost pozicioniranja u prostoru.
+%Definiranjem pojma bespilotnih letjelica nailazi se na bogat izbor objašnjenja jer imaju široku primjenu. \\
 
+\subsection{Pregled povijesti}
+Početak razvoja bespilotnih letjelica je usko vezan s razvojem svih zrakoplova. Povijest seže u prošlo stoljeće kada su Kinezi puštali papirnate zmajeve prema nebu ili letjeli u balonima na vrućem zraku, iako bi se moglo reći da je prva bespilotna letjelica kamen koji je bacio špiljski čovjek u pretpovijesno doba. Ove \glqq letjelice\grqq imaju malo ili nimalo kontrole. U suvremenom dobu, bespilotnim letjelicama se nazivaju sve letjelice koje su imale autonomno ili daljinsko upravljanje. Razvojem tehnologija i moderniziranjem nazivi i opisi ovih letjelica se mijenjaju poput ratnih torpeda, bespilotnih vozila, daljinski upravljača, autonomna kontrola, dron itd.\\
+U ranim godinama zrakoplostva, sama ideja da zrakoplov leti bez ljudskog faktora imala je veliku prednost u tome što je na taj način u potpunosti uklonila rizik za život. No pojavio se veliki nedostatak kod mogućnosti upravljanja takvim letjelicama, odnosno postojala su određena ograničenja. Tako su bespilotne letjelice bile opisivane kao 3D \engl{dangarous, dirty, dull} --- opasne, prljave i glupe. Opasne su jer njima netko može srušiti zrakoplov i dovesti u opasnost pilota i ostale putnike, zatim prljave su jer se kreću na mjestima koja su izložena kemijskom, biološkim ili radiološkim opasnostima, te glupe jer je potrebno njima upravljati nekoliko sati što postaje stresno i nepoželjno \citep{unmannedAircraftSystem}. Danas se upotreba i korištenje znatno promijenilo te su one postale popularan izvor zabave, uz svrhu i na nekim drugim područjima.\\
+Bespilotne letjelice kao takve, bile su prepoznatljive i prije Prvog svjetskog rata. Tome su  doprinijeli ljudi koji su ih već tad koristili za područje istraživanja i slično. Konkretnije, 1883.  godine  Douglas  Archibald, po  nacionalnosti Englez,  na liniju  „zmaja“  stavio  je anemometar  te  je  mjerio  brzinu  vjetra  na  raznim  nadmorskim  visinama. Nekoliko  godina kasnije, na „zmaj“ je priključio kamere te je na taj način proizveo prvo izviđanje putem letjelice. Nadalje, William Eddy snimio je tisuće fotografija koristeći „zmaj“ s kamerama tijekom rata što se može smatrati prvim korištenjem bespilotnih letjelica za vrijeme ratne borbe\citep{UAVSystems}.\\
+Veliki razvoj bespilotnih letjelica vidljiv je u vojne svrhe. Charles  Kettering  razvio  je  bespilotnu  letjelicu  s  dva  krila, tzv.~dvokrilac za tadašnju vojsku (\emph{Army Signal Corps}). Tri godine razvoja dovele su do letjelice nazvane „\emph{Kettering Aerial Torpedo}", odnosno „\emph{Kettering Bug}“ ili samo „\emph{Bug}“. Letjelica je mogla letjeti približno 40 do 55 m/h te nositi oko 80 kg teškog eksploziva. Bila usmjerena prema cilju sa svojim postavkama i imala  je  odvojiva  krila  koja  bi  se ispustila u  trenutku kada  bi  letjelica  bila iznad  mete dopuštajući trupu aviona da padne na tlo kao bomba.  Također 1917.~, Lawrence Sperry je razvio UAV, sličan kao od Katteringa. Letjelica je imala naziv \emph{Sperry - Curtis Aerial Torpedo}, a bila je namjena za mornaricu. Imala nekoliko uspješnih letova, no nikad se nije koristila u ratu. Tvrtka pod nazivo \emph{Radioplane Company} je izradila tisuće ciljnih dronova \engl{target drones} za vrijeme drugog svjetskog rata. Nijemci su u kasnijim godinama drugog svjetskog rata koristili smrtonosne bespilotne letjelice V-1 i V-2. Tek su se u vrijeme Vijetnamskog rata bespilotne letjelice uspješno koristile kao sredstva za nadziranje odnosno izviđanje. (Fahlstrom, Gleason, 2012., str. 4). Značajnu ulogu bespilotne letjelice imale su i u ratovima u Bosni i Afganistanu.\\
+Nadalje, tijekom zadnjih nekoliko godina ovakve letjelice su se sve više razvijale i modernizirale te se njihova svrha i način korištenja promijenio. Ovakav razvoj doveo je do pitanja hoće li bespilotne letjelice, odnosno sustavi bespilotnih letjelica, zamijeniti zrakoplove i letjelice za koje je potreban ljudski faktor. Postoje u potpunosti automatizirane letjelice čiji je kontrolni sustav neovisan o vanjskim signalima, a i one koje sadržavaju mogućnosti ručnog upravljanja  od  strane  pilota.  Teoretski,  potpuno  automatizirane  letjelice  mogu  letjeti  bez utjecaja ili ometanja od strane bilo kakvog signala, no njihov nedostatak je taj što mogu biti kontrolirane od strane računala. Na taj način je omogućeno manipuliranje sustavom te unatoč jakoj enkripciji,  još  uvijek  postoji  sigurnosni  rizik  i  opasnost.  Upravo  zbog  toga  te  same kontrole  i  sigurnosti  zrakoplova, i njihovih putnika, odgovornost koju pruža ljudski faktor u zrakoplovstvu, spriječit će da bespilotne letjelice postanu prioritet ili da u potpunosti zamijene normalne letjelice \citep{UAVSystems}.\\
+Danas se vojna upotreba bespilotnih letjelica može 
+podijeliti na tri područja, to su pomorska, kopnena i zračna upotreba, dok se u civilne  svrhe  može  upotrijebiti  u  različitim  područjima ljudskih  aktivnosti  kao  npr.  u  geodeziji  tj. fotogrametriji,   poljoprivredi,   industrijskoj proizvodnji,  civilnoj  zaštiti,  upravljanju katastrofama,  zaštiti  okoliša,  nadzorom policijskog    djelovanja,    obavještajnim službama,   novinarstvom,   komercijalnim djelatnostima, razonodom itd. Također  je  sve  veća  uporaba  bespilotnih letjelica za inspekciju   nepristupačnih dijelova  u industrijskim  objektima  kao  što su: brane, dalekovodi, visoki dimnjaci, cjevovodi, mostovi i dr. Isto tako sve popularniji i mali modeli namijenjeni za razonodu.
+
+\subsection{Definicija bespilotnih letjelica}
+Za pojam bespilotnih letjelica koristi se engleski službeni naziv „Unmanned Aerial Vehicle“,  dok  se  zadnjih  nekoliko  godina  pojavio  pojam  UAS  \engl{Unmanned  Aerial System}. Time se htjelo naglasiti činjenica da su to složeni sustavi koji uključuju i postaje na zemlji te mnoge druge elemente, a ne samo letjelice koje lete zrakom. Međutim, pojam UAS nije punokorišten za razliku od pojma UAV koji je postao dio modernog leksikona 
+(The UAV, n.d.).\\
+Bespilotne letjelice lete bez ljudskog pilota, umjesto toga kontrolira ih operator na tlu. Svrha bespilotnih letjelica, odnosno u ovom slučaju se govori o sustavu bespilotnih letjelica (UAS),  tj.  dronova, je  dostava poruke,  paketa  ili  samo  skupljanje  podataka. Kao najvažnija svrha sustava je upravo prikupljanje podataka. Letjelice poput dronova, a i neke druge, mogu prodrijeti  u  područja  i  lokacije  do  kojih  čovjek  ne  može  bez  određene  opasnosti  i  rizika. Ponekad, podaci mogu biti presudni za određene operacije ili aktivnosti. Također, navodi se da je jedna od karakteristika ovakvih sustava to što ih se može ponovno koristiti, odnosno to što se vraćaju (Unmanned Aerial Vehicle Systems Association, 2016).
+
+\subsection{Prednosti i nedostaci}
+Postoji nekoliko prednosti i nedostataka koje pružaju bespilotne letjelice. Prednost u odnosu na letjelice s pilotom je upravo u tome, što bespilotne letjelice ne trebaju imati pilota 
+koji fizički  mora  biti  unutar  letjelice  u
+pravljati  njome.  Nadalje, jedna od prednosti je ta što mogu doći na nedohvatljiva područja za ljude, a obavljaju precizno i kvalitetno snimanje terena. Mogu ostati u zraku i do 30 sati (Advantages of UAS, 2016). Samim time, bespilotna letjelica predstavlja sigurno okruženje te se može kretati dosta velikom brzinom. Ukoliko dođe do pada letjelice, nema štete od stradanja pilota, a uz to mogu letjeti u zonama u kojima postoje velike opasnosti i to na duže vrijeme (Soffar, 2016). \\
+Prednosti koje dronovi pružaju su njihova niska cijena te je održavanje puno jeftinije od običnih letjelica i zrakoplova. Uz to, dronovi mogu letjeti na niskim nadmorskim visinama za razliku od zrakoplova, a također mogu letjeti nekoliko sati bez prestanka. Njihove sposobnosti snimanja, nadziranja, nadgledavanja, izviđanja jedne su od velikih prednosti kao i laka i brza implementacija sustava (Phil for Humanity, 2016).\\
+S  druge  strane,  postoje  i  neki  nedostaci  bespilotnih  letjelica  i  dronova. Bespilotne letjelice su u odnosu na dronove, skupe za proizvodnju,dok se veliki troškovi mogu pojaviti i ljudskom greškom kod letjelica s daljinskim upravljanjem te to može uzrokovati njen pad. Također, može se dogoditi i to da se letjelica izgubi što također donosi velike troškove. Kvarovi na računalu isto mogu uzrokovati štete na bespilotnim letjelicama, naročito kada se one koriste za vojne napade što može rezultirati ubijanjem civila i uništenjem  civilne  imovine (Soffar, 2016). \\
+Unatoč tome, vojska i dalje koristi dronove i  bespilotne letjelice jer vjeruju u njihove prednosti, a nisu svjesni nedostataka. Nedostaci dronova su ti da oni ne mogu komunicirati s civilima, odnosno u slučaju vojnog napada te potrebe za evakuacijom nekog područja. Loše programirani dronovi mogu izazvati velike štete, a kao takvi mogu biti preuzeti od strane neprijatelja što dovodi u pitanje sigurnost takvih sustava. 
+
+
+ 
+
+\subsection{Vrste}
+Prema Fahlstorm  i  Gleason  (2012.) postoje  3  vrste  letjelica  bez  pilota,  isključujući 
+projektile: \begin{itemize}
+\item Bespilotne letjelice \engl{Unmanned Aerial Vehicle - UAV}
+\item Letjelice na daljinsko upravljanje \engl{ Remotely Piloted Vehicle - RPV}
+\item Dronovi \engl{Drones}
+\item Oblik muhe \engl{insect fly shaped drone}
+\end{itemize}
+U današnje doba, najčešći pojam koji se javlja za opisivanje bespilotnih letjelica je dron. Razlika između drona i bespilotne letjelice (UAV) je u stupnjuautomatizacije, jer dronov let ovisi o unaprijed programiranom ponašanju, a kod UAV postoji daljinsko upravljanje od strane pilota  u  kontrolnoj  stanici (UAV  Insider,  2013). U ovom radu bit će naglasak na treću vrstu bespilotnih letjelica koje se sve više i više danas koriste, a to su dronovi. 
+
+\subsubsection{UAV}
+Kao što je već spomenuto, bespilotna letjelica je letjelica ili zrakoplov bez pilota. Njome se može upravljati na daljinski, odnosno od strane osoba koja to čini u kontrolnoj stanici. S druge strane, može letjeti samostalno na temelju unaprijed programiranih planova leta ili više složenih dinamičkih sustava za automatizaciju. Takve letjelice se koriste za mnoge svrhe i misije, najčešće u slučaju izviđanja, no ponekad imaju i napadačke uloge. Sposobnosti koje posjeduje su te što može biti kontrolirala, ima održiv horizontalni let i pokreće se pomoću mlaznog ili klipnog motora. Postoji nekoliko tipova ovakvih letjelica, a klasificirane su prema svrsi koju obavljaju (The UAV, n.d.):
+\begin{itemize}
+\item Za pronalaženje ciljeva i meta --- pronalazi zemaljske i zračne neprijateljske mete 
+\item Izviđačke --- omogućuje pronalazak ratnih polja
+\item Za borbu --- ima napadačku sposobnost za visoko rizične misije
+\item Za istraživanje i razvoj --- koristi se za daljnji razvoj tehnologije
+\item U građanske i trgovačke svrhe --- posebno dizajniran za državne i komercijalne svrhe
+\end{itemize}
+Neke  od  bespilotnih  letjelica  su:  Altair,  Global  Hawk,  X47-A, Prowler II, X45-A UCAV, Fire Scout, Predator A i Predator B, ER/MP UAS, I-GNAT, Mariner, Army I-GNAT ER i drugi.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=5cm]{img/fer_logo.jpg}
+\caption{Bespilotna letjelica\protect\footnotemark}
+\label{fig:bespilotna letjelica}
+\end{figure}
+\footnotetext{www.sadasfasdfasfas}
+
+\subsubsection{RPV}
+RPV su letjelice na daljinsko upravljanje \engl{ Remotely Piloted Vehicle}. Takve male letjelice  su  najviše  korištene  za  terenski  rad  vezan  uz  okoliš. Prema  tome,  njihov  raspon korištenja kreće se od šumarstva, morskih istraživanja, promatranja biljnih i životinjskih svijeta, dobivanja uzoraka o biološkim stvarima iz zraka i slično. Prednosti takvih letjelica su u tome što je pilot siguran, odnosno nije fizički prisutan. Zatim, brzo prikupljanje podataka, niska cijena te relativno kratko vrijeme odaziva i dobivanja odgovora na zahtjeve. No s druge strane, postoje i neka ograničenja prilikom takvih letjelica, a to su niska stabilnost kao fotografske platforme, kratko vrijeme leta, malobrojnost senzora, teškoće kod navigacijskog sustava itd. \\
+Daljnji razvoj i korištenje letjelica na daljinsko upravljanje je upravo za potrebe snimanja stana okoliša. Osim otkrivanja i procjene okoliša, potreban je i daljnji fokus na poboljšanje slike te omogućiti ugradnju više senzora za razna mjerenja \citep{Hardin}.
+
+\subsubsection{Dronovi}
+Vrsta bespilotnih letjelica, poznatiji kao dronovi su zračni bespilotni sustavi koji mogu biti kratkog ili dugog dometa, a koriste se za vojne ili civilne svrhe. Najčešća oprema koju dron sadržava je kamera, a neki mogu biti naoružani projektilima. 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=5cm]{img/fer_logo.jpg}
+\caption{Bespilotna letjelica\protect\footnotemark}
+\label{fig:dron}
+\end{figure}
+\footnotetext{www.sadasfasdfasfaass}
+Na  slici~\ref{fig:dron}  nalazi  se  slika 
+drona. Današnja najvažnija primjena dronova je stvaranje mapa, odnosno snimaka iz zraka. Dronovi su  vrlo dobri u izradi karata, daleko više od drugih tehnologija za istu primjenu. Nadalje, odlični su u fotografiranju i računalnoj  obradi  tih  fotografija \citep[str.~10]{Drones}. Većina dronova koriste razne senzore kako  bi  napravili  procjenu  stanja,  odnosno  koriste  MEMS\footnote{\engl{Microelectromechanical}} čipove  za  mjerenje  ubrzanja  i rotacije. Neki od njih nose sustav za mjerenje udaljenosti od tla te također mogu imati barometre za  mjerenje  tlaka  zraka.  Uz  to,  dronovi  mogu  imati  na  sebi senzore  za  prijenos  topline  pa  i manetometre za mjerenje zemljinog magnetnog polja. No najveća većina njih posjeduje GPS senzore jer MEMS senzori koji se koriste na takvim jeftinim letjelicama nisu dovoljni precizni. No, GPS ne može ažurirati svoju poziciju dovoljno često te ima svoje oscilacije pa je najbolja kombinacija  upravo  spomenutih  senzora \citep[str.~13]{Drones}.\\
+Nadalje, na slici~\ref{fig:konfiguracijaDrona} nalazi se primjer jedne od konfiguracija drona s više motora. Sastoji  se  od  spomenutih  motora  i  propelera,  kontrolera  za  let,  GPS  senzora,  baterije, elektroničkog kontrolera za brzinu, prijemnika, ploče za napajanje i telemetrijskog modula. 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=5cm]{img/fer_logo.jpg}
+\caption{Bespilotna letjelica\protect\footnotemark}
+\label{fig:konfiguracijaDrona}
+\end{figure}
+\footnotetext{http://drones.newamerica.org/primer/DronesAndAerialObservation.pdf
+}
+\subsection{Zakonska regulativa\citep{Ekscentar}} 
+Zabilježavanjem nezakonitih upotreba bespilotnih letjelica kojima su ugrožavani ljudski životi i koji nisu u skladu s određenim zakonima (zakon o zaštiti osobnih podataka), kako bi se ograničila i osigurala upotreba bespilotnih letjelica potrebna je zakonska regulativa o toj temi. S obzirom na to da korištenje dronova, povećanjem njihovog broja, prvenstveno za zabavu postaje veoma popularno i u Republici Hrvatskoj, javlja se potreba za razmotranje i zakonske regulative\footnote{Zakon o dronovima: \url{http://www.dronovi.hr/zakon-o-dronovima.html}}.  Letjelice  se  mogu  vrlo  lako  nabaviti  ili  izraditi  te  postoji mogućnost preplavljenosti zračnog prostora. Zbog toga je potrebno registrirati svaku letjelicu i regulirati njezinu uporabu. Tako je prema Pravilniku o sustavima bespilotnih zrakoplova utvrđeno, osim općih odrednica o klasama područja letenja i letačkih operacija te veličine samih bespilotnih letjelica, to da se let bespilotnim letjelicama smije odvijati samo danju. Nadalje, potrebno je osigurati sigurnu udaljenost letjelice od ljudi, objekata, vozila, cesta, dalekovoda i drugo. Rukovoditelje bespilotne letjelice mora od nje biti udaljen do 500 metara te mu ona uvijek mora biti unutar vidnog polja. Što se tiče zrakoplova, let  drona  mora  biti  udaljen  najmanje  3  kilometara  od  aerodroma.  Dakako,  zabranjeno  je izbacivanje bilo kakvih predmeta iz letjelice. \\
+No kako se dronovi najčešće koriste za snimanja iz zraka, postoje zakoni koji se moraju poštovati i za to. Dakle, navodi se da snimati iz zraka smiju pravne i fizičke osobe koje su za to pravodobno registrirane. Zatim je potrebno podnijeti zahtjev za izdavanje odobrenja za snimanje s dostavom  raznih  podataka (geodetsko snimanje koje se predaje Državnoj geodetskoj upravi):
+\begin{itemize}
+\item podatke o naručitelju snimanja
+\item podatke o izvršitelju snimanja i dokaz o registriranoj djelatnosti iz zraka izvršitelja snimanja (potrebno priložiti kopiju registracije pri Trgovačkom sudu)
+\item podatke o izvršitelju razvijanja
+\item podatke o vremenu snimanja
+\item svrhu snimanja
+\item popis objekata, skicu ili kartu s označenim područjem snimanja
+\item podatke o vrsti i mjerilu snimanja, kameri, žarišnoj daljini objektiva, filmu ili obliku zapisa (analogni/digitalni)
+\item način čuvanja izvornih podataka snimanja.
+\end{itemize}.
+Tek nakon dobivanja odobrenja može se pristupiti snimanju te kasnije i razvijanju zračnih snimaka i pri tome je dužna najkasnije u roku od 8 dana od dana snimanja dostaviti zračne snimke na pregled Državnoj geodetskoj upravi (Zakon o obrani, NN 33/02), dok je za bilo kakvo umnožavanje, objavljivanje ili iznošenje snimaka iz Hrvatske potrebno  pribaviti  odobrenje  uz  suglasnost  ministarstva (Ministarstvo  pomorstva,  prometa  i infrastrukture, 2015).\\
+Prilikom snimanja iz zraka pojedinih vojnih, telekomunikacijskih, energetskih i industrijskih objekata, područja nacionalnih parkova i parkova prirode te drugih zaštićenih dijelova prirode, također je potrebno priložiti i mišljenje korisnika objekta, odnosno ustanove koja upravlja zaštićenim dijelom prirode (Uredba o snimanju iz zraka, NN 116/03). Digitalni oblik obrasca Zahtjeva za izdavanje odobrenja za razvijanje zračnih snimaka može se pronaći na službenim internetskim stranicama Državne geodetske uprave, a uz obrazac je potrebno priložiti dokaz o registriranoj djelatnosti za snimanje iz zraka, dok je za letjelicu potrebno priložiti kopiju Certifikata za obavljanje radova iz zraka s Operativnim specifikacijama koju izdaje Agencija za civilno zrakoplovstvo.\\
+
+\subsection{Primjena i rasprostranjenost}
+Kako bespilotne  letjelice  postaju  manje,  jeftinije  i  jednostavnije za  upravljanje,  a regulatorne izmjene, naročito u SAD-u, smanjuju prepreke za nove korisnike, letjelica je sve više. 
+Prema izvješću tvrtke PwC (Price Waterhouse Coopers) “Clarity from above“ može se govoriti o globalnoj tržišnoj vrijednosti rješenja baziranim na bespilotnim letjelicama višoj od 127,3 milijardi dolara.
+Očekuje se da će povećanjem broja letjelica smanjiti nesreće na radu, 
+poput pada zaposlenika s krova tijekom inspekcija zgrada, a time i gubici zbog kompenzacija 
+radnicima. 
+Bespilotne letjelice bi u budućnosti mogle riješiti niz problema i smanjiti troškove i u nizu drugih industrija, u zemljama u razvoju i slučajevima prirodnih katastrofa. (Allianz, 2017.)
+Kao što je navedeno ranije, postoji podjela bespilotnih letjelica (UAV) prema njihovoj svrsi. Tako  su  najprije  bile  namijenjene za korištenje u vojne svrhe, no danas je njihova primjena puno veća (Stombaugh, Smith, Thamann, n.d.). Ostala područja u kojima se danas koriste su:\begin{itemize}
+\item geodezija --- projektiranje, rudarstvo, geologija, šumarstvo
+\item poljoprivreda
+\item kotrola i nadzor nad kritičnom infrastrukturom
+\item sigurnost i okoliš
+\item praćenje i nadzor okoliša
+\item potraga i spašavanje
+\item sigurnost
+\item dostava
+\end{itemize}
+U  vojne  svrhe bespilotne  letjelice  se  koriste  za  sigurnosni  nadzor  i  kontrolu  vojnih područja, za zračne izvidnice, otkrivanje kemijskih, bioloških, radioloških i nuklearnih uvjeta na nekom terenu, zatim za telekomunikacijski promet, za potragu i spašavanje i dr. Što se tiče terenskog  pretraživanja  i  spašavanja,  vrše  nadgledanje  i  obilježavaju  točke  na  kojima  je potrebna intervencija i slično. Nadalje, bespilotne letjelice  su  korisne  i  u  telekomunikacijske svrhe, a čak mogu i detektirati lansiranje nekog projektila (Military UAS Application, 2016).\\
+U poljoprivredi se pomoću dronova ili drugih vrsta bespilotnih letjelice za tu svrhu, nastoji povećati produktivnost i efikasnost  proizvodnje.  Dronovi  se  mogu  koristiti  za  nadzor usjeva,  provjeru  uvjeta  na  zemljištu  da  bi  se  tako  ostvario  ekološki  održiv  način  rada,  tj. racionalnije koristila voda, upotrebljavali pesticidi pa i pametnije koristili strojevi. U geodeziji, bespilotne letjelice mogu snimati teren te se na temelju toga može izraditi 3D prikaz, razni digitalni modeli terena i površine itd. Dronovi su korisni jer mogu doći do nepristupačnih terena i područja te obaviti potrebno snimanje  i mjerenje.  Nadalje,  bespilotne letjelice  mogu  biti korisne kod mjerenja infrastrukture i vrše točan, brz i pouzdan nadzor nad objektima zajedno sa preciznim i učinkovitim ugrađenim kamerama(Geo-Tron, 2015)\\
+Praćenje  okoliša,  snimanje  šuma,  procjena  kvalitete  zraka,  kontrola   i nadzor nad kritičnom infrastrukturom (npr.~odlagališta  i otpadne  vode)  te  mnoge  druge  mogućnosti  vezane  uz  okoliš  karakteristične  su  dronove. Prednost je u tome što takva snimanja i prikupljanja podataka nisu skupa te ne postoje veliki financijski troškovi, a ne ovise niti o vremenskim uvjetima.\\
+Također, bespilotne letjelice se koriste i za civilnu sigurnost jer se mogu koristiti za policijski nadzor, zaštitu državnih granica te razne druge nadzore i operacije (Geo-Tron, 2015). Uz sve navedeno, većina današnjih korisnika, kupuje i koriste dronove ponajviše za zabavu sa željom prikupljanja fotografija s određenih visina. 
+Najnovije upotrebe uključuju dostavljanje krvi i cjepiva na udaljene lokacije u Africi, gašenje požara, kontrolu štetnika, pa čak i dostavljanje u ugostiteljskim zanimanjima kao što je dostava hrane.
+Osiguratelji  sve  češće  upotrebljavaju ovaj  tip  letjelica za  jednostavniju  i  sigurniju procjenu rizika građevinskih ili infrastrukturnih projekata.
+
+\subsection{Proizvođači}
+Danas  najvećim  proizvođačem  bespilotnih  letjelica  za  civilnu  upotrebu  smatra  se kineska kompanija DJI, sa sjedištem u gradu Shenzhen-u. Drugi poznatiji proizvođači su još francuski  Parrot,  odnosno njezina  švicarska  podružnica  senseFly,  američki  3D  Robotics,  kanadski  Aeryon itd.
+Bespilotne letjelice  s  kamerama  i  senzorima pružaju poduzećima  diljem  svijeta potpunije podatke.Također se koriste u prijevozu i preciznim poslovnim aktivnostima te tako sve više utječu na poslovne strategije poduzeća.\\
+Na  drugoj  po  redu  „{The  Commercial  UAV  Show"  konferenciji  u  Londonu održanoj 2015. godine izlagalo je  stotinjak tvrtki iz cijelog svijeta. Korisnici su prezentirali projekte s bespilotnim  letjelicama  uz  mnoštvo  savjeta  kako  započeti  projekte,  kako  ih  prezentirati, implementirati te dijelili konkretna iskustva iz provedenih projekata. Dominirala su rješenja za preciznu  poljoprivredu,  snimanje  arheološke  baštine,  geodetske  izmjere,  izrada  karata  i modeliranje, nadzor okoliša, požarišta, prometnica te razne inspekcije, a pojavio se i značajan broj  specijaliziranih  tvrtki  za  senzore,  motore,  antene  i  ostale  dijelove  bespilotnih  letjelica.(Tihomir Šašić, 2015.)
+
+\subsection{Klasifikacija}
+Postoji  veliki  broj  različitih  tipova  bespilotnih  letjelica  s  različitim  mogućnostima, ovisno o potrebama samih korisnika, no ne postoji njihova opće prihvaćena podjela.\\
+Europska  zajednica  za  bespilotne  letjelice  \engl{European  Association  of  Unmanned Vehicles Systems - EUROUVS} kreirala je klasifikaciju bespilotnih letjelica na osnovu sljedećih parametara:  visina  leta,  trajanje  leta,  brzina,  maksimalna  nosivost  \engl{Maximum  takeoff weight – MTOW}, veličina letjelice, domet signala i dr. \\
+Po  namjeni  bespilotne  letjelice
+možemo  podijeliti  na  vojne  i  civilne,  a  civilne  na komercijalne i nekomercijalne. Po namjeni se ove letjelice mogu podijeliti i u četiri glavne kategorije:\begin{itemize}
+\item mikro/mini (MAV/Mini) --- najmanje platforme koje lete na najmanjim visinama,
+\item taktičke (TUAV),
+\item strateške,
+\item bespilotne letjelice s posebnom zadaćom
+\end{itemize}
+
+\begin{table}[htbt]
+\caption{Klasifikacija bespilotnih letjelica prema EUROUVS}
+\label{tbl:klasifikacija}
+\centering
+\begin{tabular}{|M{2.5cm}|M{3cm}|M{2cm}|M{2cm}|M{2cm}|M{2cm}|}\hline
+  & Kategorija & Max. nosivost (kg) & Visina leta (m) & Trajanje leta (m) & Domet signala (km)\\ \hline
+\multirow{2}{*}{Mini/mikro} & mikro & $0.10$ & $250$ & $1$ & $<10$ \\ \cline{2-6}
+& mini & $<30$ & $150-300$ & $<2$ & $<10$ \\ \hline
+\multirow{6}{*}{Taktičke} & Bliskog doleta & $150$ & $3000$ & $2-4$ & $10-30$ \\ \cline{2-6}
+& Kratkog doleta & $200$ & $3000$ & $3-6$ & $30-70$ \\ \cline{2-6}
+& Srednjeg doleta & $150-500$ & $3000-5000$ & $3-10$ & $70-200$ \\ \cline{2-6}
+& Dugog doleta & $-$ & $5000$ & $6-10$ & $200-500$ \\ \cline{2-6}
+& Dugog doleta i trajanja leta & $500-1500$ & $5000-8000$ & $12-24$ & $>500$ \\ \cline{2-6}
+& Srednje leteće dugog trajanja leta & $1000-1500$ & $5000-8000$ & $12-24$ & $>500$ \\ \hline
+Strateške & Visoko leteće dugog trajanja leta & $2500-12500$ & $15000-20000$ & $12-48$ & $>500$ \\ \hline
+\multirow{4}{2cm}{Bespilotne letjelice s posebnom zadaćom} & Smrtonosne & $250$ & $3000-4000$ & $3-4$ & $300$ \\ \cline{2-6}
+& Mamci & $250$ & $50-50000$ & $<4$ & $0-500$\\ \cline{2-6}
+& Stratosferske & U razvoj & $20000-30000$ & $>48$ & $>2000$\\ \cline{2-6}
+& Egzosferske & U razvoju & $>30000$ & U razvoju & U razvoju \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Matematički model}
+
+\section{Eksperimentalni dio}
+Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (postoje i skuplje). U našem eksperimentalnom dijelu koristena je jeftinija verzija, pa su zbog tog korišteni dodatni vizualni senzori koji određuju položaj letjelice u prostoru.  
+ 
 \begin{table}[h!]
-  \centering
-  \begin{tabular}{ | c | m{5cm} | m{5cm} | }
+  \caption{Kratki slikovni prikaz osnovnih vrsta i oblika dronova\citep{vrsteDronova}}
+  \label{tbl:vrsteDronova}
+  \begin{center}
+  	\begin{tabular}{ | c | c | c | }
     \hline
-    Vrsta & \centering Prednosti & Mane \\ \hline
+    Vrsta & Prednosti & Mane \\ \hline
     \begin{minipage}{.3\textwidth}
-      \includegraphics[width=\linewidth, height=60mm]{img/quadcopter.png}
+    	Quadcopter (letjelica s četiri elise)
+      \includegraphics[width=\linewidth, height=25mm]{img/quadcopter.png}
     \end{minipage}
     &
-    %\begin{minipage}[t]{5cm}
+    \begin{minipage}{5cm}
       \begin{itemize}
-        \item Accessibility
-        \item Up to date information
-        \item Fulfil students needs and wants \ldots
+        \item može lebdjeti (stacionarni let)
+        \item može poletjeti s mjesta i sletjeti
       \end{itemize}
-    %\end{minipage}
+    \end{minipage}
     & 
-    %\begin{minipage}{5cm}
+    \begin{minipage}{5cm}
       \begin{itemize}
-        \item Accessibility
-        \item Up to date information
-        \item Fulfil students needs and wants \ldots
+        \item nije za velike udaljenosti ni visine
+        \item kratak vijek trajanja baterije
       \end{itemize}
-    %\end{minipage}
+    \end{minipage}
     \\ \hline
-  \end{tabular}
-  \caption{my.Lboro Analysis}\label{tbl:myLboro}
+    \begin{minipage}{.3\textwidth}
+    	Oblik zrakoplova \engl{plane shaped drone}
+      \includegraphics[width=\linewidth, height=25mm]{img/plane_shaped_drone.png}
+    \end{minipage}
+    &
+    \begin{minipage}{5cm}
+    	\begin{itemize}
+      	\item dobar manevar
+        \item velike udaljenosti
+        \item velike visine
+      	\end{itemize}
+    \end{minipage}
+    & 
+    \begin{minipage}{5cm}
+      \begin{itemize}
+      	\item ne može lebdjeti (zasad)
+      	\item ne može poletjeti s mjesta (zasad)
+      \end{itemize}
+    \end{minipage}
+    \\ \hline
+    \begin{minipage}{.3\textwidth}
+      Oblik muhe \engl{insect fly shaped drone}
+      \includegraphics[width=\linewidth, height=25mm]{img/insect_fly_shaped_drone.png}
+    \end{minipage}
+    &
+    \begin{minipage}{5cm}
+      \begin{itemize}
+        \item vrlo mali
+        \item može se zavlačiti te ići na nepristupačan teren
+        \item oponaša kretanje muhe ili insekta
+      \end{itemize}
+    \end{minipage}
+    & 
+    \begin{minipage}{5cm}
+      \begin{itemize}
+        \item mali dron = mala baterija
+      \end{itemize}
+    \end{minipage}
+    \\ \hline
+  	\end{tabular}
+  \end{center}
 \end{table}
 
 \chapter{Proba}
