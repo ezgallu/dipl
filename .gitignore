@@ -1,0 +1,22 @@
+#
+# If all files excluded and you will include only specific sub-directories
+# the parent path must matched before.
+#
+
+# Ignore everything
+*
+# But descend into directories
+!*/
+# Recursively allow files under subtree
+!/img/**
+# You can be specific with these rules
+!.//**
+!.gitignore
+
+!./.gitignore
+!./.git**
+!./*.bib
+!./*.tex
+!./*fer.bst
+!./*fer.cls
+!./img/
