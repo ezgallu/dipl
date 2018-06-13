@@ -270,7 +270,14 @@ Tada su zakoni transformacije~\ref{eq:v} i~\ref{eq:eta} gdje je $\nu$ definiran 
 Važno je uočiti da se $\mathbf{W^{-1}_\eta}$ može definirati samo i samo ako $\theta \neq \pi/2+k\pi, (k \in Z)$. Ovaj efekt kod Eulerovih formula je ograničenje, tipična situacija kad se gubi stupanj slobode. Uzimanjem drugačijeg prikaza orijentacije u prostoru identificiranog s četiri parametra, poznatijim kao kvaternioni čija generalna struktura je objašnjena u poglavlju~\ref{sec:Kvaternioni}. Prednost kvarteniona ne leži samo u nepostojanju singulariteta nego i kod jednostavnosti izračuna, što će biti kasnije objašnjeno.
 
 \subsection{Kvaternioni}\label{sec:Kvaternioni}
-U poglavlju~\ref{sec:Euler} može se primijetiti da bi rotacija krutog tijela u prostoru mogla biti predstavljena preko Eulerovih kutova, međutim zbog singularnosti transformacijskih zakona potrebno je koristiti novu parametrizaciju kvaternionima. Kvaternioni se obično koriste u razvoju računalnih igara i u 3D virtualnom svijetu, ali također i kao metoda za pozicioniranje krutog tijela u trodimenzionalnom prostoru. Kvaternioni se temelje na Eulerovom teoremu rotacije koji definira da svaki pomak krutog tijela gdje točka ostaje nepromijenjena je ekvivalentna rotaciji. Dakle, ako je $\alpha$ kut rotacije oko jediničnog vektora $\mathbf{u} = (u_1, ~u_2, ~u_3)$, moguće je definirati kvaternion $\mathbf{q} = [q_0 ~q_1 ~q_2 ~q_3]^T$, gdje su $q_0 = \cos(\alpha/2), ~q_1 = \sin(\alpha/2)u_1, ~q_2 = \sin(\alpha/2)u_2, ~q_3 = \sin(\alpha/2)u_3$. Za razliku od Eulerovih kutova kvartenionske rotacije ne zahtijevaju skup unaprijed definiranih rotacijskih osi jer jedna os  se konstantno može mijenjati. Zbog svojstva ove metode da orijentacija ima samo jednu os rotacije, stupanj slobode se ne može izgubiti, odnosno ne postoji ograničenje. Transformacija translacijskih brzina geldano iz globalnog sustava može se izraziti $\xi=\mathbf{Q\xi_B}$, gdje je $\mathbf{Q}$ matrica~\ref{eq:matQ}.
+U poglavlju~\ref{sec:Euler} može se primijetiti da bi rotacija krutog tijela u prostoru mogla biti predstavljena preko Eulerovih kutova, međutim zbog singularnosti transformacijskih zakona potrebno je koristiti novu parametrizaciju kvaternionima. Kvaternioni se obično koriste u razvoju računalnih igara i u 3D virtualnom svijetu, ali također i kao metoda za pozicioniranje krutog tijela u trodimenzionalnom prostoru. Kvaternioni se temelje na Eulerovom teoremu rotacije koji definira da svaki pomak krutog tijela gdje točka ostaje nepromijenjena je ekvivalentna rotaciji. Dakle, ako je $\alpha$ kut rotacije oko jediničnog vektora $\mathbf{u} = (u_1, ~u_2, ~u_3)$, moguće je definirati kvaternion $\mathbf{q} = [q_0 ~q_1 ~q_2 ~q_3]^T$, gdje su $q_0 = \cos(\alpha/2), ~q_1 = \sin(\alpha/2)u_1, ~q_2 = \sin(\alpha/2)u_2, ~q_3 = \sin(\alpha/2)u_3$, koji definira tri dimenzije rotacije. Kvaternioni uvijek moraju zadovoljavati jednadžbu ograničenosti (\ref{eq:normalniUvjet}) koja se zove normalni uvjet. 
+\begin{align}
+q^2_0+q^2_1+q^2_2+q^2_3=1 \label{eq:normalniUvjet}
+\end{align}
+Za razliku od Eulerovih kutova kvartenionske rotacije ne zahtijevaju skup unaprijed definiranih rotacijskih osi jer jedna os  se konstantno može mijenjati. Zbog svojstva ove metode da orijentacija ima samo jednu os rotacije, stupanj slobode se ne može izgubiti, odnosno ne postoji ograničenje. Transformacija translacijskih brzina gledano iz globalnog sustava može se izraziti preko \ref{eq:transBrzina} gdje je $\mathbf{Q}$ matrica~\ref{eq:matQ}.
+\begin{align}
+\xi=\mathbf{Q\xi_B} \label{eq:transBrzina}
+\end{align}
 \begin{equation}
 	\mathbf{Q} =
 	\begin{bmatrix}
@@ -297,7 +304,10 @@ Zaključak, korist korištenjem kvaterniona je dvostruka: \begin{enumerate}
 \end{enumerate}
 
 \subsection{Matematički model hexkoptera}
-U ovom odjeljku prikazan je matematički model hexkoptera. Dinamika šest električnih motora je relativno brza pa će se stoga zanemariti. Cilj je odrediti matematičke jednadžbe koje opisuju dinamičko ponašanje hexkoptera pomoću generalizacije opisane sa slikom~\ref{fig:model} i poglavljem~\ref{sec:SimulacijskiDio}. Gibanje krutog tijela može se razložiti na translacijsku i rotacijsku komponentu. Stoga, kako bi se opisala dinamika hexkoptera, pretpostavka je da je letjelica kruto tijelo pa se za izračun koriste Newton-Eulerove jednadžbe koje reguliraju linearno i kutno kretanje. Sila koja djeluje na hexkopter prikazana je \ref{eq:Sila}, gdje se pretpostavlja da je $m$ konstantna masa.
+U ovom odjeljku prikazan je matematički model hexkoptera. Dinamika šest električnih motora je relativno brza pa će se stoga zanemariti. Cilj je odrediti matematičke jednadžbe koje opisuju dinamičko ponašanje hexkoptera pomoću generalizacije opisane sa slikom~\ref{fig:model} i poglavljem~\ref{sec:SimulacijskiDio}. Mogu se primijeniti Newton-Euler i Euler-Lagrange jednadžbe.\\
+
+\subsubsection{Newton-Euler jednadžbe}
+Gibanje krutog tijela može se razložiti na translacijsku i rotacijsku komponentu. Stoga, kako bi se opisala dinamika hexkoptera, pretpostavka je da je letjelica kruto tijelo pa se za izračun koriste Newton-Eulerove jednadžbe koje reguliraju linearno i kutno kretanje. Sila koja djeluje na hexkopter prikazana je \ref{eq:Sila}, gdje se pretpostavlja da je $m$ konstantna masa.
 \begin{align}
 \mathbf{F}&=\mathbf{\frac{d(m~v_B)}{dt}+\nu\times (m~v_b)} \label{eq:Sila}
 \end{align}
@@ -311,15 +321,196 @@ Ukupan potisak zajedno s gravitacijom predstavlja ukupnu silu (izraz \ref{eq:Fuk
 \begin{align}
 \mathbf{F}&=\mathbf{Q^TF_g+T_B} \label{eq:Fukupna}
 \end{align}
-Kao posljedica translacijska komponenta gibanja u globalnom sustavu je \ref{eq:Fglobalni}.
+Kao posljedica translacijska komponenta gibanja u lokalnom sustavu je \ref{eq:Flokalni}.
 \begin{align}
-m~\mathbf{\dot{v_B}+\nu\times (m~v_b)}&=\mathbf{Q^TF_g+T_B} \label{eq:Fglobalni}
+m~\mathbf{\dot{v_B}+\nu\times (m~v_b)}&=\mathbf{Q^TF_g+T_B} \label{eq:Flokalni}
+\end{align}
+Da bi dobili istu jednadžbu u globalnom sustavu, potrebno je primijetiti da je centrifugalna sila poništena jer se globalni sustav ne rotira pa tako prethodna jednadžba postaje~\ref{eq:Flokalni}
+\begin{align}
+m~\mathbf{\ddot{\xi}}&=\mathbf{F_g+Q~T_B} \label{eq:Flokalni}
+\end{align}
+Nadalje, neka je $\mathbf{I}$ matrica inercija. Hexkopter ima simetričnu strukturu s obzirom na $X_b$-os, $Y_b$-os i $Z_b$-os, stoga je matrica inercija jedinična $\mathbf{I}=diag(\mathbf{I_{xx}, I_{yy}, I_{zz}})$. Kako ukupni vanjski moment $\mathbf{M}$ djeluje, uzimajući u obzir brzinu promjene kutnog momenta  $\mathbf{H=I\nu}$ tada je moment koji djeluje na hexkopter izražen s~\ref{eq:MomentHex}.
+\begin{align}
+\mathbf{M}&=\mathbf{\frac{d(I~\nu)}{dt}+\nu\times(I~\nu)} \label{eq:MomentHex}
+\end{align}
+Kutna brzina i akceleracija rotora stvaraju okretni moment prikazan \ref{eq:Torque} oko osi rotora, gdje je $b$ konstanta otpora tereta te gdje je $I_{M_i}$ moment inercije rotora $i$.
+\begin{align}
+\tau_{M_i}&=b~\omega^2_i+I_{M_i}~\dot{\omega_i} \label{eq:Torque}
+\end{align}
+Iz geometrijske strukture hexkoptera i od komponenata $\mathbf{f_i}$ i $\mathbf{\tau_{M_i}}$ u lokalnom koordinatnom sustavu moguće je dobiti informaciju o momentima \emph{roll, pitch i yaw} preko~\ref{eq:matTau}.
+\begin{equation}
+	\begin{bmatrix}
+	\tau_{\phi} \\
+	\tau_{\theta} \\
+	\tau_{\psi}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	\frac{3}{4}kl(\omega^2_2+\omega^2_3-\omega^5_2-\omega^2_6) \\
+	kl(-\omega^2_1-\frac{\omega^2_2}{4}+\frac{\omega^2_3}{4}+\omega^2_4+\frac{\omega^2_5}{4}-\frac{\omega^2_6}{4}) \\
+	b(-\omega^2_1+\omega^2_2-\omega^2_3+\omega^2_4-\omega^2_5+\omega^2_6)+I_M(\dot{\omega^2_1}+\dot{\omega^2_2}+\dot{\omega^2_3}+\dot{\omega^2_4}+\dot{\omega^2_5}+\dot{\omega^2_6})
+	\end{bmatrix}
+	\label{eq:matTau}
+\end{equation}
+Ovdje je $l$ udaljenost između rotora i središta mase hexkoptera, a $\dot{x}\omega_i$ predstavlja vremensku derivaciju $\omega_i(t)$\footnote{Vremenska derivacija: $\frac{d\omega_i(t)}{dt}$}. Nadalje, jednadžba koja određuje dinamiku rotacije može se zapisati kao \ref{eq:rotDin} gdje $\mathbf{\Gamma}$ predstavlja žiroskopske sile i $\mathbf{\tau_B}$ vanjski okretni moment.
+\begin{align}
+\mathbf{I~\dot{\nu}+\nu\times(I~\nu)}+\Gamma&=\mathbf{\tau_B} \label{eq:rotDin}
+\end{align}
+Nakon kratkog izračuna dobije se \ref{eq:vDot} u kojoj je $\omega_{\Gamma}=\omega_1-\omega_2+\omega_3-\omega_4+\omega_5-\omega_6$.
+\begin{equation}
+	\dot{\nu} = \mathbf{I^{-1}} \Bigg(
+	\begin{bmatrix}
+	p \\
+	q \\
+	r
+	\end{bmatrix}
+	\times
+	\begin{bmatrix}
+	I_xx~p \\
+	I_yy~q \\
+	I_zz~r
+	\end{bmatrix}
+	-\mathbf{I_r}
+	\begin{bmatrix}
+	p \\
+	q \\
+	r
+	\end{bmatrix}
+	\times
+	\begin{bmatrix}
+	0 \\
+	0 \\
+	1
+	\end{bmatrix}
+	\mathbf{\omega_{\Gamma}}+\tau
+	\Bigg)
+	\label{eq:vDot}
+\end{equation}
+Inaće jednadžba \ref{eq:vDot} može se pisati kao \ref{eq:vDot2}
+\begin{equation}
+	\begin{bmatrix}
+	\dot{p} \\
+	\dot{q} \\
+	\dot{r}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+	(I_{yy}-I_{zz})~q~r/I_{xx} \\
+	(I_{zz}-I_{xx})~p~r/I_{yy} \\
+	(I_{xx}-I_{yy})~p~q/I_{zz}
+	\end{bmatrix}
+	-\mathbf{I_r}
+	\begin{bmatrix}
+	q/I_{xx} \\
+	-p/I_{yy} \\
+	0
+	\end{bmatrix}
+	\mathbf{\omega_{\Gamma}}+
+	\begin{bmatrix}
+	\tau_{\phi}/I_{xx} \\
+	\tau_{\theta}/I_{yy} \\
+	\tau_{\psi}/I_{zz}
+	\end{bmatrix}
+	\label{eq:vDot2}
+\end{equation}
+Konačno, nakon određivanja kutne brzine lako se odredi i kutno ubrzanje u globalnom koordinatnom sustavu preko izraza \ref{eq:angularAcceleration}.
+\begin{align}
+\mathbf{\ddot{q}}&=\mathbf{\frac{d(S~\nu)}{dt}} \label{eq:angularAcceleration}
 \end{align}
 
+\subsubsection{Euler-Lagrange jednadžbe}
+Newton-Eulerova forma se temelji na ravnoteži sile i momenata. Alternativa tim jednadžbama, koristeći pristup temeljen na sačuvanje energije, su Euler-Lagrangeove jednadžbe. Prije svega, definicija Lagrangiana je izražena \ref{eq:Lagrangian} gdje je $E_t = (m/2)\mathbf{\dot{\xi}^T\dot{\xi}}$ translacijska kinetička energija, $E_r = (1/2)\mathbf{\nu^T~I~\nu}$ je kutna energija te $E_p=m~g~z$ je potencijalna energija gdje je $z$ visina hexkoptera.
+\begin{align}
+\mathcal{L}&=E_t+E_r-E_p \label{eq:Lagrangian}
+\end{align}
+Dinamički model letjelice dobiva se iz \ref{eq:dinModL} gdje $\bf f$ predstavlja vanjske sile koje utječu na potisak $\bf T_B$, $\tau=4\bf {S \tau_B}$ je generalizirani okretni moment i $\mathbf{w=\left[ \xi^T, q^T \right]}$ su Lagrangianove koordinate.
+\begin{equation}
+{d\over dt}\left({\partial {\cal L}\over \partial\dot{{\bf w}}}\right)-{\partial {\cal L}\over \partial{\bf w}}= \begin{bmatrix}\bf f \\ \bf\tau \end{bmatrix} \label{eq:dinModL}
+\end{equation}
+Budući da kinetička energija ne sadrži kombinaciju $\dot{\xi}$ i $\dot{\bf q}$, translacijska i rotacijska dinamika se mogu razmatrati zasebno. Translacijsko gibanje može se izraziti jednadžbom \ref{eq:transGiba} koja je jednaka kao \ref{eq:Flokalni}.
+\begin{equation}
+m\ddot{{\ \xi}}-{\bf F}_{g}={\bf f}={\bf Q\ T}_{B} \label{eq:transGiba}
+\end{equation}
+Potrebno je da se definira rotacijsko gibanje s generaliziranim koordinatama, ovdje brzina $\xi$ mora biti opisana kvaternionom $\bf q$.\\
+Vidljivo je da se $\xi$ ne može dobiti iz \ref{eq:transBrzina} direktno, jer matrica $\bf S$ nije kvadratna, pa nije ni invertibilna. No produkt između $\bf S$ i njegove transponirane matrice je \ref{eq:productSt_S} gdje je $\cal I$ jedinična matrica dimenzije $3\times3$. 
+\begin{equation}
+{\bf S}^{T}{\bf S}={1\over 4}{\cal I} \label{eq:productSt_S}
+\end{equation}
+Dakle, lijevim množenjem s $\mathbf{S_T}$ izraza \ref{eq:productSt_S} dolazi se do \ref{eq:lijevoMnozenje} iz kojeg se dobije brzina \ref{eq:brzinaL}.
+\begin{align}
+{\bf S}^{T}\dot{{\bf q}}&={\bf S}^{T}{\bf S}{\ \nu}={1\over 4}{\cal I}{\ \nu} \label{eq:lijevoMnozenje} \\
+{\ \nu}&=4{\bf S}^{T}\dot{{\bf q}} \label{eq:brzinaL}
+\end{align}
+Definiranjem \ref{eq:defJ}, kutna energija može se izraziti s \ref{eq:kutnaE}.
+\begin{align}
+{\bf J}&={\bf S\ I} \ {\bf S}^{T} \label{eq:defJ} \\
+E_{r}&={1\over 2}{\ \nu}^{T}{\bf I}{\ \nu}=8\dot{{\ q}}^{T}{\bf J}\dot{{\ q}} \label{eq:kutnaE}
+\end{align}
+Sada je moguće napisati rotacijsku jednadžbu (\ref{eq:rotJedna}) preko kvaterniona $\bf q$. 
+\begin{align}
+8\bigg[2{\bf J}\ddot{{\bf q}}+2{d{\bf J}\over dt}\dot{q}-{\partial\over \partial {\bf q}}(\dot{q}^{T}{\bf J}\dot{q})\bigg]&={\ \tau} \label{eq:rotJedna}
+\end{align}
+Stoga je matematički model koji opisuje hexkopter izražen Euler-Lagrange formom prikazan \ref{eq:matModelL}.
+\begin{align}
+\ddot{{\bf q}}&={1\over 2}{\bf J}^{-1}\bigg[{1\over 8}{ \tau}-2{d{\bf J}\over dt}\dot{{\ q}}+{\partial\over \partial_{{\bf q}}}(\dot{q}^{T}{\bf J}\dot{q})\bigg] \label{eq:matModelL}
+\end{align}
+Može se uočiti da su ovi izrazi ekvivalentni izrazima \ref{eq:vDot} i \ref{eq:angularAcceleration}.
 
+\subsection{Sinteza sustava upravljanja}
+U ovom poglavlju projektira se regulator za slijeđenje željene trajektorije. Koriste se kvaternioni jer smanjuju nestabilnost te ubrzavaju numerički račun. Jednostavan i lako izvediv način upravljana, tj. njegove stabilizacije, realiziran je proporcionalno-derivacijskim (PD) regulatorom. PD regulatoru dodaje se integralna komponenta s ciljem smanjenja efekta fluktuacije \engl{fluctuations} hexkoptera koje su uzrokovane vanjskim poremećajima.
+U izrazu \ref{eq:matQ} prikazana je kontrola leta hexkoptera. Konkretno, razvijena je jednostavna heuristička metoda za slijeđenje željene trajektorije. \\
+Generalno, PID regulator koji prati referencu ima formu \ref{eq:PIDe} i \ref{eq:PIDu} gdje je $u(t)$ upravljački ulaz i $e(t)$ predstavlja pogrešku između reference $r_d(t)$ i trenutne pozicije $x(t)$.
+\begin{align}
+e(t) &= x_d(t) - x(t) \label{eq:PIDe} \\
+u(t) &= K_p~e(t) + K_I \int_0^t {\mathrm{e(s)}\,\mathrm{d}s} + K_D {d\over dt} e(t) \label{eq:PIDu}
+\end{align}
+Koeficijenti $K_p, K_I, K_D$ predstavljaju parametre za proporcionalni, integracijski te derivacijski član PID regulatora. PID regulator se primjenjuje na sustav, prikazan \ref{eq:Torque} i \ref{eq:rotDin}, koji opisuje kretanje letjelice, tj.~njezin položaj. Može se pisati:
+\begin{align}
+d_x &= K_{x,P}~(x_d-x)+K_{x,D}~(\dot{x}_d-\dot{x})+K_{x,I} \int_0^t {\mathrm{(x_d-x)}\,\mathrm{d}s} \label{eq:PIDdy} \\
+d_y &= K_{y,P}~(y_d-y)+K_{y,D}~(\dot{y}_d-\dot{y})+K_{y,I} \int_0^t {\mathrm{(y_d-y)}\,\mathrm{d}s} \label{eq:PIDdy} \\
+d_z &= K_{z,P}~(z_d-z)+K_{z,D}~(\dot{z}_d-\dot{z})+K_{z,I} \int_0^t {\mathrm{(z_d-z)}\,\mathrm{d}s} \label{eq:PIDdy}
+\end{align}
+Razlika između klasičnih pristupa linearizacije, poput Lyapunove linearizacije ili linearizacije najmanjim kvadratima, i pristupa putem kvaterniona je u kvaternionskoj pogrešci $q_e$ --- ona je definirana kao razlika između željene orijentacije i trenutne izraženih preko kvaterniona. To dovodi do izraza \ref{eq:PIDqe1}-\ref{eq:PIDqe4} gdje je $\bf q_d$ kvaternion koji odgovara željenoj \emph{yaw} orijentaciji te kvaternion $\bf q$ koji odgovara trenutnoj orijentaciji. 
+\begin{align}
+q_{e,1} &= -q_{d,0}q_1 -q_{d,3}q_2 + q_{d,2}q_3 + q_{d,1}q_0 \label{eq:PIDqe1} \\
+q_{e,2} &= q_{d,3}q_1 -q_{d,0}q_2 - q_{d,1}q_3 + q_{d,2}q_0 \label{eq:PIDqe2} \\
+q_{e,3} &= -q_{d,2}q_1 +q_{d,1}q_2 - q_{d,0}q_3 + q_{d,3}q_0 \label{eq:PIDqe3} \\
+q_{e,4} &= q_{d,1}q_1 +q_{d,2}q_2 + q_{d,3}q_3 + q_{d,0}q_0 \label{eq:PIDqe4}
+\end{align}
+Tada se komponente momenta $\tau_{\phi}, \tau_{\theta},\tau_{\psi}$ mogu se zapisati kao \ref{eq:tauPhi}-\ref{eq:tauPsi}.
+\begin{align}
+\tau_{\phi} &= (K_{\phi,D}~p + K_{\phi,P}~q_{e,1}~q_{e,4})~I_{xx} \label{eq:tauPhi} \\
+\tau_{\theta} &= (K_{\theta,D}~q + 2K_{\theta,P}~q_{e,2}~q_{e,4})~I_{yy} \label{eq:tauTheta} \\
+\tau_{\psi} &= (K_{\psi,D}~r + 2K_{\psi,P}~q_{e,3}~q_{e,4})~I_{zz} \label{eq:tauPsi}
+\end{align}
+Točne kutne brzine rotora $\omega_i$, koje su također upravljački ulazi izvedene su izrazima \ref{eq:omega1}-\ref{eq:omega6} gdje $k$ označuje potisnu konstantu, $b$ označuje vučnu konstantu, a $l$ predstavlja udaljenost između rotora i centra mase hexkoptera.
+\begin{align}
+\omega^2_1 &= \frac{T}{6k} - \frac{2\tau_{\theta}}{5kl} - \frac{\tau_{\psi}}{10b} \label{eq:omega1} \\
+\omega^2_2 &= \frac{T}{6k} + \frac{\tau_{\phi}}{3kl} -\frac{2\tau_{\theta}}{5kl} + \frac{\tau_{\psi}}{5b} \label{eq:omega2} \\
+\omega^2_3 &= \frac{T}{6k} + \frac{\tau_{\phi}}{3kl} + \frac{2\tau_{\theta}}{5kl} - \frac{\tau_{\psi}}{5b} \label{eq:omega3} \\
+\omega^2_4 &= \frac{T}{6k} + \frac{2\tau_{\theta}}{5kl} + \frac{\tau_{\psi}}{10b} \label{eq:omega4} \\
+\omega^2_5 &= \frac{T}{6k} - \frac{\tau_{\phi}}{3kl} + \frac{2\tau_{\theta}}{5kl} - \frac{\tau_{\psi}}{5b} \label{eq:omega5} \\
+\omega^2_6 &= \frac{T}{6k} - \frac{\tau_{\phi}}{3kl} -\frac{2\tau_{\theta}}{5kl} + \frac{\tau_{\psi}}{5b} \label{eq:omega6} 
+\end{align}
+Neka $\bf \ddot{\xi}, \dot{\xi}$ i $\bf q_3$ definiraju željenu trajektoriju. Koristeći izraze \ref{eq:Flokalni}-\ref{eq:vDot} i normalni uvjet \ref{eq:normalniUvjet} možemo izraziti $q_0$ (\ref{eq:q0}), $q_1$ (\ref{eq:q1}), $q_2$ (\ref{eq:q2}) i ukupni potisak $\bf T$ (\ref{eq:T}). 
+\begin{align}
+q_0 &= \sqrt{\frac{1}{2} + \frac{d_z+g}{2\sqrt{d^2_x+d^2_y+(d_z+g)^2}}-q^2_3} \label{eq:q0} \\
+T &= \frac{m(d_z + g)}{2~(q^2_0 + q^2_3)-1} \label{eq:T} \\
+q_1 &= \frac{m(d_z q_3 - d_y q_0)}{(q^2_0 + q^2_3)~2T} \label{eq:q1} \\
+q_2 &= \frac{m(d_z q_0 - d_y q_3)}{(q^2_0 + q^2_3)~2T} \label{eq:q2}
+\end{align}
+Valja se prisjetiti da se hexkopterom upravlja podešavanjem brzina vrtnje rotora koji se pokreću elektromotorima. 
+
+
+\subsection{Matlab}
 
 \section{Eksperimentalni dio}
-Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (postoje i skuplje). U našem eksperimentalnom dijelu koristena je jeftinija verzija, pa su zbog tog korišteni dodatni vizualni senzori koji određuju položaj letjelice u prostoru.  
+Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (postoje i skuplje) koje imaju ugrađeno mnogo senzora. U našem eksperimentalnom dijelu koristena je jeftinija verzija koja nema toliko senzora, pa su zbog tog korišteni dodatni vizualni senzori koji određuju položaj letjelice u prostoru. 
+\subsection{Postav}
+
+\subsection{ROS kod}
+
+\subsection{Rezultati}
  
 \begin{table}[h!]
   \caption{Kratki slikovni prikaz osnovnih vrsta i oblika dronova\citep{vrsteDronova}}
