@@ -41,7 +41,6 @@ Danas se uz nagli tred upoznavanja s tehnologijama bespilotnih letjelica, kao i 
 Korištenje  bespilotnih letjelica, naročito u civilne svrhe, bilježi eksponencijalan rast, kako u pogledu njihovog broja, veličine i težine, tako i u pogledu sve brojnijih mogućnosti njihove primjene \citep{EUR-Lex}. Cilj je razviti jeftinije i sposobnije bespilotne letjelice. U skoroj budućnosti tehnologija će se usavršiti pa će manje letjelice moći prenositi sve veću opremu, tako npr.~poštanski paketi će se dostavljati pomoću letjelica.\\
 Motiv izrade ovog rada leži u širokoj primjeni (kako u različitim granama industrije i istraživanja tako i za zabavu). Cilj ovog rada je shvatiti rad bespilotne letjelice te izrada sustava za slijeđenje željene trajektorije. Izazov je kretati se zadanom trajektorijom znajući da postoje razne vanjske smetnje koje utjeću na upravljanje. U teorijskom dijelu će se opisati razvoj, svrha odnosno tipovi bespilotnih letjelica, dok će se detaljnije razraditi njezin model te odrediti matematički model prikladan za sintezu sustava upravljanja. Projektirat će se regulator za slijeđenje reference, uz pretpostavku raspoloživosti informacije o trenutnoj poziciji te orijentaciji. Provjera projektiranog sustava je u simulaciji odnosno eksperimentalno u laboratorijskim uvjetima.
 
-\chapter{Razrada}
 \section{Bespilotne letjelice}
 Bespilotne letjelice (UAV\footnote{UAV \engl{Unmanned Aerial Vehicle} – opći je pojam koji označava zapravo sve vrste bespilotnih letjelica koje se kolokvijalno najčešće nazivaju dronovima. Pod tim se obično spominju dvije vrste letjelica kojima ne trebaju ljudski piloti, prve su tzv. kvadrikopteri \engl{quadcopter}, letjelice s četiri elise pomoću kojih dron može lebdjeti na mjestu i kretati se u raznim smjerovima. Drugi tip bespilotnih letjelica su izgleda projektila ili zrakoplova kojim se upravlja iz baze i povezani su uglavnom s vojnim operacijama.}) su, najjednostavnije rečeno, letjelice koje su sposobne izvršiti kontinuirani let bez prisutnosti pilota \citep{UAV}. Postoje razni oblici i veličine, no najčešće su dizajnirane za točno specifične uloge.\\
 U nastavku bit će navedeni kratak pregled bespilotnih letjelica kroz povijest, njihova definicija, vrste te primjena.\\
@@ -49,13 +48,12 @@ Današnji dronovi su opremljeni raznim senzorima (akcelometri, giroskopi, kamere
 %Definiranjem pojma bespilotnih letjelica nailazi se na bogat izbor objašnjenja jer imaju široku primjenu. \\
 
 \subsection{Pregled povijesti}
-Početak razvoja bespilotnih letjelica je usko vezan s razvojem svih zrakoplova. Povijest seže u prošlo stoljeće kada su Kinezi puštali papirnate zmajeve prema nebu ili letjeli u balonima na vrućem zraku, iako bi se moglo reći da je prva bespilotna letjelica kamen koji je bacio špiljski čovjek u pretpovijesno doba. Ove \glqq letjelice\grqq imaju malo ili nimalo kontrole. U suvremenom dobu, bespilotnim letjelicama se nazivaju sve letjelice koje su imale autonomno ili daljinsko upravljanje. Razvojem tehnologija i moderniziranjem nazivi i opisi ovih letjelica se mijenjaju poput ratnih torpeda, bespilotnih vozila, daljinski upravljača, autonomna kontrola, dron itd.\\
+Početak razvoja bespilotnih letjelica je usko vezan s razvojem svih zrakoplova. Povijest seže u prošlo stoljeće kada su Kinezi puštali papirnate zmajeve prema nebu ili letjeli u balonima na vrući zrak, a moglo bi se reći da je prva bespilotna letjelica kamen koji je bacio špiljski čovjek u pretpovijesno doba. Ove \glqq letjelice\grqq imaju malo ili nimalo kontrole. U suvremenom dobu, bespilotnim letjelicama se nazivaju sve letjelice koje su imale autonomno ili daljinsko upravljanje. Razvojem tehnologija i moderniziranjem nazivi i opisi ovih letjelica se mijenjaju --- poput ratnih torpeda, bespilotnih vozila, daljinski upravljača, autonomna kontrola, dron itd.\\
 U ranim godinama zrakoplostva, sama ideja da zrakoplov leti bez ljudskog faktora imala je veliku prednost u tome što je na taj način u potpunosti uklonila rizik za život. No pojavio se veliki nedostatak kod mogućnosti upravljanja takvim letjelicama, odnosno postojala su određena ograničenja. Tako su bespilotne letjelice bile opisivane kao 3D \engl{dangarous, dirty, dull} --- opasne, prljave i glupe. Opasne su jer njima netko može srušiti zrakoplov i dovesti u opasnost pilota i ostale putnike, zatim prljave su jer se kreću na mjestima koja su izložena kemijskom, biološkim ili radiološkim opasnostima, te glupe jer je potrebno njima upravljati nekoliko sati što postaje stresno i nepoželjno \citep{unmannedAircraftSystem}. Danas se upotreba i korištenje znatno promijenilo te su one postale popularan izvor zabave, uz svrhu i na nekim drugim područjima.\\
 Bespilotne letjelice kao takve, bile su prepoznatljive i prije Prvog svjetskog rata. Tome su  doprinijeli ljudi koji su ih već tad koristili za područje istraživanja i slično. Konkretnije, 1883.  godine  Douglas  Archibald, po  nacionalnosti Englez,  na liniju  „zmaja“  stavio  je anemometar  te  je  mjerio  brzinu  vjetra  na  raznim  nadmorskim  visinama. Nekoliko  godina kasnije, na „zmaj“ je priključio kamere te je na taj način proizveo prvo izviđanje putem letjelice. Nadalje, William Eddy snimio je tisuće fotografija koristeći „zmaj“ s kamerama tijekom rata što se može smatrati prvim korištenjem bespilotnih letjelica za vrijeme ratne borbe\citep{UAVSystems}.\\
-Veliki razvoj bespilotnih letjelica vidljiv je u vojne svrhe. Charles  Kettering  razvio  je  bespilotnu  letjelicu  s  dva  krila, tzv.~dvokrilac za tadašnju vojsku (\emph{Army Signal Corps}). Tri godine razvoja dovele su do letjelice nazvane „\emph{Kettering Aerial Torpedo}", odnosno „\emph{Kettering Bug}“ ili samo „\emph{Bug}“. Letjelica je mogla letjeti približno 40 do 55 m/h te nositi oko 80 kg teškog eksploziva. Bila usmjerena prema cilju sa svojim postavkama i imala  je  odvojiva  krila  koja  bi  se ispustila u  trenutku kada  bi  letjelica  bila iznad  mete dopuštajući trupu aviona da padne na tlo kao bomba.  Također 1917.~, Lawrence Sperry je razvio UAV, sličan kao od Katteringa. Letjelica je imala naziv \emph{Sperry - Curtis Aerial Torpedo}, a bila je namjena za mornaricu. Imala nekoliko uspješnih letova, no nikad se nije koristila u ratu. Tvrtka pod nazivo \emph{Radioplane Company} je izradila tisuće ciljnih dronova \engl{target drones} za vrijeme drugog svjetskog rata. Nijemci su u kasnijim godinama drugog svjetskog rata koristili smrtonosne bespilotne letjelice V-1 i V-2. Tek su se u vrijeme Vijetnamskog rata bespilotne letjelice uspješno koristile kao sredstva za nadziranje odnosno izviđanje. (Fahlstrom, Gleason, 2012., str. 4). Značajnu ulogu bespilotne letjelice imale su i u ratovima u Bosni i Afganistanu.\\
+Veliki razvoj bespilotnih letjelica vidljiv je u vojne svrhe. Charles  Kettering  razvio  je  bespilotnu  letjelicu  s  dva  krila, tzv.~dvokrilac za tadašnju vojsku (\emph{Army Signal Corps}). Tri godine razvoja dovele su do letjelice nazvane „\emph{Kettering Aerial Torpedo}", odnosno „\emph{Kettering Bug}“ ili samo „\emph{Bug}“. Letjelica je mogla letjeti približno 40 do 55 m/h te nositi oko 80 kg teškog eksploziva. Bila usmjerena prema cilju sa svojim postavkama i imala  je  odvojiva  krila  koja  bi  se ispustila u  trenutku kada  bi  letjelica  bila iznad  mete dopuštajući trupu aviona da padne na tlo kao bomba.  Također 1917.~, Lawrence Sperry je razvio UAV (vidi \ref{sec:UAV}), sličan kao od Katteringa. Letjelica je imala naziv \emph{Sperry - Curtis Aerial Torpedo}, a bila je namjena za mornaricu. Imala nekoliko uspješnih letova, no nikad se nije koristila u ratu. Tvrtka pod nazivom \emph{Radioplane Company} je izradila tisuće ciljnih dronova \engl{target drones} za vrijeme drugog svjetskog rata. Nijemci su u kasnijim godinama drugog svjetskog rata koristili smrtonosne bespilotne letjelice V-1 i V-2. Tek su se u vrijeme Vijetnamskog rata bespilotne letjelice uspješno koristile kao sredstva za nadziranje odnosno izviđanje \citep{UAVSystems}. Značajnu ulogu bespilotne letjelice imale su i u ratovima u Bosni i Afganistanu.\\
 Nadalje, tijekom zadnjih nekoliko godina ovakve letjelice su se sve više razvijale i modernizirale te se njihova svrha i način korištenja promijenio. Ovakav razvoj doveo je do pitanja hoće li bespilotne letjelice, odnosno sustavi bespilotnih letjelica, zamijeniti zrakoplove i letjelice za koje je potreban ljudski faktor. Postoje u potpunosti automatizirane letjelice čiji je kontrolni sustav neovisan o vanjskim signalima, a i one koje sadržavaju mogućnosti ručnog upravljanja  od  strane  pilota.  Teoretski,  potpuno  automatizirane  letjelice  mogu  letjeti  bez utjecaja ili ometanja od strane bilo kakvog signala, no njihov nedostatak je taj što mogu biti kontrolirane od strane računala. Na taj način je omogućeno manipuliranje sustavom te unatoč jakoj enkripciji,  još  uvijek  postoji  sigurnosni  rizik  i  opasnost.  Upravo  zbog  toga  te  same kontrole  i  sigurnosti  zrakoplova, i njihovih putnika, odgovornost koju pruža ljudski faktor u zrakoplovstvu, spriječit će da bespilotne letjelice postanu prioritet ili da u potpunosti zamijene normalne letjelice \citep{UAVSystems}.\\
-Danas se vojna upotreba bespilotnih letjelica može 
-podijeliti na tri područja, to su pomorska, kopnena i zračna upotreba, dok se u civilne  svrhe  može  upotrijebiti  u  različitim  područjima ljudskih  aktivnosti  kao  npr.  u  geodeziji  tj. fotogrametriji,   poljoprivredi,   industrijskoj proizvodnji,  civilnoj  zaštiti,  upravljanju katastrofama,  zaštiti  okoliša,  nadzorom policijskog    djelovanja,    obavještajnim službama,   novinarstvom,   komercijalnim djelatnostima, razonodom itd. Također  je  sve  veća  uporaba  bespilotnih letjelica za inspekciju   nepristupačnih dijelova  u industrijskim  objektima  kao  što su: brane, dalekovodi, visoki dimnjaci, cjevovodi, mostovi i dr. Isto tako sve popularniji i mali modeli namijenjeni za razonodu.
+Danas se vojna upotreba bespilotnih letjelica može podijeliti na tri područja, to su pomorska, kopnena i zračna upotreba, dok se u civilne  svrhe  može  upotrijebiti  u  različitim  područjima ljudskih  aktivnosti  kao  npr.  u  geodeziji  tj. fotogrametriji,   poljoprivredi,   industrijskoj proizvodnji,  civilnoj  zaštiti,  upravljanju katastrofama,  zaštiti  okoliša,  nadzorom policijskog    djelovanja,    obavještajnim službama,   novinarstvom,   komercijalnim djelatnostima, razonodom itd. Također  je  sve  veća  uporaba  bespilotnih letjelica za inspekciju   nepristupačnih dijelova  u industrijskim  objektima  kao  što su: brane, dalekovodi, visoki dimnjaci, cjevovodi, mostovi i dr. Isto tako sve popularniji i mali modeli namijenjeni za razonodu.
 
 \subsection{Definicija bespilotnih letjelica}
 Za pojam bespilotnih letjelica koristi se engleski službeni naziv „Unmanned Aerial Vehicle“,  dok  se  zadnjih  nekoliko  godina  pojavio  pojam  UAS  \engl{Unmanned  Aerial System}. Time se htjelo naglasiti činjenica da su to složeni sustavi koji uključuju i postaje na zemlji te mnoge druge elemente, a ne samo letjelice koje lete zrakom. Međutim, pojam UAS nije punokorišten za razliku od pojma UAV koji je postao dio modernog leksikona 
@@ -65,25 +63,32 @@ Bespilotne letjelice lete bez ljudskog pilota, umjesto toga kontrolira ih operat
 \subsection{Prednosti i nedostaci}
 Postoji nekoliko prednosti i nedostataka koje pružaju bespilotne letjelice. Prednost u odnosu na letjelice s pilotom je upravo u tome, što bespilotne letjelice ne trebaju imati pilota 
 koji fizički  mora  biti  unutar  letjelice  u
-pravljati  njome.  Nadalje, jedna od prednosti je ta što mogu doći na nedohvatljiva područja za ljude, a obavljaju precizno i kvalitetno snimanje terena. Mogu ostati u zraku i do 30 sati (Advantages of UAS, 2016). Samim time, bespilotna letjelica predstavlja sigurno okruženje te se može kretati dosta velikom brzinom. Ukoliko dođe do pada letjelice, nema štete od stradanja pilota, a uz to mogu letjeti u zonama u kojima postoje velike opasnosti i to na duže vrijeme (Soffar, 2016). \\
-Prednosti koje dronovi pružaju su njihova niska cijena te je održavanje puno jeftinije od običnih letjelica i zrakoplova. Uz to, dronovi mogu letjeti na niskim nadmorskim visinama za razliku od zrakoplova, a također mogu letjeti nekoliko sati bez prestanka. Njihove sposobnosti snimanja, nadziranja, nadgledavanja, izviđanja jedne su od velikih prednosti kao i laka i brza implementacija sustava (Phil for Humanity, 2016).\\
-S  druge  strane,  postoje  i  neki  nedostaci  bespilotnih  letjelica  i  dronova. Bespilotne letjelice su u odnosu na dronove, skupe za proizvodnju,dok se veliki troškovi mogu pojaviti i ljudskom greškom kod letjelica s daljinskim upravljanjem te to može uzrokovati njen pad. Također, može se dogoditi i to da se letjelica izgubi što također donosi velike troškove. Kvarovi na računalu isto mogu uzrokovati štete na bespilotnim letjelicama, naročito kada se one koriste za vojne napade što može rezultirati ubijanjem civila i uništenjem  civilne  imovine (Soffar, 2016). \\
+pravljati  njome.  Nadalje, jedna od prednosti je ta što mogu doći na nedohvatljiva područja za ljude, a obavljaju precizno i kvalitetno snimanje terena. Mogu ostati u zraku i do 30 sati \citep{AdvantagesofUAS}. Samim time, bespilotna letjelica predstavlja sigurno okruženje te se može kretati dosta velikom brzinom. Ukoliko dođe do pada letjelice, nema štete od stradanja pilota, a uz to mogu letjeti u zonama u kojima postoje velike opasnosti i to na duže vrijeme \citep{Soffar}. \\
+Prednosti koje dronovi pružaju su njihova niska cijena te je održavanje puno jeftinije od običnih letjelica i zrakoplova. Uz to, dronovi mogu letjeti na niskim nadmorskim visinama za razliku od zrakoplova, a također mogu letjeti nekoliko sati bez prestanka. Njihove sposobnosti snimanja, nadziranja, nadgledavanja, izviđanja jedne su od velikih prednosti kao i laka i brza implementacija sustava \citep{PhilForHumanity}.\\
+S  druge  strane,  postoje  i  neki  nedostaci  bespilotnih  letjelica  i  dronova. Bespilotne letjelice su u odnosu na dronove, skupe za proizvodnju,dok se veliki troškovi mogu pojaviti i ljudskom greškom kod letjelica s daljinskim upravljanjem te to može uzrokovati njen pad. Također, može se dogoditi i to da se letjelica izgubi što također donosi velike troškove. Kvarovi na računalu isto mogu uzrokovati štete na bespilotnim letjelicama, naročito kada se one koriste za vojne napade što može rezultirati ubijanjem civila i uništenjem  civilne  imovine \citep{Soffar}. \\
 Unatoč tome, vojska i dalje koristi dronove i  bespilotne letjelice jer vjeruju u njihove prednosti, a nisu svjesni nedostataka. Nedostaci dronova su ti da oni ne mogu komunicirati s civilima, odnosno u slučaju vojnog napada te potrebe za evakuacijom nekog područja. Loše programirani dronovi mogu izazvati velike štete, a kao takvi mogu biti preuzeti od strane neprijatelja što dovodi u pitanje sigurnost takvih sustava. 
 
 
  
 
 \subsection{Vrste}
-Prema Fahlstorm  i  Gleason  (2012.) postoje  3  vrste  letjelica  bez  pilota,  isključujući 
+Prema \citet{UAVSystem} postoje  3  vrste  letjelica  bez  pilota,  isključujući 
 projektile: \begin{itemize}
-\item Bespilotne letjelice \engl{Unmanned Aerial Vehicle - UAV}
-\item Letjelice na daljinsko upravljanje \engl{ Remotely Piloted Vehicle - RPV}
-\item Dronovi \engl{Drones}
-\item Oblik muhe \engl{insect fly shaped drone}
+\item Bespilotne letjelice \engl{Unmanned Aerial Vehicle - UAV} (slika \ref{fig:UAV letjelica})
+\item Letjelice na daljinsko upravljanje \engl{ Remotely Piloted Vehicle - RPV} (slika \ref{fig:RPV letjelica})
+\item Dronovi \engl{Drones} (slika \ref{fig:dron})
+\item Oblik kukca \engl{insect fly shaped drone} (slika \ref{fig:oblik kukca})
 \end{itemize}
-U današnje doba, najčešći pojam koji se javlja za opisivanje bespilotnih letjelica je dron. Razlika između drona i bespilotne letjelice (UAV) je u stupnjuautomatizacije, jer dronov let ovisi o unaprijed programiranom ponašanju, a kod UAV postoji daljinsko upravljanje od strane pilota  u  kontrolnoj  stanici (UAV  Insider,  2013). U ovom radu bit će naglasak na treću vrstu bespilotnih letjelica koje se sve više i više danas koriste, a to su dronovi. 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=8cm]{img/insect_fly_shaped_drone.png}
+\caption{Oblik kukca\protect\footnotemark}
+\label{fig:oblik kukca}
+\end{figure}
+\footnotetext{Izvor: https://i.pinimg.com/474x/dd/6c/65/dd6c65f6342309d5fe1027ad3cd66a20--spy-gadgets-radio-control.jpg}
+U današnje doba, najčešći pojam koji se javlja za opisivanje bespilotnih letjelica je dron. Razlika između drona i bespilotne letjelice (UAV) je u stupnjuautomatizacije, jer dronov let ovisi o unaprijed programiranom ponašanju, a kod UAV postoji daljinsko upravljanje od strane pilota  u  kontrolnoj  stanici \citep{UAVInsider}. U ovom radu bit će naglasak na treću vrstu bespilotnih letjelica koje se sve više i više danas koriste, a to su dronovi. 
 
-\subsubsection{UAV}
+\subsubsection{UAV}\label{sec:UAV}
 Kao što je već spomenuto, bespilotna letjelica je letjelica ili zrakoplov bez pilota. Njome se može upravljati na daljinski, odnosno od strane osoba koja to čini u kontrolnoj stanici. S druge strane, može letjeti samostalno na temelju unaprijed programiranih planova leta ili više složenih dinamičkih sustava za automatizaciju. Takve letjelice se koriste za mnoge svrhe i misije, najčešće u slučaju izviđanja, no ponekad imaju i napadačke uloge. Sposobnosti koje posjeduje su te što može biti kontrolirala, ima održiv horizontalni let i pokreće se pomoću mlaznog ili klipnog motora. Postoji nekoliko tipova ovakvih letjelica, a klasificirane su prema svrsi koju obavljaju (The UAV, n.d.):
 \begin{itemize}
 \item Za pronalaženje ciljeva i meta --- pronalazi zemaljske i zračne neprijateljske mete 
@@ -95,36 +100,42 @@ Kao što je već spomenuto, bespilotna letjelica je letjelica ili zrakoplov bez 
 Neke  od  bespilotnih  letjelica  su:  Altair,  Global  Hawk,  X47-A, Prowler II, X45-A UCAV, Fire Scout, Predator A i Predator B, ER/MP UAS, I-GNAT, Mariner, Army I-GNAT ER i drugi.
 \begin{figure}[htb]
 \centering
-\includegraphics[width=5cm]{img/fer_logo.jpg}
-\caption{Bespilotna letjelica\protect\footnotemark}
-\label{fig:bespilotna letjelica}
+\includegraphics[width=8cm]{img/UAV.png}
+\caption{UAV letjelica\protect\footnotemark}
+\label{fig:UAV letjelica}
 \end{figure}
-\footnotetext{www.sadasfasdfasfas}
+\footnotetext{Izvor: https://www.mitre.org/sites/default/files/images/uas-track-civil-airspace-aviation.jpg}
 
 \subsubsection{RPV}
 RPV su letjelice na daljinsko upravljanje \engl{ Remotely Piloted Vehicle}. Takve male letjelice  su  najviše  korištene  za  terenski  rad  vezan  uz  okoliš. Prema  tome,  njihov  raspon korištenja kreće se od šumarstva, morskih istraživanja, promatranja biljnih i životinjskih svijeta, dobivanja uzoraka o biološkim stvarima iz zraka i slično. Prednosti takvih letjelica su u tome što je pilot siguran, odnosno nije fizički prisutan. Zatim, brzo prikupljanje podataka, niska cijena te relativno kratko vrijeme odaziva i dobivanja odgovora na zahtjeve. No s druge strane, postoje i neka ograničenja prilikom takvih letjelica, a to su niska stabilnost kao fotografske platforme, kratko vrijeme leta, malobrojnost senzora, teškoće kod navigacijskog sustava itd. \\
 Daljnji razvoj i korištenje letjelica na daljinsko upravljanje je upravo za potrebe snimanja stana okoliša. Osim otkrivanja i procjene okoliša, potreban je i daljnji fokus na poboljšanje slike te omogućiti ugradnju više senzora za razna mjerenja \citep{Hardin}.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=8cm]{img/RPV.png}
+\caption{RPV letjelica\protect\footnotemark}
+\label{fig:RPV letjelica}
+\end{figure}
+\footnotetext{Izvor: http://www.grandforksherald.com/sites/default/files/styles/16x9\_620/public/field/image/060916.n.gfh-\_.grandsky\%20001.JPG?itok=iMeyXr2z}
 
 \subsubsection{Dronovi}
 Vrsta bespilotnih letjelica, poznatiji kao dronovi su zračni bespilotni sustavi koji mogu biti kratkog ili dugog dometa, a koriste se za vojne ili civilne svrhe. Najčešća oprema koju dron sadržava je kamera, a neki mogu biti naoružani projektilima. 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=5cm]{img/fer_logo.jpg}
-\caption{Bespilotna letjelica\protect\footnotemark}
+\includegraphics[width=8cm]{img/drone.png}
+\caption{Dron\protect\footnotemark}
 \label{fig:dron}
 \end{figure}
-\footnotetext{www.sadasfasdfasfaass}
+\footnotetext{Izvor: http://www.bluebird-electric.net/artificial\_intelligence\_autonomous\_robotics/robotics\_artificial\_intell-igence\_autonomous\_pictures/uav\_drone\_photo\_recon\_camera\_multi\_rotor\_helicopter.jpg}
 Na  slici~\ref{fig:dron}  nalazi  se  slika 
 drona. Današnja najvažnija primjena dronova je stvaranje mapa, odnosno snimaka iz zraka. Dronovi su  vrlo dobri u izradi karata, daleko više od drugih tehnologija za istu primjenu. Nadalje, odlični su u fotografiranju i računalnoj  obradi  tih  fotografija \citep[str.~10]{Drones}. Većina dronova koriste razne senzore kako  bi  napravili  procjenu  stanja,  odnosno  koriste  MEMS\footnote{\engl{Microelectromechanical}} čipove  za  mjerenje  ubrzanja  i rotacije. Neki od njih nose sustav za mjerenje udaljenosti od tla te također mogu imati barometre za  mjerenje  tlaka  zraka.  Uz  to,  dronovi  mogu  imati  na  sebi senzore  za  prijenos  topline  pa  i manetometre za mjerenje zemljinog magnetnog polja. No najveća većina njih posjeduje GPS senzore jer MEMS senzori koji se koriste na takvim jeftinim letjelicama nisu dovoljni precizni. No, GPS ne može ažurirati svoju poziciju dovoljno često te ima svoje oscilacije pa je najbolja kombinacija  upravo  spomenutih  senzora \citep[str.~13]{Drones}.\\
 Nadalje, na slici~\ref{fig:konfiguracijaDrona} nalazi se primjer jedne od konfiguracija drona s više motora. Sastoji  se  od  spomenutih  motora  i  propelera,  kontrolera  za  let,  GPS  senzora,  baterije, elektroničkog kontrolera za brzinu, prijemnika, ploče za napajanje i telemetrijskog modula. 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=5cm]{img/fer_logo.jpg}
-\caption{Bespilotna letjelica\protect\footnotemark}
+\includegraphics[width=13cm]{img/konfiguracijaDrona.png}
+\caption{Konfiguracija drona\protect\footnotemark}
 \label{fig:konfiguracijaDrona}
 \end{figure}
-\footnotetext{http://drones.newamerica.org/primer/DronesAndAerialObservation.pdf
-}
+\footnotetext{http://drones.newamerica.org/primer/DronesAndAerialObservation.pdf}
 
 \subsection{Zakonska regulativa\citep{Ekscentar}} 
 Zabilježavanjem nezakonitih upotreba bespilotnih letjelica kojima su ugrožavani ljudski životi i koji nisu u skladu s određenim zakonima (zakon o zaštiti osobnih podataka), kako bi se ograničila i osigurala upotreba bespilotnih letjelica potrebna je zakonska regulativa o toj temi. S obzirom na to da korištenje dronova, povećanjem njihovog broja, prvenstveno za zabavu postaje veoma popularno i u Republici Hrvatskoj, javlja se potreba za razmotranje i zakonske regulative\footnote{Zakon o dronovima: \url{http://www.dronovi.hr/zakon-o-dronovima.html}}.  Letjelice  se  mogu  vrlo  lako  nabaviti  ili  izraditi  te  postoji mogućnost preplavljenosti zračnog prostora. Zbog toga je potrebno registrirati svaku letjelicu i regulirati njezinu uporabu. Tako je prema Pravilniku o sustavima bespilotnih zrakoplova utvrđeno, osim općih odrednica o klasama područja letenja i letačkih operacija te veličine samih bespilotnih letjelica, to da se let bespilotnim letjelicama smije odvijati samo danju. Nadalje, potrebno je osigurati sigurnu udaljenost letjelice od ljudi, objekata, vozila, cesta, dalekovoda i drugo. Rukovoditelje bespilotne letjelice mora od nje biti udaljen do 500 metara te mu ona uvijek mora biti unutar vidnog polja. Što se tiče zrakoplova, let  drona  mora  biti  udaljen  najmanje  3  kilometara  od  aerodroma.  Dakako,  zabranjeno  je izbacivanje bilo kakvih predmeta iz letjelice. \\
@@ -148,7 +159,7 @@ Prema izvješću tvrtke PwC (Price Waterhouse Coopers) “Clarity from above“ 
 Očekuje se da će povećanjem broja letjelica smanjiti nesreće na radu, 
 poput pada zaposlenika s krova tijekom inspekcija zgrada, a time i gubici zbog kompenzacija 
 radnicima. 
-Bespilotne letjelice bi u budućnosti mogle riješiti niz problema i smanjiti troškove i u nizu drugih industrija, u zemljama u razvoju i slučajevima prirodnih katastrofa. (Allianz, 2017.)
+Bespilotne letjelice bi u budućnosti mogle riješiti niz problema i smanjiti troškove i u nizu drugih industrija, u zemljama u razvoju i slučajevima prirodnih katastrofa. \citep{Allianz}
 Kao što je navedeno ranije, postoji podjela bespilotnih letjelica (UAV) prema njihovoj svrsi. Tako  su  najprije  bile  namijenjene za korištenje u vojne svrhe, no danas je njihova primjena puno veća (Stombaugh, Smith, Thamann, n.d.). Ostala područja u kojima se danas koriste su:\begin{itemize}
 \item geodezija --- projektiranje, rudarstvo, geologija, šumarstvo
 \item poljoprivreda
@@ -159,17 +170,25 @@ Kao što je navedeno ranije, postoji podjela bespilotnih letjelica (UAV) prema n
 \item sigurnost
 \item dostava
 \end{itemize}
-U  vojne  svrhe bespilotne  letjelice  se  koriste  za  sigurnosni  nadzor  i  kontrolu  vojnih područja, za zračne izvidnice, otkrivanje kemijskih, bioloških, radioloških i nuklearnih uvjeta na nekom terenu, zatim za telekomunikacijski promet, za potragu i spašavanje i dr. Što se tiče terenskog  pretraživanja  i  spašavanja,  vrše  nadgledanje  i  obilježavaju  točke  na  kojima  je potrebna intervencija i slično. Nadalje, bespilotne letjelice  su  korisne  i  u  telekomunikacijske svrhe, a čak mogu i detektirati lansiranje nekog projektila (Military UAS Application, 2016).\\
-U poljoprivredi se pomoću dronova ili drugih vrsta bespilotnih letjelice za tu svrhu, nastoji povećati produktivnost i efikasnost  proizvodnje.  Dronovi  se  mogu  koristiti  za  nadzor usjeva,  provjeru  uvjeta  na  zemljištu  da  bi  se  tako  ostvario  ekološki  održiv  način  rada,  tj. racionalnije koristila voda, upotrebljavali pesticidi pa i pametnije koristili strojevi. U geodeziji, bespilotne letjelice mogu snimati teren te se na temelju toga može izraditi 3D prikaz, razni digitalni modeli terena i površine itd. Dronovi su korisni jer mogu doći do nepristupačnih terena i područja te obaviti potrebno snimanje  i mjerenje.  Nadalje,  bespilotne letjelice  mogu  biti korisne kod mjerenja infrastrukture i vrše točan, brz i pouzdan nadzor nad objektima zajedno sa preciznim i učinkovitim ugrađenim kamerama(Geo-Tron, 2015)\\
+U  vojne  svrhe bespilotne  letjelice  se  koriste  za  sigurnosni  nadzor  i  kontrolu  vojnih područja, za zračne izvidnice, otkrivanje kemijskih, bioloških, radioloških i nuklearnih uvjeta na nekom terenu, zatim za telekomunikacijski promet, za potragu i spašavanje i dr. Što se tiče terenskog  pretraživanja  i  spašavanja,  vrše  nadgledanje  i  obilježavaju  točke  na  kojima  je potrebna intervencija i slično. Nadalje, bespilotne letjelice  su  korisne  i  u  telekomunikacijske svrhe, a čak mogu i detektirati lansiranje nekog projektila \citep{Military}.\\
+U poljoprivredi se pomoću dronova ili drugih vrsta bespilotnih letjelice za tu svrhu, nastoji povećati produktivnost i efikasnost  proizvodnje.  Dronovi  se  mogu  koristiti  za  nadzor usjeva,  provjeru  uvjeta  na  zemljištu  da  bi  se  tako  ostvario  ekološki  održiv  način  rada,  tj. racionalnije koristila voda, upotrebljavali pesticidi pa i pametnije koristili strojevi.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=8cm]{img/poljoprivreda.png}
+\caption{Upotreba letjelica u poljoprivredi\protect\footnotemark}
+\label{fig:letjelicaUPoljoprivredi}
+\end{figure}
+\footnotetext{Izvor: https://geospatialmedia.s3.amazonaws.com/wp-content/uploads/2017/08/140911-drones-editorial.jpg}\\
+U geodeziji, bespilotne letjelice mogu snimati teren te se na temelju toga može izraditi 3D prikaz, razni digitalni modeli terena i površine itd. Dronovi su korisni jer mogu doći do nepristupačnih terena i područja te obaviti potrebno snimanje  i mjerenje.  Nadalje,  bespilotne letjelice  mogu  biti korisne kod mjerenja infrastrukture i vrše točan, brz i pouzdan nadzor nad objektima zajedno sa preciznim i učinkovitim ugrađenim kamerama \citep{GeoTron}\\
 Praćenje  okoliša,  snimanje  šuma,  procjena  kvalitete  zraka,  kontrola   i nadzor nad kritičnom infrastrukturom (npr.~odlagališta  i otpadne  vode)  te  mnoge  druge  mogućnosti  vezane  uz  okoliš  karakteristične  su  dronove. Prednost je u tome što takva snimanja i prikupljanja podataka nisu skupa te ne postoje veliki financijski troškovi, a ne ovise niti o vremenskim uvjetima.\\
-Također, bespilotne letjelice se koriste i za civilnu sigurnost jer se mogu koristiti za policijski nadzor, zaštitu državnih granica te razne druge nadzore i operacije (Geo-Tron, 2015). Uz sve navedeno, većina današnjih korisnika, kupuje i koriste dronove ponajviše za zabavu sa željom prikupljanja fotografija s određenih visina. 
+Također, bespilotne letjelice se koriste i za civilnu sigurnost jer se mogu koristiti za policijski nadzor, zaštitu državnih granica te razne druge nadzore i operacije \citep{GeoTron}. Uz sve navedeno, većina današnjih korisnika, kupuje i koriste dronove ponajviše za zabavu sa željom prikupljanja fotografija s određenih visina. 
 Najnovije upotrebe uključuju dostavljanje krvi i cjepiva na udaljene lokacije u Africi, gašenje požara, kontrolu štetnika, pa čak i dostavljanje u ugostiteljskim zanimanjima kao što je dostava hrane.
 Osiguratelji  sve  češće  upotrebljavaju ovaj  tip  letjelica za  jednostavniju  i  sigurniju procjenu rizika građevinskih ili infrastrukturnih projekata.
 
 \subsection{Proizvođači}
 Danas  najvećim  proizvođačem  bespilotnih  letjelica  za  civilnu  upotrebu  smatra  se kineska kompanija DJI, sa sjedištem u gradu Shenzhen-u. Drugi poznatiji proizvođači su još francuski  Parrot,  odnosno njezina  švicarska  podružnica  senseFly,  američki  3D  Robotics,  kanadski  Aeryon itd.
 Bespilotne letjelice  s  kamerama  i  senzorima pružaju poduzećima  diljem  svijeta potpunije podatke.Također se koriste u prijevozu i preciznim poslovnim aktivnostima te tako sve više utječu na poslovne strategije poduzeća.\\
-Na  drugoj  po  redu  „{The  Commercial  UAV  Show"  konferenciji  u  Londonu održanoj 2015. godine izlagalo je  stotinjak tvrtki iz cijelog svijeta. Korisnici su prezentirali projekte s bespilotnim  letjelicama  uz  mnoštvo  savjeta  kako  započeti  projekte,  kako  ih  prezentirati, implementirati te dijelili konkretna iskustva iz provedenih projekata. Dominirala su rješenja za preciznu  poljoprivredu,  snimanje  arheološke  baštine,  geodetske  izmjere,  izrada  karata  i modeliranje, nadzor okoliša, požarišta, prometnica te razne inspekcije, a pojavio se i značajan broj  specijaliziranih  tvrtki  za  senzore,  motore,  antene  i  ostale  dijelove  bespilotnih  letjelica.(Tihomir Šašić, 2015.)
+Na  drugoj  po  redu  „The  Commercial  UAV  Show"  konferenciji  u  Londonu održanoj 2015. godine izlagalo je  stotinjak tvrtki iz cijelog svijeta. Korisnici su prezentirali projekte s bespilotnim  letjelicama  uz  mnoštvo  savjeta  kako  započeti  projekte,  kako  ih  prezentirati, implementirati te dijelili konkretna iskustva iz provedenih projekata. Dominirala su rješenja za preciznu  poljoprivredu,  snimanje  arheološke  baštine,  geodetske  izmjere,  izrada  karata  i modeliranje, nadzor okoliša, požarišta, prometnica te razne inspekcije, a pojavio se i značajan broj  specijaliziranih  tvrtki  za  senzore,  motore,  antene  i  ostale  dijelove  bespilotnih  letjelica.(Tihomir Šašić, 2015.)
 
 \subsection{Klasifikacija}
 Postoji  veliki  broj  različitih  tipova  bespilotnih  letjelica  s  različitim  mogućnostima, ovisno o potrebama samih korisnika, no ne postoji njihova opće prihvaćena podjela.\\
@@ -203,7 +222,7 @@ Strateške & Visoko leteće dugog trajanja leta & $2500-12500$ & $15000-20000$ &
 & Egzosferske & U razvoju & $>30000$ & U razvoju & U razvoju \\ \hline
 \end{tabular}
 \end{table}
-Po načinu kontrole i upravljanja bespilotne letjelice dijelimo  na  autonomne  sustave, sustave   samoupravljanja,   sustave   upravljanja   po   radarskom   ili   radio   snopu   (sustav telenavođenja),   sustave   telekomandnog   upravljanja   i   kombinirane   sustave   (autonomni, neautonomni). (Vindiš M., 2014.)\\
+Po načinu kontrole i upravljanja bespilotne letjelice dijelimo  na  autonomne  sustave, sustave   samoupravljanja,   sustave   upravljanja   po   radarskom   ili   radio   snopu   (sustav telenavođenja),   sustave   telekomandnog   upravljanja   i   kombinirane   sustave   (autonomni, neautonomni). \citep{Vindis}\\
 Prema visini leta, težinu pri polijetanju i maksimalnom doletu bespilotne letjelice možemo podijeliti na (BHDCA, 2016): \begin{itemize}
 \item Kategorija  1  (masa  do  1  kg,  visina  leta do 50 m iznad površine \engl{AGL - Above Ground Level}, dolet do 150 m),
 \item Kategorija 2 (masa veća od 1 kg do 5 kg, visina leta do 150 m AGL, dolet do 500 m),
@@ -216,34 +235,153 @@ Po konstruktivnoj izvedbi bespilotne letjelice možemo podijeliti na letjelice k
 \end{itemize}
 Prema  međunarodnoj  organizaciji  za civilno  zrakoplovstvo  \engl{International  Civil Aviation Organization - ICAO} bespilotne letjelice mogu se podijeliti u dvije kategorije:\begin{enumerate}
 \item Autonomne letjelice --- temelje se na naprednim sustavima za dinamičko navođenje te se trenutačno smatra neprikladnim za regulaciju u civilnom zrakoplovstvu radi zakonskih problema te pitanja odgovornosti.
-\item Letjelice na daljinsko upravljanje (RPA) --- letjelice na daljinsko upravljanje podliježu pravnim  potpisima  kao  Međunarodne organizacije  za  civilno  zrakoplovstvo  tako  i propisima  i  zakonima  nacionalnih  agencija  za  civilno  zrakoplovstvo.  Letjelice  na daljinsko upravljanje mogu se podijeliti na one sa fiksnim krilima, rotacijske te ostale modele. (Varšić N., 2016.)
+\item Letjelice na daljinsko upravljanje (RPA) --- letjelice na daljinsko upravljanje podliježu pravnim  potpisima  kao  Međunarodne organizacije  za  civilno  zrakoplovstvo  tako  i propisima  i  zakonima  nacionalnih  agencija  za  civilno  zrakoplovstvo.  Letjelice  na daljinsko upravljanje mogu se podijeliti na one sa fiksnim krilima, rotacijske te ostale modele.
 \end{enumerate}
 Danas  se  u  civilne  svrhe  najčešće  primjenjuju  mini  i  mikro bespilotne  letjelice  s propelerima  tzv.  ~dronovi.  Razvojem  tehnologija  i  pojeftinjenjem  sustava  za  izvođenje letova  bez  pilota  u  zrakoplovu  takvi  sustavi  su  danas  ekonomski  prihvatljivi  za  razne namjene. 
 
-\section{Komponente bespilotne letjelice}
+
+\section{Sustav za regulaciju}
+\subsection{Osnovni pojmovi}
+\begin{description}
+\item[Automatska regulacija:] po definiciji je automatsko održavanje željenog stanja nekog procesa ili  mijenjanje  tog  stanja  po  određenom zakonu,  bez obzira  na  djelovanje  vanjskih  i unutarnjih  poremećaja.  To  se  postiže  pomoću povratne  veze,  koja  omogućava  usporedbu izmjerene  vrijednosti  neke  veličine  reguliranog  procesa  sa  njenom  željenom  vrijednosti (referencijom),  te  se  na  temelju  razlike  tih  dviju veličina  odlučuje  kako  proces  usmjeriti. Proces  se  usmjerava  upravljanjem  tokom  energije  ili tvari. Regulacija se odvija u „zatvorenom krugu“.
+\item[Signal:] funkcija koja opisuje vremensku promjenu fizičke veličine nekog fizičkog procesa. 
+\item[Sustav \engl{system}:] skup elemenata povezanih vezama kojima djeluju jedan na drugi.  Sustav  obično 
+opisuje fizički proces, uređaj ili međusobnu vezu uređaja.
+\item[Ulaz ili pobuda:] Signal  koji  se  može  prepoznati  kao  uzrok  nekih  prom
+jena  u  sustavu.
+\item[Izlaz ili odziv:] Signal koji se prepoznaje kao posljedica.
+\item[Proces:] općenito  skup  aktivnosti  kojima  se  ulazni  elementi  transformiraju  u  izlazne elemente  sa  specifičnim  svojstvima,  a  sama    transformacija  određena  je  parametrima  i ograničenjima.
+\end{description}  
+
+\subsection{Sinteza regulatora}
+Sustav upravljanja na temelju (mjerenih) signala ulaza i izlaza procesa pronalazi upravljačke signale koji ostvaruju željeni cilj upravljanja. Linearni sustavi su oni sustavi čije se vladanje može opisati linearnim diferencijalnim jednadžbama (vremenski kontinuirani linearni sustavi) ili linearnim jednadžbama diferencija (vremenski diskretni linearni sustavi).\\
+Osnovna struktura sustava upravljanja ilustrirana je na slici \ref{fig:Osnovna struktura} Regulacijski krug sadrži 4 glavna sastavna dijela: proces, mjerni član, regulator, i izvršni (postavni) član.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=10cm]{img/osnovnaReg.png}
+\caption{Osnovna struktura sustava upravljanja\protect\footnotemark}
+\label{fig:Osnovna struktura}
+\end{figure}
+\footnotetext{Izvor: http://www.fer.unizg.hr/\_download/repository/SLSU\_SveucilisniPrirucnik\_2018\_05\_18.pdf}\\
+Sa stajališta projektiranja sustava upravljanja praktičnije je razmatrati pojednostavljenu shemu sustava upravljanja (vidi sliku \ref{fig:Pojednostavljena struktura}) kod koje su regulator i izvršni član objedinjeni, a mjerni član je idealan.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=10cm]{img/struktura.png}
+\caption{Pojednostavljena struktura sustava upravljanja\protect\footnotemark}
+\label{fig:Pojednostavljena struktura}
+\end{figure}
+\footnotetext{Izvor: http://www.fer.unizg.hr/\_download/repository/SLSU\_SveucilisniPrirucnik\_2018\_05\_18.pdf}\\
+Važne veličine regulacijskog kruga na slici \ref{fig:Pojednostavljena struktura} su:
+\begin{itemize}
+\item $y$ - regulirana veličina (stvarna vrijednost) \engl{controlled variable}
+\item $r$ – referentna veličina (postavna veličina, referenca) \engl{reference value}
+\item $e$ – regulacijsko odstupanje \engl{control error}
+\item $u$ – upravljačka, izvršna veličina \engl{manipulated variable}
+\item $z$ – smetnja, poremećaj \engl{disturbance}
+\end{itemize}
+U načelu se sinteza regulatora može definirati kao postupak projektiranja regulatora koji osigurava odgovarajući odziv regulirane veličine $y$ u odnosu na referentnu veličinu $r$ uz odgovarajuću kompenzaciju utjecaja poremećaja $z$. \citep{Baotic}\\
+Formalno se postupak sinteze sustava upravljanja može razložiti na sljedeće korake:
+\begin{enumerate}
+\item Proučiti sustav (proces) - odrediti opći cilj sustava upravljanja.
+\item  Modelirati sustav, i pojednostaviti model ako je neophodno.
+\item  Skalirati varijable i analizirati model; odrediti njegova svojstva.
+\item  Odrediti/izabrati koje se varijable želi regulirati.
+\item  Odrediti/izabrati mjerne i upravljačke varijable.
+\item  Izabrati upravljačku strukturu.
+\item  Odrediti/izabrati oblik regulatora.
+\item  Odrediti pokazatelje kakvoće (specifikacije) za sustav upravljanja.
+\item  Parametrirati regulator.
+\item  Analizirati dobiveni sustav upravljanja - provjeriti jesu li zadovoljene specifikacije.
+\item  Simulirati upravljački sustav na računalu ili ispitnom postrojenju.
+\item  Ponoviti postupak od koraka 2, ako je potrebno.
+\end{enumerate}
+Postoje nekoliko načina sinteze sustava upravljanja, odnosno sinteze regulatora:
+\begin{itemize}
+\item Sinteza sustava upravljanja primjenom krivulje mjesta korijena
+\item Sinteza regulatora postavljanjem polova
+\item Sinteze prema optimumu dvostrukog odnosa
+\item Linearni kvadratni regulator (LQR) po varijablama stanja
+\item Metoda podešavanja Ziegler-Nichols
+\item Kriterij minimalne integralne pogreške
+\item Upravljanje u prostoru stanja
+\item Optimalno upravljanje
+\end{itemize}
+
+\subsection{Modeliranje dinamičkih procesa}
+Ponašanje dinamičkih sustava opisano je skupom diferencijalnih jednadžbi koje su općenito nelinearne. U ovim diferencijalnim jednadžbama sadržane su zakonitosti koje vrijede za dati sustav. Osnovni je problem koji se pojavljuje kod analize ovakvih sustava nepostojanje opće metodologije za rješavanje nelinearnih diferencijalnih jednadžbi. S druge strane, ako je dinamički sustav opisan skupom linearnih diferencijalnih jednadžbi, tada je njegova analiza znatno jednostavnija.
+Općenito, kao rezultat modeliranja dolazi se do zapisa \ref{eq:dinSustav} dinamičkog sustava:
+\begin{equation}
+\centering
+	\begin{aligned}
+		\dot{x}_1 = f_1(x_1,x_2,...,x_n,u_1,...,u_m);\\
+		\dot{x}_2 = f_2(x_1,x_2,...,x_n,u_1,...,u_m);\\
+		\vdots\\
+		\dot{x}_n = f_n(x_1,x_2,...,x_n,u_1,...,u_m);\\
+	\end{aligned}
+\label{eq:dinSustav}
+\end{equation}
+odnosno skraćeno zapisano \ref{eq:dinSustav2}: 
+\begin{equation}
+\centering
+	\mathbf{\dot{x} = f(x,u)};
+\label{eq:dinSustav2}
+\end{equation}
+gdje je $x=[x_1,...,x_n]^T$ - vektor stanja sustava, a $u = [u_1,...u_m]^T$ - vektor ulaznih varijabli sustava.\\
+U prvom se koraku analize određuju ravnotežne točke \engl{equilibrium points} za koje vrijedi:
+\begin{equation}
+\centering
+	\mathbf{\dot{x} = 0 \Longrightarrow f(x_0,u_0) = 0};
+\label{eq:dinSustav2}
+\end{equation}
+U ovim točkama je postignuta ravnoteža između energije koja ulazi u sustav i energije koja izlazi iz sustava.\\
+Često se zbog nemogućnosti analize sustava u izvornom nelinearnom obliku pribjegava tzv.~linearizaciji sustava tj.~opisu sustava linearnim modelom u okolini ravnotežne točke.
+Naravno u tom slučaju dobiveni (linearni) model je valjan u uskom području oko ravnotežne
+točke. Temelj postupka linearizacije je razvoj funkcije u Taylorov red koji za statičku funkciju
+(sustav) glasi \ref{eq:TaylorovRed}
+\begin{equation}
+\centering
+	\mathbf{f(x+\Delta x) = f(x_0)+\sum_{i=1}^{n}{\frac{\partial f(x)}{\partial x_i}}\Big|_{x_0}\cdot\Delta x_i + \emph{o}(\Delta x_1,...,\Delta x_n)},
+\label{eq:TaylorovRed}
+\end{equation}
+gdje je $\Delta x = [\Delta x_1,...,\Delta x_n]^T$, a $\emph{o}(\Delta x_1,...,\Delta x_n)$ - ostatak reda, polinom koji sadrži samo članove s potencijama $\geq 2$.
+Zanemarivanjem ostatka $\emph{o}(\cdot)$ reda dobije se \ref{eq:TaylorovRed2}:
+\begin{equation}
+\centering
+	\mathbf{f(x+\Delta x) \approx f(x_0)+\sum_{i=1}^{n}{\frac{\partial f(x)}{\partial x_i}}\Big|_{x_0}\cdot\Delta x_i},
+\label{eq:TaylorovRed2}
+\end{equation}
+Iz \ref{eq:dinSustav2} dolazi se do \ref{eq:deltaX}
+\begin{equation}
+\centering
+	\mathbf{(\Delta x)' \approx {\frac{\partial f(x,u)}{\partial x}}\Big|_{x_0,u_0}\cdot\Delta x+ {\frac{\partial f(x,u)}{\partial u}}\Big|_{x_0,u_0}\cdot\Delta u},
+\label{eq:deltaX}
+\end{equation}
+Ovdje je bitno uočiti da je postupkom linearizacije dobiven model koji više nije funkcija početnih varijabli $x$ već promjena tih varijabli $\Delta x$ oko ravnotežne točke $x_0$. \citep{AUzbirka}
+
+
+
+\chapter{Razrada}
+\section{Komponente i način rada bespilotne letjelice}
 U današnje vrijeme poseban značaj i široku primjenu dobila je vrsta bespilotnih letjelica koje nazivamo multirotori,  a za koju  se skoro uvijek koristi naziv  dronovi.  Stoga ćemo  u nastavku nešto šire obraditi ovu vrstu bespilotnih letjelica.\\
-Multirotor je letjelica s minimalno 3 rotirajuća tijela (elise). Ova konfiguracija letjelice naziva se Trikopter, i on je po načinu upravljanja drugačiji od ostalih multirotora kao što su quadkopter   (4   motora),   hexkopter   (6   motora),   oktokopter   (8   motora)   itd.   Jedino   kod konstruktivne konfiguracije  trikoptera  jedan  motor  mora  biti pomičan,  kod  svih  ostalih konfiguracija  motori  su  fiksni.  Pojavom pristupačnih motora bez četkica \engl{brushless}  te unaprjeđenjem baterije  i minimiziranjem elektroničkih  komponenti  došlo  je  do  ekspanzije multirotor letjelica na tržištu. Razvoj kontrolera leta omogućio je jednostavno upravljanje sa inače složenim sustavom upravljanja, što je rezultiralo masovnom proizvodnjom i korištenjem multirotora u razne svrhe.\\
-Pozicioniranje  motora  jedan  iznad  odnosno ispod drugoga nudi određene prednosti i nedostatke  kod  multirotora  sastavljenih  u  „X“.  Žilić  (2015.)  navodi  da  prednosti  ove konfiguracije su smanjenje dimenzija letjelica i nešto lakša konstrukcija što olakšava transport, a glavni nedostatak je smanjene efikasnosti rada motora koja pada i do 20\% u odnosu na istu konfiguraciju  elektroničkih  komponenti  postavljenih  kao  standardni  oktakopter.  Osnovni elementi  multirotora  su  motori,  propeleri, upravljač leta,  baterija  i  konstrukcija  koja  sve  to povezuje   u   cjelinu   popularno   nazvan   okvir   \engl{frame}.  Za  multirotore  poboljšanih karakteristika koriste se motori bez četkica gdje su namotaji u središtu motora i imaju ulogu statora, a permanentni magneti su smješteni po obodu motora i imaju ulogu rotora. Glavna odlika ovih motora je pouzdan rad, jak okretni moment, i velika brzina odaziva na promjenu broja okretaja motora. Ova zadnja karakteristika je ključni element za upravljanje multirotorom, jer se upravljanje svodi na brze promjene broja okretaja motora.\\
-Dabi multirotor uopće mogao funkcionirati i biti upravljiv mora imati upravljač leta. To je elektronski uređaj koji u sebi ima ugrađen elektronski kompas, žiroskop, akcelerometar (mjerač ubrzanja) i često barometar. Svaki bolji upravljač ima i GPS \engl{Global Positioning System} modul za očitavanja položaja. Obrađujući podatke od navedenih senzora upravljač šalje signale pojedinim motorima da smanje ili povećaju broj okretaja te na taj način održava stabilan let  multirotora.  Mnogi upravljači imaju mogućnost priključka vanjskog senzora  (npr.~sonar), koji će dati podatak o udaljenosti od neke prepreke. (Žilić A., 2015.)\\
-Svi navedeni dijelovi multirotora smještaju se u konstrukciju. Pravilo koje se  mora poštovati je uravnoteženost multirotora po svim osima. Što je multirotor uravnoteženiji to će motori koristiti manje energije za upravljanje i stabilizaciju pa će cijela letjelica biti efikasnija. Multirotori su u mogućnosti izvoditi programirani let. To znači da se putem programa unaprijed odrede točke na koje treba doći sa definiranom visinom i brzinom između točaka. Preciznost održavanja visine omogućava upravljač koji,  kako  je  ranije  navedeno,  pored  ostalih  senzora, ima i  barometar koji mu omogućuje letenje na  točno zadanoj  visini. Ovakav let se izvodi korištenjem GPS podataka, te otvara vrata u primjeni za svrhu geodetskog mjerenja. Ukoliko na letjelici imamo postavljenu kameru moguće je programirati let po točno zadanoj ruti i na njoj definirati točke na kojima će kamera snimit fotografiju. Kada letjelica završi let u memoriji kamere ostaju snimljene fotografije koje se međusobno jednim dijelom preklapaju, pri čemu za svaku fotografiju postoje GPS koordinate i podatak o visini. Kada se ovi podaci uvrste u za to namijenjen program možemo dobiti trodimenzionalni prikaz terena. (Žilić A., 2015.)
-
-
-
+Multirotor je letjelica s minimalno 3 rotirajuća tijela (elise). Ova konfiguracija letjelice naziva se Trikopter, i on je po načinu upravljanja drugačiji od ostalih multirotora kao što su quadkopter   (4   motora),   heksakopter   (6   motora),   oktokopter   (8   motora)   itd.   Jedino   kod konstruktivne konfiguracije  trikoptera  jedan  motor  mora  biti pomičan,  kod  svih  ostalih konfiguracija  motori  su  fiksni.  Pojavom pristupačnih motora bez četkica \engl{brushless}  te unaprjeđenjem baterije  i minimiziranjem elektroničkih  komponenti  došlo  je  do  ekspanzije multirotor letjelica na tržištu. Razvoj kontrolera leta omogućio je jednostavno upravljanje sa inače složenim sustavom upravljanja, što je rezultiralo masovnom proizvodnjom i korištenjem multirotora u razne svrhe.\\
+Pozicioniranje  motora  jedan  iznad  odnosno ispod drugoga nudi određene prednosti i nedostatke  kod  multirotora  sastavljenih  u  „X“.  \citet{Zilic}  navodi  da  prednosti  ove konfiguracije su smanjenje dimenzija letjelica i nešto lakša konstrukcija što olakšava transport, a glavni nedostatak je smanjene efikasnosti rada motora koja pada i do 20\% u odnosu na istu konfiguraciju  elektroničkih  komponenti  postavljenih  kao  standardni  oktakopter.  Osnovni elementi  multirotora  su  motori,  propeleri, upravljač leta,  baterija  i  konstrukcija  koja  sve  to povezuje   u   cjelinu   popularno   nazvan   okvir   \engl{frame}.  Za  multirotore  poboljšanih karakteristika koriste se motori bez četkica gdje su namotaji u središtu motora i imaju ulogu statora, a permanentni magneti su smješteni po obodu motora i imaju ulogu rotora. Glavna odlika ovih motora je pouzdan rad, jak okretni moment, i velika brzina odaziva na promjenu broja okretaja motora. Ova zadnja karakteristika je ključni element za upravljanje multirotorom, jer se upravljanje svodi na brze promjene broja okretaja motora.\\
+Da bi multirotor uopće mogao funkcionirati i biti upravljiv mora imati upravljač leta. To je elektronski uređaj koji u sebi ima ugrađen elektronski kompas, žiroskop, akcelerometar (mjerač ubrzanja) i često barometar. Svaki bolji upravljač ima i GPS \engl{Global Positioning System} modul za očitavanja položaja. Obrađujući podatke od navedenih senzora upravljač šalje signale pojedinim motorima da smanje ili povećaju broj okretaja te na taj način održava stabilan let  multirotora.  Mnogi upravljači imaju mogućnost priključka vanjskog senzora  (npr.~sonar), koji će dati podatak o udaljenosti od neke prepreke. \citep{Zilic}\\
+Svi navedeni dijelovi multirotora smještaju se u konstrukciju. Pravilo koje se  mora poštovati je uravnoteženost multirotora po svim osima. Što je multirotor uravnoteženiji to će motori koristiti manje energije za upravljanje i stabilizaciju pa će cijela letjelica biti efikasnija. Multirotori su u mogućnosti izvoditi programirani let. To znači da se putem programa unaprijed odrede točke na koje treba doći sa definiranom visinom i brzinom između točaka. Preciznost održavanja visine omogućava upravljač koji,  kako  je  ranije  navedeno,  pored  ostalih  senzora, ima i  barometar koji mu omogućuje letenje na  točno zadanoj  visini. Ovakav let se izvodi korištenjem GPS podataka, te otvara vrata u primjeni za svrhu geodetskog mjerenja. Ukoliko na letjelici imamo postavljenu kameru moguće je programirati let po točno zadanoj ruti i na njoj definirati točke na kojima će kamera snimit fotografiju. Kada letjelica završi let u memoriji kamere ostaju snimljene fotografije koje se međusobno jednim dijelom preklapaju, pri čemu za svaku fotografiju postoje GPS koordinate i podatak o visini. Kada se ovi podaci uvrste u za to namijenjen program možemo dobiti trodimenzionalni prikaz terena. \citep{Zilic}
 \section{Simulacijski dio}\label{sec:SimulacijskiDio}
-Svrha ovog poglavlja je preko matematičkih jednadžbi opisati dinamičko ponašanje hexkoptera koje se koriste za projektiranje, preko odgovarajućih metoda, kontrolera  za stabilizaciju i kontroler za slijeđenje željene trajektorije. Izabran je hexkopter jer je on korišten u eksperimentalnom dijelu. Hexkopter se sastoji od šest rotora koji su smješteni na vrhovima šesterokuta koji su jednako udaljeni od centra mase, odnosno od tri para suprotno rotirajućih i fiksno dijagonalno postavljenih elisa.  Kontrolira se podešavanjem kutne brzine rotora (vrtnja samo u jednom smjeru) koji se okreću pomoću električnih motora. To uvelike olakšava postupke projektiranja. Povećanjem broja rotora povećava se nosivot i olakšava upravljanje kod kvara jednog od motora. Pretpostavlja se da je letjelica kruto tijelo tako da se dinamika može izvesti diferencijalnim jednadžbama iz Newton-Euler i Euler-Lagrange jednadžbi. Eulerov kut parametrizacije trodimenzionalnih rotacija sadrži singularne točke u koordinatnom prostoru koji mogu uzrokovati pogreške i u dinamičkom modelu i kontroli. Da bi se spriječio singularitet, rotacija letjelice je parametrizirana kvaternionima. Ovom parametrizacijom u obzir je uzeta linearnost kvaterniona, njihova stabilnost i učinkovitost (potrebno manje vremena za obradu tijekom simulacije). Vrijedi napomenuti da su kvaternioni i Eulerovi kutevi povezani. Robusno matematičko modeliranje zajedno s učinkovitim upravljanjem osigurava lagan i siguran let. 
+Svrha ovog poglavlja je preko matematičkih jednadžbi opisati dinamičko ponašanje heksakoptera koje se koriste za projektiranje, preko odgovarajućih metoda, kontrolera  za stabilizaciju i kontroler za slijeđenje željene trajektorije. Izabran je heksakopter jer je on korišten u eksperimentalnom dijelu. Heksakopter se sastoji od šest rotora koji su smješteni na vrhovima šesterokuta koji su jednako udaljeni od centra mase, odnosno od tri para suprotno rotirajućih i fiksno dijagonalno postavljenih elisa.  Kontrolira se podešavanjem kutne brzine rotora (vrtnja samo u jednom smjeru) koji se okreću pomoću električnih motora. To uvelike olakšava postupke projektiranja. Povećanjem broja rotora povećava se nosivot i olakšava upravljanje kod kvara jednog od motora. Pretpostavlja se da je letjelica kruto tijelo tako da se dinamika može izvesti diferencijalnim jednadžbama iz Newton-Euler i Euler-Lagrange jednadžbi. Eulerov kut parametrizacije trodimenzionalnih rotacija sadrži singularne točke u koordinatnom prostoru koji mogu uzrokovati pogreške i u dinamičkom modelu i kontroli. Da bi se spriječio singularitet, rotacija letjelice je parametrizirana kvaternionima. Ovom parametrizacijom u obzir je uzeta linearnost kvaterniona, njihova stabilnost i učinkovitost (potrebno manje vremena za obradu tijekom simulacije). Vrijedi napomenuti da su kvaternioni i Eulerovi kutevi povezani. Robusno matematičko modeliranje zajedno s učinkovitim upravljanjem osigurava lagan i siguran let. \citep{MathematicalModeling}
 \begin{figure}[htb]
 \centering
 \includegraphics[width=8cm]{img/model_hexcopter.png}
-\caption{Model hexkoptera\protect\footnotemark}
+\caption{Model heksakoptera\protect\footnotemark}
 \label{fig:model}
 \end{figure}
 \footnotetext{Članak}
 \subsection{Eulerovi kutovi}\label{sec:Euler}
-Shematski prikaz hexkoptera prikazan je na slici~\ref{fig:model}. Da bi opisali gibanje hexkoptera potrebna su dva referentna sustava:\begin{itemize}
+Shematski prikaz heksakoptera prikazan je na slici~\ref{fig:model}. Da bi opisali gibanje heksakoptera potrebna su dva referentna sustava:\begin{itemize}
 \item nepomični globalni koordinatni sustav,
-\item pokretni lokalni koordinatni sustav hexkoptera.
+\item pokretni lokalni koordinatni sustav heksakoptera.
 \end{itemize}
-Nultočka nepomičnog globalnog koordinatnog sustava postavljena je u jednoj točci (npr.~kut prostorije) te osi tog koordinatnog sustava su ortogonalne te raspoređene po \emph{desnoj orijentaciji} koordinatnog sustava u kojem je apsolutna linearna pozicija izražena kao $(\mathbf{x,y,z})$. Za određivanje orijentacije letjelice potrebno je definirati pokretni koordinatni sustava $(X_p,Y_p,Z_p)$ koji se giba zajedno s hexkoptera, a centar tog koordinatnog sustava nalazi se u centru mase hexkoptera i orijentirani je kao na slici~\ref{fig:model}. Smjer ortonormiranih vektora $X_p,Y_p,Z_p$ u svakom se trenutku može izraziti u odnosu prema nepomičnom globalnom koordinatnom sustavu. Slijed rotacija oko ortonormalnih vektora pomičnog koordinatnog sustava predstavljen je tzv.~Eulerovim kutovima --- skretanje \engl{roll} $\phi$, poniranje \engl{pitch} $\theta$ i valjanje \engl{yaw} $\psi$. Radi jednostavnosti označimo pokretni vektor pozicije i Eulerove kutove s $\xi = [x ~y ~z]^T$ i $\eta = [\phi ~\theta ~\psi]^T$. Transformaciju iz  lokalnog u globalni koordinatni sustav realizirana je s dobro znanom matricom rotacije \textbf{R} (izraz \ref{eq:matRot}) koja je ortogonalna.
+Nultočka nepomičnog globalnog koordinatnog sustava postavljena je u jednoj točci (npr.~kut prostorije) te su osi tog koordinatnog sustava ortogonalne te raspoređene prema \emph{desnoj orijentaciji} u kojem je apsolutna linearna pozicija izražena kao $(\mathbf{x,y,z})$. Za određivanje orijentacije letjelice potrebno je definirati pokretni koordinatni sustava $(X_p,Y_p,Z_p)$ koji se giba zajedno s heksakopterom, a centar tog koordinatnog sustava nalazi se u centru mase heksakoptera i orijentirani je kao na slici~\ref{fig:model}. Smjer ortonormiranih vektora $X_p,Y_p,Z_p$ u svakom se trenutku može izraziti u odnosu prema nepomičnom globalnom koordinatnom sustavu. Slijed rotacija oko ortonormiranih vektora pomičnog koordinatnog sustava predstavljen je tzv.~Eulerovim kutovima --- skretanje \engl{roll} $\phi$, poniranje \engl{pitch} $\theta$ i valjanje \engl{yaw} $\psi$. Radi jednostavnosti označimo pokretni vektor pozicije i Eulerove kutove s $\xi = [x ~y ~z]^T$ i $\eta = [\phi ~\theta ~\psi]^T$. Transformaciju iz  lokalnog u globalni koordinatni sustav realizirana je s dobro znanom matricom rotacije \textbf{R} (izraz \ref{eq:matRot}) koja je ortogonalna.
 \begin{equation}
 	\begin{bmatrix}
 	\cos\theta\cos\psi & \cos\psi\sin\theta\sin\phi-\cos\phi\sin\psi & \cos\phi\cos\psi\sin\theta+\sin\phi\sin\psi \\
@@ -267,14 +405,14 @@ Tada su zakoni transformacije~\ref{eq:v} i~\ref{eq:eta} gdje je $\nu$ definiran 
 \nu&=\mathbf{W_\eta}\dot{\eta},\label{eq:v}\\
 \dot{\eta}&=\mathbf{W^{-1}_\eta}\nu.\label{eq:eta}
 \end{align}
-Važno je uočiti da se $\mathbf{W^{-1}_\eta}$ može definirati samo i samo ako $\theta \neq \pi/2+k\pi, (k \in Z)$. Ovaj efekt kod Eulerovih formula je ograničenje, tipična situacija kad se gubi stupanj slobode. Uzimanjem drugačijeg prikaza orijentacije u prostoru identificiranog s četiri parametra, poznatijim kao kvaternioni čija generalna struktura je objašnjena u poglavlju~\ref{sec:Kvaternioni}. Prednost kvarteniona ne leži samo u nepostojanju singulariteta nego i kod jednostavnosti izračuna, što će biti kasnije objašnjeno.
+Važno je uočiti da se $\mathbf{W^{-1}_\eta}$ može definirati samo i samo ako $\theta \neq \pi/2+k\pi, (k \in Z)$. Ovaj efekt kod Eulerovih formula je ograničenje \engl{gimbal lock}, tipična situacija kod koje se gubi stupanj slobode. Uzimanjem drugačijeg prikaza orijentacije u prostoru identificiranog s četiri parametra, poznatijim kao kvaternioni čija generalna struktura je objašnjena u poglavlju~\ref{sec:Kvaternioni} rješava se taj problem. Prednost kvarteniona ne leži samo u nepostojanju singulariteta nego i kod jednostavnosti izračuna, što će biti kasnije objašnjeno.
 
 \subsection{Kvaternioni}\label{sec:Kvaternioni}
-U poglavlju~\ref{sec:Euler} može se primijetiti da bi rotacija krutog tijela u prostoru mogla biti predstavljena preko Eulerovih kutova, međutim zbog singularnosti transformacijskih zakona potrebno je koristiti novu parametrizaciju kvaternionima. Kvaternioni se obično koriste u razvoju računalnih igara i u 3D virtualnom svijetu, ali također i kao metoda za pozicioniranje krutog tijela u trodimenzionalnom prostoru. Kvaternioni se temelje na Eulerovom teoremu rotacije koji definira da svaki pomak krutog tijela gdje točka ostaje nepromijenjena je ekvivalentna rotaciji. Dakle, ako je $\alpha$ kut rotacije oko jediničnog vektora $\mathbf{u} = (u_1, ~u_2, ~u_3)$, moguće je definirati kvaternion $\mathbf{q} = [q_0 ~q_1 ~q_2 ~q_3]^T$, gdje su $q_0 = \cos(\alpha/2), ~q_1 = \sin(\alpha/2)u_1, ~q_2 = \sin(\alpha/2)u_2, ~q_3 = \sin(\alpha/2)u_3$, koji definira tri dimenzije rotacije. Kvaternioni uvijek moraju zadovoljavati jednadžbu ograničenosti (\ref{eq:normalniUvjet}) koja se zove normalni uvjet. 
+U poglavlju~\ref{sec:Euler} može se primijetiti da bi rotacija krutog tijela u prostoru mogla biti predstavljena preko Eulerovih kutova, međutim zbog singularnosti transformacijskih zakona potrebno je koristiti novu parametrizaciju kvaternionima. Kvaternioni se obično koriste u razvoju računalnih igara i u 3D virtualnom svijetu, ali također i kao metoda za pozicioniranje krutog tijela u trodimenzionalnom prostoru. Kvaternioni se temelje na Eulerovom teoremu rotacije koji definira da svaki pomak krutog tijela gdje točka ostaje nepromijenjena je ekvivalentna rotaciji. Dakle, ako je $\alpha$ kut rotacije oko jediničnog vektora $\mathbf{u} = (u_1, ~u_2, ~u_3)$, moguće je definirati kvaternion $\mathbf{q} = [q_0 ~q_1 ~q_2 ~q_3]^T$, gdje su $q_0 = \cos(\alpha/2), ~q_1 = \sin(\alpha/2)u_1, ~q_2 = \sin(\alpha/2)u_2, ~q_3 = \sin(\alpha/2)u_3$, koji definira tri dimenzije rotacije. Kvaternioni uvijek moraju zadovoljavati jednadžbu ograničenosti (\ref{eq:normalniUvjet}) koja je poznatija kao normalni uvjet. 
 \begin{align}
 q^2_0+q^2_1+q^2_2+q^2_3=1 \label{eq:normalniUvjet}
 \end{align}
-Za razliku od Eulerovih kutova kvartenionske rotacije ne zahtijevaju skup unaprijed definiranih rotacijskih osi jer jedna os  se konstantno može mijenjati. Zbog svojstva ove metode da orijentacija ima samo jednu os rotacije, stupanj slobode se ne može izgubiti, odnosno ne postoji ograničenje. Transformacija translacijskih brzina gledano iz globalnog sustava može se izraziti preko \ref{eq:transBrzina} gdje je $\mathbf{Q}$ matrica~\ref{eq:matQ}.
+Za razliku od Eulerovih kutova kvaternionske rotacije ne zahtijevaju skup unaprijed definiranih rotacijskih osi jer jedna os se konstantno može mijenjati. Zbog svojstva ove metode da orijentacija ima samo jednu os rotacije, stupanj slobode se ne može izgubiti, odnosno ne postoji ograničenje. Transformacija translacijskih brzina gledano iz globalnog sustava može se izraziti preko \ref{eq:transBrzina} gdje je $\mathbf{Q}$ matrica~\ref{eq:matQ}.
 \begin{align}
 \xi=\mathbf{Q\xi_B} \label{eq:transBrzina}
 \end{align}
@@ -287,7 +425,7 @@ Za razliku od Eulerovih kutova kvartenionske rotacije ne zahtijevaju skup unapri
 	\end{bmatrix}
 	\label{eq:matQ}
 \end{equation}
-Kao matrica $\mathbf{R}$ i matrica $\mathbf{Q}$ je ortogonalna, pa vrijedi također $\mathbf{Q^{-1} = Q^{T}}$. Kao kutna brzina, uključujući transformaciju može se izraziti kao $\mathbf{\dot{q}}=\mathbf{S}~\nu$ gdje matrica $\mathbf{S}$ ovisi o kvartenijskim komponentama prikazanim~\ref{eq:matS}.
+Kao matrica $\mathbf{R}$ i matrica $\mathbf{Q}$ je ortogonalna, pa vrijedi također $\mathbf{Q^{-1} = Q^{T}}$. Kutna brzina, uključujući transformaciju, može se izraziti kao $\mathbf{\dot{q}}=\mathbf{S}~\nu$ gdje matrica $\mathbf{S}$ ovisi o kvartenijskim komponentama prikazanim~\ref{eq:matS}.
 \begin{equation}
 	\mathbf{S} = \frac{1}{2}
 	\begin{bmatrix}
@@ -304,10 +442,10 @@ Zaključak, korist korištenjem kvaterniona je dvostruka: \begin{enumerate}
 \end{enumerate}
 
 \subsection{Matematički model hexkoptera}
-U ovom odjeljku prikazan je matematički model hexkoptera. Dinamika šest električnih motora je relativno brza pa će se stoga zanemariti. Cilj je odrediti matematičke jednadžbe koje opisuju dinamičko ponašanje hexkoptera pomoću generalizacije opisane sa slikom~\ref{fig:model} i poglavljem~\ref{sec:SimulacijskiDio}. Mogu se primijeniti Newton-Euler i Euler-Lagrange jednadžbe.\\
+U ovom odjeljku prikazan je matematički model heksakoptera.  Dinamika šest električnih motora je relativno brza pa će se stoga zanemariti. Cilj je odrediti matematičke jednadžbe koje opisuju dinamičko ponašanje heksakoptera pomoću generalizacije opisane sa slikom~\ref{fig:model} i poglavljem~\ref{sec:SimulacijskiDio}. Mogu se primijeniti Newton-Euler i Euler-Lagrange jednadžbe.\\
 
 \subsubsection{Newton-Euler jednadžbe}
-Gibanje krutog tijela može se razložiti na translacijsku i rotacijsku komponentu. Stoga, kako bi se opisala dinamika hexkoptera, pretpostavka je da je letjelica kruto tijelo pa se za izračun koriste Newton-Eulerove jednadžbe koje reguliraju linearno i kutno kretanje. Sila koja djeluje na hexkopter prikazana je \ref{eq:Sila}, gdje se pretpostavlja da je $m$ konstantna masa.
+Gibanje krutog tijela može se razložiti na translacijsku i rotacijsku komponentu. Stoga, kako bi se opisala dinamika heksakoptera, pretpostavka je da je letjelica kruto tijelo pa se za izračun koriste Newton-Eulerove jednadžbe koje reguliraju linearno i kružno gibanje. Sila koja djeluje na heksakopter prikazana je \ref{eq:Sila}, gdje se pretpostavlja da je $m$ konstantna masa.
 \begin{align}
 \mathbf{F}&=\mathbf{\frac{d(m~v_B)}{dt}+\nu\times (m~v_b)} \label{eq:Sila}
 \end{align}
@@ -317,11 +455,11 @@ Svaki rotor $i$ ima kutnu brzinu $\omega_i$ koja stvara silu $\mathbf{f_i}=k[0 ~
 \mathbf{T_B}&=\mathbf{[0 ~0 ~T]^T} \label{eq:TB} \\
 \mathbf{T}&=\sum_{i=1}^{6}f_i=k\sum_{i=1}^{6}\omega_i \label{eq:Tsila}
 \end{align}
-Ukupan potisak zajedno s gravitacijom predstavlja ukupnu silu (izraz \ref{eq:Fukupna}) djelovanja na hexkopter.
+Ukupan potisak zajedno s gravitacijom predstavlja ukupnu silu (izraz \ref{eq:Fukupna}) koja djeluje na heksakopter.
 \begin{align}
 \mathbf{F}&=\mathbf{Q^TF_g+T_B} \label{eq:Fukupna}
 \end{align}
-Kao posljedica translacijska komponenta gibanja u lokalnom sustavu je \ref{eq:Flokalni}.
+Kao posljedica, translacijska komponenta gibanja u lokalnom sustavu je \ref{eq:Flokalni}.
 \begin{align}
 m~\mathbf{\dot{v_B}+\nu\times (m~v_b)}&=\mathbf{Q^TF_g+T_B} \label{eq:Flokalni}
 \end{align}
@@ -329,7 +467,7 @@ Da bi dobili istu jednadžbu u globalnom sustavu, potrebno je primijetiti da je 
 \begin{align}
 m~\mathbf{\ddot{\xi}}&=\mathbf{F_g+Q~T_B} \label{eq:Flokalni}
 \end{align}
-Nadalje, neka je $\mathbf{I}$ matrica inercija. Hexkopter ima simetričnu strukturu s obzirom na $X_b$-os, $Y_b$-os i $Z_b$-os, stoga je matrica inercija jedinična $\mathbf{I}=diag(\mathbf{I_{xx}, I_{yy}, I_{zz}})$. Kako ukupni vanjski moment $\mathbf{M}$ djeluje, uzimajući u obzir brzinu promjene kutnog momenta  $\mathbf{H=I\nu}$ tada je moment koji djeluje na hexkopter izražen s~\ref{eq:MomentHex}.
+Nadalje, neka je $\mathbf{I}$ matrica inercija. Heksakopter ima simetričnu strukturu s obzirom na $X_b$-os, $Y_b$-os i $Z_b$-os, stoga je matrica inercija jedinična $\mathbf{I}=diag(\mathbf{I_{xx}, I_{yy}, I_{zz}})$. Kako ukupni vanjski moment $\mathbf{M}$ djeluje, uzimajući u obzir brzinu promjene kutnog momenta  $\mathbf{H=I\nu}$ tada je moment koji djeluje na heksakopter izražen s~\ref{eq:MomentHex}.
 \begin{align}
 \mathbf{M}&=\mathbf{\frac{d(I~\nu)}{dt}+\nu\times(I~\nu)} \label{eq:MomentHex}
 \end{align}
@@ -337,7 +475,7 @@ Kutna brzina i akceleracija rotora stvaraju okretni moment prikazan \ref{eq:Torq
 \begin{align}
 \tau_{M_i}&=b~\omega^2_i+I_{M_i}~\dot{\omega_i} \label{eq:Torque}
 \end{align}
-Iz geometrijske strukture hexkoptera i od komponenata $\mathbf{f_i}$ i $\mathbf{\tau_{M_i}}$ u lokalnom koordinatnom sustavu moguće je dobiti informaciju o momentima \emph{roll, pitch i yaw} preko~\ref{eq:matTau}.
+Iz geometrijske strukture heksakoptera i od komponenata $\mathbf{f_i}$ i $\mathbf{\tau_{M_i}}$ u lokalnom koordinatnom sustavu moguće je dobiti informaciju o momentima \emph{roll, pitch i yaw} preko~\ref{eq:matTau}.
 \begin{equation}
 	\begin{bmatrix}
 	\tau_{\phi} \\
@@ -352,7 +490,7 @@ Iz geometrijske strukture hexkoptera i od komponenata $\mathbf{f_i}$ i $\mathbf{
 	\end{bmatrix}
 	\label{eq:matTau}
 \end{equation}
-Ovdje je $l$ udaljenost između rotora i središta mase hexkoptera, a $\dot{x}\omega_i$ predstavlja vremensku derivaciju $\omega_i(t)$\footnote{Vremenska derivacija: $\frac{d\omega_i(t)}{dt}$}. Nadalje, jednadžba koja određuje dinamiku rotacije može se zapisati kao \ref{eq:rotDin} gdje $\mathbf{\Gamma}$ predstavlja žiroskopske sile i $\mathbf{\tau_B}$ vanjski okretni moment.
+Ovdje je $l$ udaljenost između rotora i središta mase heksakoptera, a $\dot{x}\omega_i$ predstavlja vremensku derivaciju $\omega_i(t)$\footnote{Vremenska derivacija: $\frac{d\omega_i(t)}{dt}$}. Nadalje, jednadžba koja određuje dinamiku rotacije može se zapisati kao \ref{eq:rotDin} gdje $\mathbf{\Gamma}$ predstavlja žiroskopske sile i $\mathbf{\tau_B}$ vanjski okretni moment.
 \begin{align}
 \mathbf{I~\dot{\nu}+\nu\times(I~\nu)}+\Gamma&=\mathbf{\tau_B} \label{eq:rotDin}
 \end{align}
@@ -419,7 +557,7 @@ Konačno, nakon određivanja kutne brzine lako se odredi i kutno ubrzanje u glob
 \end{align}
 
 \subsubsection{Euler-Lagrange jednadžbe}
-Newton-Eulerova forma se temelji na ravnoteži sile i momenata. Alternativa tim jednadžbama, koristeći pristup temeljen na sačuvanje energije, su Euler-Lagrangeove jednadžbe. Prije svega, definicija Lagrangiana je izražena \ref{eq:Lagrangian} gdje je $E_t = (m/2)\mathbf{\dot{\xi}^T\dot{\xi}}$ translacijska kinetička energija, $E_r = (1/2)\mathbf{\nu^T~I~\nu}$ je kutna energija te $E_p=m~g~z$ je potencijalna energija gdje je $z$ visina hexkoptera.
+Newton-Eulerova forma se temelji na ravnoteži sile i momenata. Alternativa tim jednadžbama, koristeći pristup temeljen na sačuvanje energije, su Euler-Lagrangeove jednadžbe. Prije svega, definicija Lagrangiana je izražena \ref{eq:Lagrangian} gdje je $E_t = (m/2)\mathbf{\dot{\xi}^T\dot{\xi}}$ translacijska kinetička energija, $E_r = (1/2)\mathbf{\nu^T~I~\nu}$ je kutna energija te $E_p=m~g~z$ je potencijalna energija gdje je $z$ visina heksakoptera.
 \begin{align}
 \mathcal{L}&=E_t+E_r-E_p \label{eq:Lagrangian}
 \end{align}
@@ -450,15 +588,15 @@ Sada je moguće napisati rotacijsku jednadžbu (\ref{eq:rotJedna}) preko kvatern
 \begin{align}
 8\bigg[2{\bf J}\ddot{{\bf q}}+2{d{\bf J}\over dt}\dot{q}-{\partial\over \partial {\bf q}}(\dot{q}^{T}{\bf J}\dot{q})\bigg]&={\ \tau} \label{eq:rotJedna}
 \end{align}
-Stoga je matematički model koji opisuje hexkopter izražen Euler-Lagrange formom prikazan \ref{eq:matModelL}.
+Stoga je matematički model koji opisuje heksakopter izražen Euler-Lagrange formom prikazan \ref{eq:matModelL}.
 \begin{align}
 \ddot{{\bf q}}&={1\over 2}{\bf J}^{-1}\bigg[{1\over 8}{ \tau}-2{d{\bf J}\over dt}\dot{{\ q}}+{\partial\over \partial_{{\bf q}}}(\dot{q}^{T}{\bf J}\dot{q})\bigg] \label{eq:matModelL}
 \end{align}
 Može se uočiti da su ovi izrazi ekvivalentni izrazima \ref{eq:vDot} i \ref{eq:angularAcceleration}.
 
 \subsection{Sinteza sustava upravljanja}
-U ovom poglavlju projektira se regulator za slijeđenje željene trajektorije. Koriste se kvaternioni jer smanjuju nestabilnost te ubrzavaju numerički račun. Jednostavan i lako izvediv način upravljana, tj. njegove stabilizacije, realiziran je proporcionalno-derivacijskim (PD) regulatorom. PD regulatoru dodaje se integralna komponenta s ciljem smanjenja efekta fluktuacije \engl{fluctuations} hexkoptera koje su uzrokovane vanjskim poremećajima.
-U izrazu \ref{eq:matQ} prikazana je kontrola leta hexkoptera. Konkretno, razvijena je jednostavna heuristička metoda za slijeđenje željene trajektorije. \\
+U ovom poglavlju projektira se regulator za slijeđenje željene trajektorije. Koriste se kvaternioni jer smanjuju nestabilnost te ubrzavaju numerički račun. Jednostavan i lako izvediv način upravljana, tj. njegove stabilizacije, realiziran je proporcionalno-derivacijskim (PD) regulatorom. PD regulatoru dodaje se integralna komponenta s ciljem smanjenja efekta fluktuacije \engl{fluctuations} heksakoptera koje su uzrokovane vanjskim poremećajima.
+U izrazu \ref{eq:matQ} prikazana je kontrola leta heksakoptera. Konkretno, razvijena je jednostavna heuristička metoda za slijeđenje željene trajektorije. \\
 Generalno, PID regulator koji prati referencu ima formu \ref{eq:PIDe} i \ref{eq:PIDu} gdje je $u(t)$ upravljački ulaz i $e(t)$ predstavlja pogrešku između reference $r_d(t)$ i trenutne pozicije $x(t)$.
 \begin{align}
 e(t) &= x_d(t) - x(t) \label{eq:PIDe} \\
@@ -483,7 +621,7 @@ Tada se komponente momenta $\tau_{\phi}, \tau_{\theta},\tau_{\psi}$ mogu se zapi
 \tau_{\theta} &= (K_{\theta,D}~q + 2K_{\theta,P}~q_{e,2}~q_{e,4})~I_{yy} \label{eq:tauTheta} \\
 \tau_{\psi} &= (K_{\psi,D}~r + 2K_{\psi,P}~q_{e,3}~q_{e,4})~I_{zz} \label{eq:tauPsi}
 \end{align}
-Točne kutne brzine rotora $\omega_i$, koje su također upravljački ulazi izvedene su izrazima \ref{eq:omega1}-\ref{eq:omega6} gdje $k$ označuje potisnu konstantu, $b$ označuje vučnu konstantu, a $l$ predstavlja udaljenost između rotora i centra mase hexkoptera.
+Točne kutne brzine rotora $\omega_i$, koje su također upravljački ulazi izvedene su izrazima \ref{eq:omega1}-\ref{eq:omega6} gdje $k$ označuje potisnu konstantu, $b$ označuje vučnu konstantu, a $l$ predstavlja udaljenost između rotora i centra mase heksakoptera.
 \begin{align}
 \omega^2_1 &= \frac{T}{6k} - \frac{2\tau_{\theta}}{5kl} - \frac{\tau_{\psi}}{10b} \label{eq:omega1} \\
 \omega^2_2 &= \frac{T}{6k} + \frac{\tau_{\phi}}{3kl} -\frac{2\tau_{\theta}}{5kl} + \frac{\tau_{\psi}}{5b} \label{eq:omega2} \\
@@ -499,7 +637,7 @@ T &= \frac{m(d_z + g)}{2~(q^2_0 + q^2_3)-1} \label{eq:T} \\
 q_1 &= \frac{m(d_z q_3 - d_y q_0)}{(q^2_0 + q^2_3)~2T} \label{eq:q1} \\
 q_2 &= \frac{m(d_z q_0 - d_y q_3)}{(q^2_0 + q^2_3)~2T} \label{eq:q2}
 \end{align}
-Valja se prisjetiti da se hexkopterom upravlja podešavanjem brzina vrtnje rotora koji se pokreću elektromotorima. 
+Valja se prisjetiti da se heksakopterom upravlja podešavanjem brzina vrtnje rotora koji se pokreću elektromotorima. 
 
 
 \subsection{Matlab}
