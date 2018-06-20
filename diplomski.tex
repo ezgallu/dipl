@@ -9,6 +9,9 @@
 \usepackage{enumitem}
 \usepackage{multirow}
 \usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{subcaption}
+
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
@@ -56,8 +59,7 @@ Nadalje, tijekom zadnjih nekoliko godina ovakve letjelice su se sve više razvij
 Danas se vojna upotreba bespilotnih letjelica može podijeliti na tri područja, to su pomorska, kopnena i zračna upotreba, dok se u civilne  svrhe  može  upotrijebiti  u  različitim  područjima ljudskih  aktivnosti  kao  npr.  u  geodeziji  tj. fotogrametriji,   poljoprivredi,   industrijskoj proizvodnji,  civilnoj  zaštiti,  upravljanju katastrofama,  zaštiti  okoliša,  nadzorom policijskog    djelovanja,    obavještajnim službama,   novinarstvom,   komercijalnim djelatnostima, razonodom itd. Također  je  sve  veća  uporaba  bespilotnih letjelica za inspekciju   nepristupačnih dijelova  u industrijskim  objektima  kao  što su: brane, dalekovodi, visoki dimnjaci, cjevovodi, mostovi i dr. Isto tako sve popularniji i mali modeli namijenjeni za razonodu.
 
 \subsection{Definicija bespilotnih letjelica}
-Za pojam bespilotnih letjelica koristi se engleski službeni naziv „Unmanned Aerial Vehicle“,  dok  se  zadnjih  nekoliko  godina  pojavio  pojam  UAS  \engl{Unmanned  Aerial System}. Time se htjelo naglasiti činjenica da su to složeni sustavi koji uključuju i postaje na zemlji te mnoge druge elemente, a ne samo letjelice koje lete zrakom. Međutim, pojam UAS nije punokorišten za razliku od pojma UAV koji je postao dio modernog leksikona 
-(The UAV, n.d.).\\
+Za pojam bespilotnih letjelica koristi se engleski službeni naziv „Unmanned Aerial Vehicle“,  dok  se  zadnjih  nekoliko  godina  pojavio  pojam  UAS  \engl{Unmanned  Aerial System}. Time se htjelo naglasiti činjenica da su to složeni sustavi koji uključuju i postaje na zemlji te mnoge druge elemente, a ne samo letjelice koje lete zrakom. Međutim, pojam UAS nije punokorišten za razliku od pojma UAV koji je postao dio modernog leksikona.\\
 Bespilotne letjelice lete bez ljudskog pilota, umjesto toga kontrolira ih operator na tlu. Svrha bespilotnih letjelica, odnosno u ovom slučaju se govori o sustavu bespilotnih letjelica (UAS),  tj.  dronova, je  dostava poruke,  paketa  ili  samo  skupljanje  podataka. Kao najvažnija svrha sustava je upravo prikupljanje podataka. Letjelice poput dronova, a i neke druge, mogu prodrijeti  u  područja  i  lokacije  do  kojih  čovjek  ne  može  bez  određene  opasnosti  i  rizika. Ponekad, podaci mogu biti presudni za određene operacije ili aktivnosti. Također, navodi se da je jedna od karakteristika ovakvih sustava to što ih se može ponovno koristiti, odnosno to što se vraćaju (Unmanned Aerial Vehicle Systems Association, 2016).
 
 \subsection{Prednosti i nedostaci}
@@ -72,7 +74,7 @@ Unatoč tome, vojska i dalje koristi dronove i  bespilotne letjelice jer vjeruju
  
 
 \subsection{Vrste}
-Prema \citet{UAVSystem} postoje  3  vrste  letjelica  bez  pilota,  isključujući 
+Prema \citet{UAVSystems} postoje  3  vrste  letjelica  bez  pilota,  isključujući 
 projektile: \begin{itemize}
 \item Bespilotne letjelice \engl{Unmanned Aerial Vehicle - UAV} (slika \ref{fig:UAV letjelica})
 \item Letjelice na daljinsko upravljanje \engl{ Remotely Piloted Vehicle - RPV} (slika \ref{fig:RPV letjelica})
@@ -81,7 +83,7 @@ projektile: \begin{itemize}
 \end{itemize}
 \begin{figure}[htb]
 \centering
-\includegraphics[width=8cm]{img/insect_fly_shaped_drone.png}
+\includegraphics[width=6cm]{img/insect_fly_shaped_drone.png}
 \caption{Oblik kukca\protect\footnotemark}
 \label{fig:oblik kukca}
 \end{figure}
@@ -89,7 +91,7 @@ projektile: \begin{itemize}
 U današnje doba, najčešći pojam koji se javlja za opisivanje bespilotnih letjelica je dron. Razlika između drona i bespilotne letjelice (UAV) je u stupnjuautomatizacije, jer dronov let ovisi o unaprijed programiranom ponašanju, a kod UAV postoji daljinsko upravljanje od strane pilota  u  kontrolnoj  stanici \citep{UAVInsider}. U ovom radu bit će naglasak na treću vrstu bespilotnih letjelica koje se sve više i više danas koriste, a to su dronovi. 
 
 \subsubsection{UAV}\label{sec:UAV}
-Kao što je već spomenuto, bespilotna letjelica je letjelica ili zrakoplov bez pilota. Njome se može upravljati na daljinski, odnosno od strane osoba koja to čini u kontrolnoj stanici. S druge strane, može letjeti samostalno na temelju unaprijed programiranih planova leta ili više složenih dinamičkih sustava za automatizaciju. Takve letjelice se koriste za mnoge svrhe i misije, najčešće u slučaju izviđanja, no ponekad imaju i napadačke uloge. Sposobnosti koje posjeduje su te što može biti kontrolirala, ima održiv horizontalni let i pokreće se pomoću mlaznog ili klipnog motora. Postoji nekoliko tipova ovakvih letjelica, a klasificirane su prema svrsi koju obavljaju (The UAV, n.d.):
+Kao što je već spomenuto, bespilotna letjelica je letjelica ili zrakoplov bez pilota. Njome se može upravljati na daljinski, odnosno od strane osoba koja to čini u kontrolnoj stanici. S druge strane, može letjeti samostalno na temelju unaprijed programiranih planova leta ili više složenih dinamičkih sustava za automatizaciju. Takve letjelice se koriste za mnoge svrhe i misije, najčešće u slučaju izviđanja, no ponekad imaju i napadačke uloge. Sposobnosti koje posjeduje su te što može biti kontrolirala, ima održiv horizontalni let i pokreće se pomoću mlaznog ili klipnog motora. Postoji nekoliko tipova ovakvih letjelica, a klasificirane su prema svrsi koju obavljaju:
 \begin{itemize}
 \item Za pronalaženje ciljeva i meta --- pronalazi zemaljske i zračne neprijateljske mete 
 \item Izviđačke --- omogućuje pronalazak ratnih polja
@@ -160,7 +162,7 @@ Očekuje se da će povećanjem broja letjelica smanjiti nesreće na radu,
 poput pada zaposlenika s krova tijekom inspekcija zgrada, a time i gubici zbog kompenzacija 
 radnicima. 
 Bespilotne letjelice bi u budućnosti mogle riješiti niz problema i smanjiti troškove i u nizu drugih industrija, u zemljama u razvoju i slučajevima prirodnih katastrofa. \citep{Allianz}
-Kao što je navedeno ranije, postoji podjela bespilotnih letjelica (UAV) prema njihovoj svrsi. Tako  su  najprije  bile  namijenjene za korištenje u vojne svrhe, no danas je njihova primjena puno veća (Stombaugh, Smith, Thamann, n.d.). Ostala područja u kojima se danas koriste su:\begin{itemize}
+Kao što je navedeno ranije, postoji podjela bespilotnih letjelica (UAV) prema njihovoj svrsi. Tako  su  najprije  bile  namijenjene za korištenje u vojne svrhe, no danas je njihova primjena puno veća \citep{TheUseOfUAS}. Ostala područja u kojima se danas koriste su:\begin{itemize}
 \item geodezija --- projektiranje, rudarstvo, geologija, šumarstvo
 \item poljoprivreda
 \item kotrola i nadzor nad kritičnom infrastrukturom
@@ -643,10 +645,78 @@ Valja se prisjetiti da se heksakopterom upravlja podešavanjem brzina vrtnje rot
 \subsection{Matlab}
 
 \section{Eksperimentalni dio}
-Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (postoje i skuplje) koje imaju ugrađeno mnogo senzora. U našem eksperimentalnom dijelu koristena je jeftinija verzija koja nema toliko senzora, pa su zbog tog korišteni dodatni vizualni senzori koji određuju položaj letjelice u prostoru. 
-\subsection{Postav}
+U ovom poglavlju obrađen je eksperimentalni dio, tj.~provjera kvalitete projektiranog sustava upravljanja u laboratorijskim uvjetima. 
+Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (postoje i skuplje) koje imaju ugrađeno mnogo senzora. U našem eksperimentalnom dijelu korištena je jeftinija verzija koja nema toliko senzora, pa su zbog tog korišteni dodatni vizualni senzori koji određuju položaj letjelice u prostoru. Korišten je heksakopter MJX X800 RC koji je prikazan na slici \ref{fig:MJX X800 RC} zajedno sa svojim kontrolerom (njegova cijena je oko 40\$). Također odabrano je programsko okruženje ROS preko kojeg će se cijeli sustav upravljati. 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=8cm]{img/fer_logo.jpg}
+\caption{Heksakopter MJX X800 RC sa svojim kontrolerom}
+\label{fig:MJX X800 RC}
+\end{figure}\\
 
-\subsection{ROS kod}
+Za potrebe eksperimenta potrebno je modificirati samog drona te odabrati način upravljanja preko računala. Postoje dva načina:
+\begin{enumerate}
+\item Slanjem upravljačkih signala putem radio signala\label{sec:radio}
+\item Modificiranjem kontrolera, odnosno omogućiti slanje upravljačih signala preko kontrolera\label{sec:modifikacija}
+\end{enumerate}
+Na \ref{sec:radio}.~način potrebno je dobro poznavati kakve signale kontroler šalje dronu kako bi se ti signali mogli dronu slat preko \emph{wireless} kartice. Za ovakav postav potrebne su još Arduino, kamere te markeri na dronu. Pošto izabrani dron nema dostupni \emph{datasheet} jednostavnija verzija postava je  na \ref{sec:modifikacija}.~način. Za ovaj način upravljanje potrebno je:
+\begin{itemize}
+\item Heksakopter MJX X800 RC i njegova modifikacija (vidi \ref{sec:heksakopter})
+\item Sustav kamera (vidi \ref{sec:kamera})
+\item Kontroler i njegova modifikacija pomoću Arduina (vidi \ref{sec:kontroler})
+\item Računalo s algoritmom upravljanja (vidi \ref{sec:algoritam})
+\end{itemize}
+
+\subsection{Heksakopter MJX X800 RC i njegova modifikacija}\label{sec:heksakopter}
+Modifikacija heksakoptera je u smislu dodavanja markera za njegovo praćenje u sustavu globalne vizije. Potrebno je koristiti barem 3 markera kako ne bi izgubili podatke o svim orjentacijama. Zbog robusnosti i stabilnosti kao markeri korištene su infracrvene \engl{IR} svjetleće diode \engl{Light Emitting Diode - LED}. Korištene su svjetleće diode visoke snage i široke kutne vidljivosti, konkretno korištena je 3W svjetleća dioda koja ima \ang{120} kutne vidljivosti (prikazana slikom \ref{fig:LED}). \\
+\begin{figure}[htb]
+\centering
+\includegraphics[width=5cm]{img/LED.png}
+\caption{Svjetleća dioda visoke snage\protect\footnotemark}
+\label{fig:LED}
+\end{figure}\\
+\footnotetext{Izvor: http://www.ledlightmake.com/bmz\_cache/infrared\%20850nm\%20led\%203W.jpg}
+One su postavljene na gornji dio heksakoptera, a napajaju se iz baterije koja pokreće motore samog heksakoptera. Potrebno je koristiti što lakše dijelove kako težina ne bi previše utjecala na samo upravljanje. Modificirani heksakopter može se vidjeti na \ref{fig:modificirani dron}.
+\begin{figure}[htb]
+\centering
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/fer_logo.jpg}
+  \caption{Gornji dio - vidljive svjetleće diode}
+  \label{fig:gornji}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/fer_logo.jpg}
+  \caption{Donji dio - spajanje na bateriju}
+  \label{fig:donji}
+\end{subfigure}
+\caption{Modificirani dron - dodane infracrvene svjetleće diode}
+\label{fig:modificirani dron}
+\end{figure}
+
+
+\subsection{Sustav kamera}\label{sec:kamera}
+Za točno određivanje položaja heksakoptera u prostoru potreban je sustav kamera. Postoje mnoge skupe kamere za praćenje letjelica, poput poznatog OptiTrack sustava, no u ovom eksperimentu potrebno je koristiti neku jeftiniju inačicu. Tako se može koristiti Wii Remote (prikazan slikom \ref{fig:Wii Remote}) u kojeg je ugrađena infracrvena kamera ili Pixy (prikazana slikom \ref{fig:Pixy kamera}) kamera s infracrvenom lećom. 
+\begin{figure}[htb]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/fer_logo.jpg}
+  \captionof{figure}{Wii Remote}
+  \label{fig:Wii Remote}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{img/fer_logo.jpg}
+  \captionof{figure}{Pixy kamera}
+  \label{fig:Pixy kamera}
+\end{minipage}
+\end{figure}
+Sustav kamera je točno određen (zadani položaj i orijentacija kamera) tako da preko fiksnih matrica transformacija daje informaciju o poziciji i orijentaciji samog drona. Ova dobivena informacija se dalje obrađuje računalom koji zadaje upravljačke veličine za upravljanje heksakopterom (više o upravljanju u \ref{sec:algoritam}).
+
+\subsection{Kontroler i njegova modifikacija pomoću Arduina}\label{sec:kontroler}
+\subsection{Računalo s algoritmom upravljanja}\label{sec:algoritam}
 
 \subsection{Rezultati}
  
