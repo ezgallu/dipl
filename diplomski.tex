@@ -368,7 +368,7 @@ U današnje vrijeme poseban značaj i široku primjenu dobila je vrsta bespilotn
 Multirotor je letjelica s minimalno 3 rotirajuća tijela (elise). Ova konfiguracija letjelice naziva se Trikopter, i on je po načinu upravljanja drugačiji od ostalih multirotora kao što su quadkopter   (4   motora),   heksakopter   (6   motora),   oktokopter   (8   motora)   itd.   Jedino   kod konstruktivne konfiguracije  trikoptera  jedan  motor  mora  biti pomičan,  kod  svih  ostalih konfiguracija  motori  su  fiksni.  Pojavom pristupačnih motora bez četkica \engl{brushless}  te unaprjeđenjem baterije  i minimiziranjem elektroničkih  komponenti  došlo  je  do  ekspanzije multirotor letjelica na tržištu. Razvoj kontrolera leta omogućio je jednostavno upravljanje sa inače složenim sustavom upravljanja, što je rezultiralo masovnom proizvodnjom i korištenjem multirotora u razne svrhe.\\
 Pozicioniranje  motora  jedan  iznad  odnosno ispod drugoga nudi određene prednosti i nedostatke  kod  multirotora  sastavljenih  u  „X“.  \citet{Zilic}  navodi  da  prednosti  ove konfiguracije su smanjenje dimenzija letjelica i nešto lakša konstrukcija što olakšava transport, a glavni nedostatak je smanjene efikasnosti rada motora koja pada i do 20\% u odnosu na istu konfiguraciju  elektroničkih  komponenti  postavljenih  kao  standardni  oktakopter.  Osnovni elementi  multirotora  su  motori,  propeleri, upravljač leta,  baterija  i  konstrukcija  koja  sve  to povezuje   u   cjelinu   popularno   nazvan   okvir   \engl{frame}.  Za  multirotore  poboljšanih karakteristika koriste se motori bez četkica gdje su namotaji u središtu motora i imaju ulogu statora, a permanentni magneti su smješteni po obodu motora i imaju ulogu rotora. Glavna odlika ovih motora je pouzdan rad, jak okretni moment, i velika brzina odaziva na promjenu broja okretaja motora. Ova zadnja karakteristika je ključni element za upravljanje multirotorom, jer se upravljanje svodi na brze promjene broja okretaja motora.\\
 Da bi multirotor uopće mogao funkcionirati i biti upravljiv mora imati upravljač leta. To je elektronski uređaj koji u sebi ima ugrađen elektronski kompas, žiroskop, akcelerometar (mjerač ubrzanja) i često barometar. Svaki bolji upravljač ima i GPS \engl{Global Positioning System} modul za očitavanja položaja. Obrađujući podatke od navedenih senzora upravljač šalje signale pojedinim motorima da smanje ili povećaju broj okretaja te na taj način održava stabilan let  multirotora.  Mnogi upravljači imaju mogućnost priključka vanjskog senzora  (npr.~sonar), koji će dati podatak o udaljenosti od neke prepreke. \citep{Zilic}\\
-Svi navedeni dijelovi multirotora smještaju se u konstrukciju. Pravilo koje se  mora poštovati je uravnoteženost multirotora po svim osima. Što je multirotor uravnoteženiji to će motori koristiti manje energije za upravljanje i stabilizaciju pa će cijela letjelica biti efikasnija. Multirotori su u mogućnosti izvoditi programirani let. To znači da se putem programa unaprijed odrede točke na koje treba doći sa definiranom visinom i brzinom između točaka. Preciznost održavanja visine omogućava upravljač koji,  kako  je  ranije  navedeno,  pored  ostalih  senzora, ima i  barometar koji mu omogućuje letenje na  točno zadanoj  visini. Ovakav let se izvodi korištenjem GPS podataka, te otvara vrata u primjeni za svrhu geodetskog mjerenja. Ukoliko na letjelici imamo postavljenu kameru moguće je programirati let po točno zadanoj ruti i na njoj definirati točke na kojima će kamera snimit fotografiju. Kada letjelica završi let u memoriji kamere ostaju snimljene fotografije koje se međusobno jednim dijelom preklapaju, pri čemu za svaku fotografiju postoje GPS koordinate i podatak o visini. Kada se ovi podaci uvrste u za to namijenjen program možemo dobiti trodimenzionalni prikaz terena. \citep{Zilic}
+Svi navedeni dijelovi multirotora smještaju se u konstrukciju. Pravilo koje se  mora poštovati je uravnoteženost multirotora po svim osima. Što je multirotor uravnoteženiji to će motori koristiti manje energije za upravljanje i stabilizaciju pa će cijela letjelica biti efikasnija. Multirotori su u mogućnosti izvoditi programirani let. To znači da se putem programa unaprijed odrede točke na koje treba doći sa definiranom visinom i brzinom između točaka. Preciznost održavanja visine omogućava upravljač koji,  kako  je  ranije  navedeno,  pored  ostalih  senzora, ima i  barometar koji mu omogućuje letenje na  točno zadanoj  visini. \citep{Zilic}
 \section{Simulacijski dio}\label{sec:SimulacijskiDio}
 Svrha ovog poglavlja je preko matematičkih jednadžbi opisati dinamičko ponašanje heksakoptera koje se koriste za projektiranje, preko odgovarajućih metoda, kontrolera  za stabilizaciju i kontroler za slijeđenje željene trajektorije. Izabran je heksakopter jer je on korišten u eksperimentalnom dijelu. Heksakopter se sastoji od šest rotora koji su smješteni na vrhovima šesterokuta koji su jednako udaljeni od centra mase, odnosno od tri para suprotno rotirajućih i fiksno dijagonalno postavljenih elisa.  Kontrolira se podešavanjem kutne brzine rotora (vrtnja samo u jednom smjeru) koji se okreću pomoću električnih motora. To uvelike olakšava postupke projektiranja. Povećanjem broja rotora povećava se nosivot i olakšava upravljanje kod kvara jednog od motora. Pretpostavlja se da je letjelica kruto tijelo tako da se dinamika može izvesti diferencijalnim jednadžbama iz Newton-Euler i Euler-Lagrange jednadžbi. Eulerov kut parametrizacije trodimenzionalnih rotacija sadrži singularne točke u koordinatnom prostoru koji mogu uzrokovati pogreške i u dinamičkom modelu i kontroli. Da bi se spriječio singularitet, rotacija letjelice je parametrizirana kvaternionima. Ovom parametrizacijom u obzir je uzeta linearnost kvaterniona, njihova stabilnost i učinkovitost (potrebno manje vremena za obradu tijekom simulacije). Vrijedi napomenuti da su kvaternioni i Eulerovi kutevi povezani. Robusno matematičko modeliranje zajedno s učinkovitim upravljanjem osigurava lagan i siguran let. \citep{MathematicalModeling}
 \begin{figure}[htb]
@@ -713,10 +713,52 @@ Za točno određivanje položaja heksakoptera u prostoru potreban je sustav kame
   \label{fig:Pixy kamera}
 \end{minipage}
 \end{figure}
-Sustav kamera je točno određen (zadani položaj i orijentacija kamera) tako da preko fiksnih matrica transformacija daje informaciju o poziciji i orijentaciji samog drona. Ova dobivena informacija se dalje obrađuje računalom koji zadaje upravljačke veličine za upravljanje heksakopterom (više o upravljanju u \ref{sec:algoritam}).
+Sustav kamera je točno određen (zadani položaj i orijentacija kamera) tako da preko fiksnih matrica transformacija daje informaciju o poziciji i orijentaciji samog drona. Ova dobivena informacija se dalje koristi kada se računalom zadaju upravljačke veličine za upravljanje heksakopterom (više o upravljanju u \ref{sec:algoritam}).
 
 \subsection{Kontroler i njegova modifikacija pomoću Arduina}\label{sec:kontroler}
+U ovom poglavlju prikazana je modifikacija kontrolera kako bi se omogućilo slanje upravljačkih signala iz računala preko kontrolera na dron. Kako se putem \emph{gljiva} upravlja dronom, odnosno lijevom gljivom se zadaje potisak \engl{thrust} i zakret \engl{yaw} te desnom gljivom pomak naprijed-nazad i pomak lijevo-desno, potrebno je omogućiti da se upravljačke veličine koje izlaze iz tih \emph{gljiva} zadaju preko računala. Pošto su \emph{gljive} zapravo potenciometri u vertikalnom i horizontalnom smjeru, promjenom njihovog položaja mijenja se  upravljačka veličina. Signali koje generira kontroler su analogni. Tu su 3 električna voda: GND, VCC i upravljački signal (napon na otporniku). Korištenjem multimetra identificiraju se vodovi i izmjeri se napon između upravljačkog signala i GND. U ovoj situaciji izmjereni su sljedeći naponi:
+\begin{itemize}
+\item 0.24 V - minimalni
+\item 1.64 V - srednji
+\item 3.10 V - maksimalni
+\end{itemize}
+Sada kada su određene veličine analognih signala potrebno je fizički prekinuti vod iz upravljačkog signala te zalemiti žice na svaki kraj tog voda, kako bi kratkospajanjem tih žica funkcionalnost kontrolera ostala ista.  To je prikazano na slikama  \ref{fig:kontrolerUnutra} i \ref{fig:kontrolerVani}.
+\begin{figure}[htb]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.6\linewidth]{img/fer_logo.jpg}
+  \captionof{figure}{Modificiranje kontrolera}
+  \label{fig:kontrolerUnutra}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.6\linewidth]{img/fer_logo.jpg}
+  \captionof{figure}{Modificirani kontroler}
+  \label{fig:kontrolerVani}
+\end{minipage}
+\end{figure}\\
+Nakon što je sve određeno i izvedeno Arduino se spaja na kontroler. Preko Arduina se zadaju upravljački naponi, no potrebno je dodati još nekoliko elemenata. Prilikom korištenja naredbe \emph{analogWrite} Arduino generira signal koji je potreban, no na taj način se ne može upravljati dronom iako mjerenjem tog signala se ispostavlja da je točan. Zaključak je da taj signal nije dovoljno \emph{stabilan} za upravljački signal te zbog tog trebamo koristiti dodatni krug za izglađivanje. Za izglađivanje se koristi LM324AN koji sadrži 4 operacijska pojačala (postoje 4 upravljačke veličine). Operacijskim pojačalima potrebno je prethodno staviti otpornik ($4.7k\Omega$ ) i kondenzator ($10 \mu F$). Dodano je i vanjsko napajanje koje iz \emph{mreže} preko ispravljača napona ispravlja napon na istosmjernih 12V nakon čega se preko stabilizatora napona stabilizira napon na 5V te se takav koristi za operacijska pojačala i Arduino. Između ulaza i GND stabilizatora stavlja se kondenzator od $10\mu F$, a između izlaza i GND stabilizatora kondenzoator od $1\mu F$. Na ulaz LM324AN dovodi se upravljački signal generiran Arduinom te takav izglačani signal se dovodi na dronov kontroler. Način spajanja prikazan je na slici \ref{fig:spajanje}.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=5cm]{img/fer_logo.jpg}
+\caption{Način spajanja Arduina i kontrolera\protect\footnotemark}
+\label{fig:spajanje}
+\end{figure}\\
+\footnotetext{niš}
+Jedna bitna stvar za napomenuti je kako svi dronovi trebaju primiti od kontrolera signal za buđenje \engl{Wake up signal}, koji je drugačiji za različite proizvođače, kako bi se s njime moglo upravljati. U ovom slučaju \emph{Wake up} signal je zadavanje maksimalne pa minimalne vrijednosti \emph{thrusta}, odnosno pomak lijeve gljive skroz prema gore pa skroz prema dolje. Također, ovaj kontroler ima opciju za fino podešavanje pa prilikom \emph{Wake up} signala potrebno je imati kratkospojene vodove kako bi se kontroler točno podesio. Ako se to ne napravi nakon simuliranog \emph{Wake up} signala izgubi se mogućnost upravljanja drona prema naprijed i prema desno. Upravljanje preko Arduina treba biti jednako kao i fizičko upravljanje preko kontrolera, tako treba napomenuti da prilikom slanja nove upute \engl{command} je potrebno upravljački signal staviti u sredinu te tek zatim ga postaviti u drugu vrijednost (ovo vrijedi samo kod prelaska kroz srednju vrijednost). Vrlo važno je zapamtiti da se dron prvo treba prizemljiti te tak onda ugasiti motore i kontroler. Ukoliko se kontroler ugasi prilikom rada na dronu ustaju zadnje poslane upute. Time može doći do oštećenja opreme i prostora oko drona. Slikom \ref{fig:cijeli sustav} se prikazuje cijeli navedeni sustav, a poglavljem \ref{sec:algoritam} bit će opisani algoritam i softverski dio.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=5cm]{img/fer_logo.jpg}
+\caption{Spajanje računala, Arduina i kontrolera\protect\footnotemark}
+\label{fig:cijeli sustav}
+\end{figure}\\
+\footnotetext{niš}
+
+
+
 \subsection{Računalo s algoritmom upravljanja}\label{sec:algoritam}
+Za upravljanje se koristi robotski operativni sustav - ROS. ROS prikuplja softverske okvire za razvoj robotskog softvera. ROS nije operacijski sustav, ali pruža usluge oblikovane za heterogene računalne skupine kao što su hardverska apstrakcija, niska razina kontrole uređaja, implementacija uobičajeno korištenih funkcija, prijenos poruka između procesa i upravljanje paketima. Obrada se odvija u čvorovima \engl{nodes} koji mogu primati, postavljati, kontrolirati,  držati i aktivirati razne informacije iz različitih senzora i aktuatora. Unatoč važnosti reaktivnosti i niske latencije u kontroli robota, ROS sam po sebi nije \emph{real-time} operacijski sustav, iako je moguće integrirati ROS s \emph{real-time} kodom. 
 
 \subsection{Rezultati}
  
