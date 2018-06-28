@@ -652,7 +652,7 @@ U ovom poglavlju obrađen je eksperimentalni dio, tj.~provjera kvalitete projekt
 Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (postoje i skuplje) koje imaju ugrađeno mnogo senzora. U našem eksperimentalnom dijelu korištena je jeftinija verzija koja nema toliko senzora, pa su zbog tog korišteni dodatni vizualni senzori koji određuju položaj letjelice u prostoru. Korišten je heksakopter MJX X800 RC koji je prikazan na slici \ref{fig:MJX X800 RC} zajedno sa svojim kontrolerom (njegova cijena je oko 40\$). Također odabrano je programsko okruženje ROS preko kojeg će se cijeli sustav upravljati. 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=8cm]{img/fer_logo.jpg}
+\includegraphics[width=8cm]{img/heksakopterMJX.JPG}
 \caption{Heksakopter MJX X800 RC sa svojim kontrolerom}
 \label{fig:MJX X800 RC}
 \end{figure}\\
@@ -682,15 +682,15 @@ Modifikacija heksakoptera je u smislu dodavanja markera za njegovo praćenje u s
 One su postavljene na gornji dio heksakoptera, a napajaju se iz baterije koja pokreće motore samog heksakoptera. Potrebno je koristiti što lakše dijelove kako težina ne bi previše utjecala na samo upravljanje. Modificirani heksakopter može se vidjeti na \ref{fig:modificirani dron}.
 \begin{figure}[htb]
 \centering
-\begin{subfigure}{.45\textwidth}
+\begin{subfigure}{.48\textwidth}
   \centering
-  \includegraphics[width=.4\linewidth]{img/fer_logo.jpg}
+  \includegraphics[width=.9\linewidth]{img/dron_gore.JPG}
   \caption{Gornji dio - vidljive svjetleće diode}
   \label{fig:gornji}
 \end{subfigure}
-\begin{subfigure}{.45\textwidth}
+\begin{subfigure}{.48\textwidth}
   \centering
-  \includegraphics[width=.4\linewidth]{img/fer_logo.jpg}
+  \includegraphics[width=.9\linewidth]{img/dron_dole.JPG}
   \caption{Donji dio - spajanje na bateriju}
   \label{fig:donji}
 \end{subfigure}
@@ -703,15 +703,15 @@ One su postavljene na gornji dio heksakoptera, a napajaju se iz baterije koja po
 Za točno određivanje položaja heksakoptera u prostoru potreban je sustav kamera. Postoje mnoge skupe kamere za praćenje letjelica, poput poznatog OptiTrack sustava, no u ovom eksperimentu potrebno je koristiti neku jeftiniju inačicu. Tako se može koristiti Wii Remote (prikazan slikom \ref{fig:Wii Remote}) u kojeg je ugrađena infracrvena kamera ili Pixy (prikazana slikom \ref{fig:Pixy kamera}) kamera s lećom koja uočava infracrveno svijetlo. 
 \begin{figure}[htb]
 \centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.4\textwidth}
   \centering
-  \includegraphics[width=.4\linewidth]{img/fer_logo.jpg}
+  \includegraphics[width=.5\linewidth]{img/wiimote.JPG}
   \captionof{figure}{Wii Remote}
   \label{fig:Wii Remote}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=.4\linewidth]{img/fer_logo.jpg}
+  \includegraphics[width=.9\linewidth]{img/pixy.JPG}
   \captionof{figure}{Pixy kamera}
   \label{fig:Pixy kamera}
 \end{minipage}
@@ -728,15 +728,15 @@ U ovom poglavlju prikazana je modifikacija kontrolera kako bi se omogućilo slan
 Sada kada su određene veličine analognih signala potrebno je fizički prekinuti vod iz upravljačkog signala te zalemiti žice na svaki kraj tog voda, kako bi kratkospajanjem tih žica funkcionalnost kontrolera ostala ista.  To je prikazano na slikama  \ref{fig:kontrolerUnutra} i \ref{fig:kontrolerVani}.
 \begin{figure}[htb]
 \centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.6\textwidth}
   \centering
-  \includegraphics[width=.6\linewidth]{img/fer_logo.jpg}
+  \includegraphics[width=.8\linewidth]{img/modificiranje.JPG}
   \captionof{figure}{Modificiranje kontrolera}
   \label{fig:kontrolerUnutra}
 \end{minipage}%
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.4\textwidth}
   \centering
-  \includegraphics[width=.6\linewidth]{img/fer_logo.jpg}
+  \includegraphics[width=.5\linewidth]{img/modificirani.JPG}
   \captionof{figure}{Modificirani kontroler}
   \label{fig:kontrolerVani}
 \end{minipage}
@@ -765,126 +765,7 @@ Za upravljanje se koristi robotski operativni sustav - ROS. ROS prikuplja softve
 
 \subsection{Rezultati}
  
-\begin{table}[h!]
-  \caption{Kratki slikovni prikaz osnovnih vrsta i oblika dronova\citep{vrsteDronova}}
-  \label{tbl:vrsteDronova}
-  \begin{center}
-  	\begin{tabular}{ | c | c | c | }
-    \hline
-    Vrsta & Prednosti & Mane \\ \hline
-    \begin{minipage}{.3\textwidth}
-    	Quadcopter (letjelica s četiri elise)
-      \includegraphics[width=\linewidth, height=25mm]{img/quadcopter.png}
-    \end{minipage}
-    &
-    \begin{minipage}{5cm}
-      \begin{itemize}
-        \item može lebdjeti (stacionarni let)
-        \item može poletjeti s mjesta i sletjeti
-      \end{itemize}
-    \end{minipage}
-    & 
-    \begin{minipage}{5cm}
-      \begin{itemize}
-        \item nije za velike udaljenosti ni visine
-        \item kratak vijek trajanja baterije
-      \end{itemize}
-    \end{minipage}
-    \\ \hline
-    \begin{minipage}{.3\textwidth}
-    	Oblik zrakoplova \engl{plane shaped drone}
-      \includegraphics[width=\linewidth, height=25mm]{img/plane_shaped_drone.png}
-    \end{minipage}
-    &
-    \begin{minipage}{5cm}
-    	\begin{itemize}
-      	\item dobar manevar
-        \item velike udaljenosti
-        \item velike visine
-      	\end{itemize}
-    \end{minipage}
-    & 
-    \begin{minipage}{5cm}
-      \begin{itemize}
-      	\item ne može lebdjeti (zasad)
-      	\item ne može poletjeti s mjesta (zasad)
-      \end{itemize}
-    \end{minipage}
-    \\ \hline
-    \begin{minipage}{.3\textwidth}
-      Oblik muhe \engl{insect fly shaped drone}
-      \includegraphics[width=\linewidth, height=25mm]{img/insect_fly_shaped_drone.png}
-    \end{minipage}
-    &
-    \begin{minipage}{5cm}
-      \begin{itemize}
-        \item vrlo mali
-        \item može se zavlačiti te ići na nepristupačan teren
-        \item oponaša kretanje muhe ili insekta
-      \end{itemize}
-    \end{minipage}
-    & 
-    \begin{minipage}{5cm}
-      \begin{itemize}
-        \item mali dron = mala baterija
-      \end{itemize}
-    \end{minipage}
-    \\ \hline
-  	\end{tabular}
-  \end{center}
-\end{table}
 
-\chapter{Proba}
-Uvod rada. Nakon uvoda dolaze poglavlja u kojima se obrađuje tema.
-\section{Odjeljak 1.1}
-Tekst o odjeljku
-\subsection{Pododjeljak}
-\emph{How can we eat?}
-Popis fusnota\footnote{Objašnjenja koja se prikazuju
-na dnu stranice} nije potreban.
-\section{Dodavanje posvete}
-\label{sec:posveta}
-Za navedeno pogledajte odjeljke \ref{sec:posveta}
-\begin{itemize}
-	\item prva stavka,
-	\item druga stavka,
-	\begin{enumerate}
-		\item druga razina.
-	\end{enumerate}
-\end{itemize}
-
-\begin{table}[htb]
-\caption{Konstante}
-\label{tbl:konstante}
-\centering
-\begin{tabular}{llr} \toprule
-Konstanta & Opis & Vrijednost\\ \midrule
-$\pi$ & Pi & 3.14159 \\
-$e$ & Eulerov broj & 2.71828 \\
-$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[width=5cm]{img/fer_logo.jpg}
-\caption{Logo FER-a}
-\label{fig:fer-logo}
-\end{figure}
-
-‘Prva dama: $\sin^2 \varphi + \cos^2 \varphi = 1$.’ \citep{ungar2002uvod} \cite{oetiket2007lshort}
-\begin{align}
-a&=b+c,\label{eq:a}\\
-d&=e+f+g,\\
-h&=i+j.\label{eq:h}
-\end{align}
-
-Dodatak dokumenta \engl{appendix}.
-
-Primjer korištenja enumitem paketa dan je u \citep{collins2008enum}.
-\citet{collins2008enum} opisuje korištenje enumitem paketa.
-\cite{greenwade93}
-Text ... citation: \cite{greenwade93}.
 
 \chapter{Zaključak}
 Zaključak.
@@ -893,17 +774,18 @@ Zaključak.
 \bibliography{literatura}
 
 \begin{sazetak}
-Bespilotne letjelice imaju sve veću upotrebu i važnost u svakodnevnom životu. 
+Bespilotne letjelice imaju sve veću upotrebu i važnost u svakodnevnom životu. Kroz povijest se mijenjala njihova upotreba pa postoji nekoliko vrsta. Sve većom upotrebom u poljoprivredi, geodeziji te za zabavu javila se potreba za zakonskom regulativom. Najveći izazov kod bespilotnih letjelica je njihovo upravljanje i točno pozicioniranje. Za rješavanje tog problema potrebno je dobro odrediti matematički model za sintezu sustava upravljanja. Model heksakopera je izveden korištenjem Newtonovih zakona. Korištenjem kvaterniona, u odnosu na Eulerove kutove, smanjuje se nestabilnost te ubrzava numerički izračun. Projektirani regulator za slijeđenje željene trajektorije ima raspoložive informacije o trenutnoj poziciji i orijentaciji letjelice. Glavno svojstvo letjelica je njihova nestabilnost. Kako bi se upravljalo preko računala, modificirani je kontroler heksakoptera tako da Arduino, uz dodatne elemente za filtriranje signala, generira upravljački signal. Algoritam upravljanja implementiran je u robotski operativnom sustavu - ROSu. Na kraju su prikazani rezultati algoritma. 
 
-\kljucnerijeci{Ključne riječi, odvojene zarezima.}
+\kljucnerijeci{Bespilotne letjelice, upravljanje, matematički model, heksakopter, kvaternioni, Eulerovi kutovi, trajektorija, Arduino, ROS.}
 \end{sazetak}
-
+\newpage
 % TODO: Navedite naslov na engleskom jeziku.
 \engtitle{Design of a Path Tracking Controller for Unmanned Aerial Vehicle in Global Vision System}
 \begin{abstract}
-Abstract.
+The use and importance of Unmanned Aerial Vehicles are increasing in everyday life. Throughout history, their use has been changed and there are several types. Legal regulations had to be published because of their increasing use in agriculture, geodesy and for entertainment. The biggest challenge for unmanned aerial vehicles is control and accurate positioning.
+To solve this problem, it is necessary to define a mathematical model for the synthesis of the control system. The model of flying hexacopter is derived using classical Newton laws. By using quaternions, relative to the Euler angles, instability decreases and the numerical calculations accelerate. The designed controller for the trajectory tracking has available information on the current position and orientation of the aircraft. The main property of such devices is their instability. In order to control the hexacopter from the computer, the hexachopter controller is modified so that an Arduino, with some additional elements for filtering signals, can generate a control signal. Algorithm for control is implemented in the robotic operating system - ROS. Results of the control algorithm are presented in the end of the paper.
 
-\keywords{Keywords.}
+\keywords{Unmanned Aerial Vehicle, control, mathematical model, hexacopter, quaternions, Euler angles, trajectory, Arduino, ROS.}
 \end{abstract}\\
 
 \hspace*{0pt}\hfill Potpis:  $\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_$\\
