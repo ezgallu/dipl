@@ -13,6 +13,40 @@
 \usepackage{subcaption}
 \usepackage[final]{pdfpages}
 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
@@ -69,7 +103,7 @@ Bespilotne letjelice lete bez ljudskog pilota, umjesto toga kontrolira ih operat
 
 \subsection{Prednosti i nedostaci}
 Postoji nekoliko prednosti i nedostataka koje pružaju bespilotne letjelice. Prednost u odnosu na letjelice s pilotom je upravo u tome, što bespilotne letjelice ne trebaju imati pilota 
-koji fizički  mora  biti  unutar  letjelice  upravljati  njome.  Nadalje, jedna od prednosti je ta što mogu doći na nedohvatljiva područja za ljude, a obavljaju precizno i kvalitetno snimanje terena. Mogu ostati u zraku i do 30 sati \citep{AdvantagesofUAS}. Samim time, bespilotna letjelica predstavlja sigurno okruženje te se može kretati dosta velikom brzinom. Ukoliko dođe do pada letjelice, nema štete od stradanja pilota, a uz to mogu letjeti u zonama u kojima postoje velike opasnosti i to na duže vrijeme \citep{Soffar}. \\
+koji fizički  mora  biti  unutar  letjelice  upravljati  njome.  Nadalje, jedna od prednosti je ta što mogu doći na nedohvatljiva područja za ljude, a obavljaju precizno i kvalitetno snimanje terena. Mogu ostati u zraku i do 30 sati \citep{AdvantagesofUAS}. Samim time, bespilotna letjelica predstavlja sigurno okruženje te se može kretati dosta velikom brzinom. Ukoliko dođe do pada letjelice, nema štete od stradanja pilota, a uz to mogu letjeti u zonama u kojima postoje velike opasnosti i to na duže vrijeme \citep{Soffar}.
 Prednosti koje dronovi pružaju su njihova niska cijena te je održavanje puno jeftinije od običnih letjelica i zrakoplova. Uz to, dronovi mogu letjeti na niskim nadmorskim visinama za razliku od zrakoplova, a također mogu letjeti nekoliko sati bez prestanka. Njihove sposobnosti snimanja, nadziranja, nadgledavanja, izviđanja jedne su od velikih prednosti kao i laka i brza implementacija sustava \citep{PhilForHumanity}.\\
 S  druge  strane,  postoje  i  neki  nedostaci  bespilotnih  letjelica  i  dronova. Bespilotne letjelice su u odnosu na dronove, skupe za proizvodnju,dok se veliki troškovi mogu pojaviti i ljudskom greškom kod letjelica s daljinskim upravljanjem te to može uzrokovati njen pad. Također, može se dogoditi i to da se letjelica izgubi što također donosi velike troškove. Kvarovi na računalu isto mogu uzrokovati štete na bespilotnim letjelicama, naročito kada se one koriste za vojne napade što može rezultirati ubijanjem civila i uništenjem  civilne  imovine \citep{Soffar}. \\
 Unatoč tome, vojska i dalje koristi dronove i  bespilotne letjelice jer vjeruju u njihove prednosti, a nisu svjesni nedostataka. Nedostaci dronova su ti da oni ne mogu komunicirati s civilima, odnosno u slučaju vojnog napada te potrebe za evakuacijom nekog područja. Loše programirani dronovi mogu izazvati velike štete, a kao takvi mogu biti preuzeti od strane neprijatelja što dovodi u pitanje sigurnost takvih sustava. 
@@ -155,7 +189,7 @@ No kako se dronovi najčešće koriste za snimanja iz zraka, postoje zakoni koji
 \item popis objekata, skicu ili kartu s označenim područjem snimanja
 \item podatke o vrsti i mjerilu snimanja, kameri, žarišnoj daljini objektiva, filmu ili obliku zapisa (analogni/digitalni)
 \item način čuvanja izvornih podataka snimanja.
-\end{itemize}.
+\end{itemize}
 Tek nakon dobivanja odobrenja može se pristupiti snimanju te kasnije i razvijanju zračnih snimaka i pri tome je dužna najkasnije u roku od 8 dana od dana snimanja dostaviti zračne snimke na pregled Državnoj geodetskoj upravi (Zakon o obrani, NN 33/02), dok je za bilo kakvo umnožavanje, objavljivanje ili iznošenje snimaka iz Hrvatske potrebno  pribaviti  odobrenje  uz  suglasnost  ministarstva (Ministarstvo  pomorstva,  prometa  i infrastrukture, 2015).\\
 Prilikom snimanja iz zraka pojedinih vojnih, telekomunikacijskih, energetskih i industrijskih objekata, područja nacionalnih parkova i parkova prirode te drugih zaštićenih dijelova prirode, također je potrebno priložiti i mišljenje korisnika objekta, odnosno ustanove koja upravlja zaštićenim dijelom prirode (Uredba o snimanju iz zraka, NN 116/03). Digitalni oblik obrasca Zahtjeva za izdavanje odobrenja za razvijanje zračnih snimaka može se pronaći na službenim internetskim stranicama Državne geodetske uprave, a uz obrazac je potrebno priložiti dokaz o registriranoj djelatnosti za snimanje iz zraka, dok je za letjelicu potrebno priložiti kopiju Certifikata za obavljanje radova iz zraka s Operativnim specifikacijama koju izdaje Agencija za civilno zrakoplovstvo.\\
 
@@ -311,6 +345,36 @@ Postoje nekoliko načina sinteze sustava upravljanja, odnosno sinteze regulatora
 \item Upravljanje u prostoru stanja
 \item Optimalno upravljanje
 \end{itemize}
+\subsubsection{PID regulator}\label{PIDreg}
+PID regulator ima najkompleksnije i najopsežnije regulacijsko djelovanje. Ovaj tip regulatora pogodan je za regulacijske sustave gdje se javljaju velika kašnjenja koja se moraju eliminirati na najbrži mogući način. Dodanom D komponentom PID regulator rezultira boljom regulacijskom dinamikom --- znatno bržim odzivom. I komponenta PID regulatora spriječava pojavu statičke pogreške. 
+Da bi se postigli zadovoljavajući rezultati regulacije, osim upotrebe  prikladnog regulatora, još je važnije da regulacijski parametri $K_P$, $K_D$ i $K_i$ budu prikladno namješteni, odnosno $T_V$ i $T_n$ komponente regulacijskih parametara $K_D$ i $K_i$.
+U praksi regulatori se uobičajeno namještaju na temelju vrijednosti dobivenih iz iskustva.
+Jedan od pristupa je upotreba Ziegler-Nichols metode, odnosno njihove tzv. konačne metode \engl{ultimate method}.
+Ova metoda se može primjeniti jedino u regulacijskim sustavima koji dopuštaju određene (podnošljive) oscilacije izlaznih signala.
+Za ovu metodu postoji sljedeća procedura postupanja:
+\begin{itemize}
+\item na regulatoru postaviti $K_P$ i $T_V$ u najnižu vrijednost, a $T_n$ u najvišu vrijednost (na ovaj način postiže se najmanji mogući utjecaj regulatora na sustav)
+\item namjesti regulacijski sustav ručno (započeti regulacijsku petlju)
+\item postaviti upravljanu veličinu na ručno namještenu vrijednost i prebaci na automatski režim rada
+\item započeti povećavanje vrijednosti $K_P$ dok izlazni signal ne postigne harmonične 
+oscilacije
+\item ako namještena vrijednost $K_P$ je kritični koeficijent proporcionalnog djelovanja $K_{P,crit}$
+\item odrediti vremenski raspon jedne pune oscilacijske amplitude i označi ga kao $T_{crit}$
+\item pomnožiti vrijednosti $K_{P,crit}$ i $T_{crit}$ s vrijednostima datim u tablici \ref{tbl:konstantePID} i unesti dobivene vrijednosti za $K_P$, $T_n$ i $T_V$ u regulator
+\item ako je potrebno ponovo namjestiti vrijednosti $K_P$ i $T_n$ sve dok regulacijsko djelovanje na pokaže zadovoljavajući dinamički odziv
+\end{itemize}
+\begin{table}[htb]
+\caption{Namještanje vrijednosti prema Ziegler-Nichols metodi}
+\label{tbl:konstantePID}
+\centering
+\begin{tabular}{lccc} \toprule
+& $\mathbf{K_P}$ & $\mathbf{T_n}$ & $\mathbf{T_v}$\\ \midrule
+P & $0,50\cdot K_{P,crit}$ & $-$ & $-$ \\
+PI & $0,45\cdot K_{P,crit}$ & $0,85\cdot T_{crit}$ & $-$ \\
+PID & $0,59\cdot K_{P,crit}$ & $0,50\cdot T_{crit}$ & $0,12\cdot T_{crit}$ \\ \bottomrule
+\end{tabular}
+\end{table}
+Proučavanjem PID regulatora može se uočiti da se savršeno regulacijsko djelovanje postiže uz veliku vrijednost koeficijenta proporcionalnog člana, kratko vrijeme integracije i dugo derivacijsko vrijeme. Regulacijski sustav će pod takvim uvjetima reagirati jako brzo na poremećaje, promjene u opterećenju i na promjene zadanih vrijednosti.
 
 \subsection{Modeliranje dinamičkih procesa}
 Ponašanje dinamičkih sustava opisano je skupom diferencijalnih jednadžbi koje su općenito nelinearne. U ovim diferencijalnim jednadžbama sadržane su zakonitosti koje vrijede za dati sustav. Osnovni je problem koji se pojavljuje kod analize ovakvih sustava nepostojanje opće metodologije za rješavanje nelinearnih diferencijalnih jednadžbi. S druge strane, ako je dinamički sustav opisan skupom linearnih diferencijalnih jednadžbi, tada je njegova analiza znatno jednostavnija.
@@ -468,9 +532,9 @@ Kao posljedica, translacijska komponenta gibanja u lokalnom sustavu je \ref{eq:F
 \begin{align}
 m~\mathbf{\dot{v_B}+\nu\times (m~v_b)}&=\mathbf{Q^TF_g+T_B} \label{eq:Flokalni}
 \end{align}
-Da bi dobili istu jednadžbu u globalnom sustavu, potrebno je primijetiti da je centrifugalna sila poništena jer se globalni sustav ne rotira pa tako prethodna jednadžba postaje~\ref{eq:Flokalni}
+Da bi dobili istu jednadžbu u globalnom sustavu, potrebno je primijetiti da je centrifugalna sila poništena jer se globalni sustav ne rotira pa tako prethodna jednadžba postaje~\ref{eq:Fglobalni}
 \begin{align}
-m~\mathbf{\ddot{\xi}}&=\mathbf{F_g+Q~T_B} \label{eq:Flokalni}
+m~\mathbf{\ddot{\xi}}&=\mathbf{F_g+Q~T_B} \label{eq:Fglobalni}
 \end{align}
 Nadalje, neka je $\mathbf{I}$ matrica inercija. Heksakopter ima simetričnu strukturu s obzirom na $X_b$-os, $Y_b$-os i $Z_b$-os, stoga je matrica inercija jedinična $\mathbf{I}=diag(\mathbf{I_{xx}, I_{yy}, I_{zz}})$. Kako ukupni vanjski moment $\mathbf{M}$ djeluje, uzimajući u obzir brzinu promjene kutnog momenta  $\mathbf{H=I\nu}$ tada je moment koji djeluje na heksakopter izražen s~\ref{eq:MomentHex}.
 \begin{align}
@@ -655,7 +719,7 @@ Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (po
 \includegraphics[width=8cm]{img/heksakopterMJX.JPG}
 \caption{Heksakopter MJX X800 RC sa svojim kontrolerom}
 \label{fig:MJX X800 RC}
-\end{figure}\\
+\end{figure}
 
 Za potrebe eksperimenta potrebno je modificirati samog drona te odabrati način upravljanja preko računala. Postoje dva načina:
 \begin{enumerate}
@@ -677,7 +741,7 @@ Modifikacija heksakoptera je u smislu dodavanja markera za njegovo praćenje u s
 \includegraphics[width=5cm]{img/LED.png}
 \caption{Svjetleća dioda visoke snage\protect\footnotemark}
 \label{fig:LED}
-\end{figure}\\
+\end{figure}
 \footnotetext{Izvor: http://www.ledlightmake.com/bmz\_cache/infrared\%20850nm\%20led\%203W.jpg}
 One su postavljene na gornji dio heksakoptera, a napajaju se iz baterije koja pokreće motore samog heksakoptera. Potrebno je koristiti što lakše dijelove kako težina ne bi previše utjecala na samo upravljanje. Modificirani heksakopter može se vidjeti na \ref{fig:modificirani dron}.
 \begin{figure}[htb]
@@ -716,7 +780,7 @@ Za točno određivanje položaja heksakoptera u prostoru potreban je sustav kame
   \label{fig:Pixy kamera}
 \end{minipage}
 \end{figure}
-Sustav kamera je točno određen (zadani položaj i orijentacija kamera) tako da preko fiksnih matrica transformacija daje informaciju o poziciji i orijentaciji samog drona. Ova dobivena informacija se dalje koristi kada se računalom zadaju upravljačke veličine za upravljanje heksakopterom (više o upravljanju u \ref{sec:algoritam}).
+Sustav kamera je točno određen (zadani položaj i orijentacija kamera) tako da preko fiksnih matrica transformacija daje informaciju o poziciji i orijentaciji samog drona. Ova dobivena informacija se dalje koristi se u računalu prilikom zadavanja upravljačke veličine za upravljanje heksakopterom (više o upravljanju u \ref{sec:algoritam}).
 
 \subsection{Kontroler i njegova modifikacija pomoću Arduina}\label{sec:kontroler}
 U ovom poglavlju prikazana je modifikacija kontrolera kako bi se omogućilo slanje upravljačkih signala iz računala preko kontrolera na dron. Kako se putem \emph{gljiva} upravlja dronom, odnosno lijevom gljivom se zadaju potisak \engl{thrust} i zakret \engl{yaw} te desnom gljivom pomak naprijed-nazad i pomak lijevo-desno, potrebno je omogućiti da se upravljačke veličine koje izlaze iz tih \emph{gljiva} zadaju preko računala. Pošto su \emph{gljive} zapravo potenciometri u vertikalnom i horizontalnom smjeru, promjenom njihovog položaja mijenja se  upravljačka veličina. Signali koje generira kontroler su analogni. Tu su 3 električna voda: GND, VCC i upravljački signal (napon na otporniku). Korištenjem multimetra identificiraju se vodovi i izmjeri se napon između upravljačkog signala i GND. U ovoj situaciji izmjereni su sljedeći naponi:
@@ -741,13 +805,13 @@ Sada kada su određene veličine analognih signala potrebno je fizički prekinut
   \label{fig:kontrolerVani}
 \end{minipage}
 \end{figure}\\
-Nakon što je sve određeno i izvedeno Arduino se spaja na kontroler. Preko Arduina se zadaju upravljački naponi, no potrebno je dodati još nekoliko elemenata. Prilikom korištenja naredbe \emph{analogWrite} Arduino generira signal koji je potreban, no na taj način se ne može upravljati dronom iako mjerenjem tog signala se ispostavlja da je točan. Zaključak je da taj signal nije dovoljno \emph{stabilan} za upravljački signal te zbog tog trebamo koristiti dodatni krug za izglađivanje. Za izglađivanje se koristi LM324AN koji sadrži 4 operacijska pojačala (postoje 4 upravljačke veličine). Operacijskim pojačalima potrebno je prethodno staviti otpornik ($4.7k\Omega$ ) i kondenzator ($10 \mu F$). Dodano je i vanjsko napajanje koje iz \emph{mreže} preko ispravljača napona ispravlja napon na istosmjernih 12V nakon čega se preko stabilizatora napona stabilizira napon na 5V te se takav koristi za operacijska pojačala i Arduino. Između ulaza i GND stabilizatora stavlja se kondenzator od $10\mu F$, a između izlaza i GND stabilizatora kondenzator od $1\mu F$. Na ulaz LM324AN dovodi se upravljački signal generiran Arduinom te takav izglačani signal se dovodi na dronov kontroler. Način spajanja prikazan je na slici \ref{fig:spajanje}.
+Nakon što je sve određeno i izvedeno Arduino se spaja na kontroler. Preko Arduina se zadaju upravljački naponi, no potrebno je dodati još nekoliko elemenata. Prilikom korištenja naredbe \emph{analogWrite} Arduino generira signal koji je potreban, no na taj način se ne može upravljati dronom iako mjerenjem tog signala se ispostavlja da je točan. Zaključak je da taj signal nije dovoljno \emph{stabilan} za upravljački signal te zbog tog trebamo koristiti dodatni krug za izglađivanje. Za izglađivanje se koristi LM324AN koji sadrži 4 operacijska pojačala, jer je potrebno zadati 4 upravljačke veličine. Operacijskim pojačalima potrebno je prethodno staviti otpornik ($4.7k\Omega$ ) i kondenzator ($10 \mu F$). Dodano je i vanjsko napajanje koje iz \emph{mreže} preko ispravljača napona ispravlja napon na istosmjernih 12V nakon čega se preko stabilizatora napona stabilizira napon na 5V te se takav koristi za operacijska pojačala i Arduino. Između ulaza i GND stabilizatora stavlja se kondenzator od $10\mu F$, a između izlaza i GND stabilizatora kondenzator od $1\mu F$. Na ulaz LM324AN dovodi se upravljački signal generiran Arduinom te takav izglačani signal se dovodi na dronov kontroler. Način spajanja prikazan je na slici \ref{fig:spajanje}.
 \begin{figure}[htb]
 \centering
 \includegraphics[width=5cm]{img/fer_logo.jpg}
 \caption{Način spajanja Arduina i kontrolera\protect\footnotemark}
 \label{fig:spajanje}
-\end{figure}\\
+\end{figure}
 \footnotetext{niš}
 Jedna bitna stvar za napomenuti je kako svi dronovi trebaju primiti od kontrolera signal za buđenje \engl{Wake up signal}, koji je drugačiji za različite proizvođače, kako bi se s njime moglo upravljati. U ovom slučaju \emph{Wake up} signal je zadavanje maksimalne pa minimalne vrijednosti \emph{thrusta}, odnosno pomak lijeve gljive skroz prema gore pa skroz prema dolje. Također, ovaj kontroler ima opciju za fino podešavanje pa prilikom \emph{Wake up} signala potrebno je imati kratkospojene vodove kako bi se kontroler točno podesio. Ako se to ne napravi nakon simuliranog \emph{Wake up} signala izgubi se mogućnost upravljanja drona prema naprijed i prema desno. Upravljanje preko Arduina treba biti jednako kao i fizičko upravljanje preko kontrolera, tako treba napomenuti da prilikom slanja nove upute \engl{command} je potrebno upravljački signal staviti u sredinu te tek zatim ga postaviti u drugu vrijednost (ovo vrijedi samo kod prelaska kroz srednju vrijednost). Vrlo važno je zapamtiti da se dron prvo treba prizemljiti te tak onda ugasiti motore i kontroler. Ukoliko se kontroler ugasi prilikom rada na dronu ustaju zadnje poslane upute. Time može doći do oštećenja opreme i prostora oko drona. Slikom \ref{fig:cijeli sustav} se prikazuje cijeli navedeni sustav, a poglavljem \ref{sec:algoritam} bit će opisani algoritam i softverski dio.
 \begin{figure}[htb]
@@ -755,13 +819,43 @@ Jedna bitna stvar za napomenuti je kako svi dronovi trebaju primiti od kontroler
 \includegraphics[width=5cm]{img/fer_logo.jpg}
 \caption{Spajanje računala, Arduina i kontrolera\protect\footnotemark}
 \label{fig:cijeli sustav}
-\end{figure}\\
+\end{figure}
 \footnotetext{niš}
 
 
 
 \subsection{Računalo s algoritmom upravljanja}\label{sec:algoritam}
-Za upravljanje se koristi robotski operativni sustav - ROS. ROS prikuplja softverske okvire za razvoj robotskog softvera. ROS nije operacijski sustav, ali pruža usluge oblikovane za heterogene računalne skupine kao što su hardverska apstrakcija, niska razina kontrole uređaja, implementacija uobičajeno korištenih funkcija, prijenos poruka između procesa i upravljanje paketima. Obrada se odvija u čvorovima \engl{nodes} koji mogu primati, postavljati, kontrolirati,  držati i aktivirati razne informacije iz različitih senzora i aktuatora. Unatoč važnosti reaktivnosti i niske latencije u kontroli robota, ROS sam po sebi nije \emph{real-time} operacijski sustav, iako je moguće integrirati ROS s \emph{real-time} kodom. 
+Za upravljanje se koristi robotski operativni sustav - ROS\footnote{Više informacija je dostupno na: \url{http://wiki.ros.org/}}. ROS prikuplja softverske okvire za razvoj robotskog softvera. ROS nije operacijski sustav, ali pruža usluge oblikovane za heterogene računalne skupine kao što su hardverska apstrakcija, niska razina kontrole uređaja, implementacija uobičajeno korištenih funkcija, prijenos poruka između procesa i upravljanje paketima. Obrada se odvija u čvorovima \engl{nodes} koji mogu primati, postavljati, kontrolirati,  držati i aktivirati razne informacije iz različitih senzora i aktuatora. Unatoč važnosti reaktivnosti i niske latencije u kontroli robota, tako i bespilotnih letjelica, ROS sam po sebi nije \emph{real-time} operacijski sustav, iako je moguće integrirati ROS s \emph{real-time} kodom. U ovom projektu korišteni je \emph{ROS Kinetic Kame}\footnote{Više o instalaciji na: \url{http://wiki.ros.org/kinetic/Installation/Ubuntu}} koji se može instalirati na \emph{Ubuntu  (16.04 LTS)} distribuciji \emph{Linuxa}. Nakon instalacije potrebnih paketa povezuju se čvorovi (prikazani slikom \ref{fig:cvoroviROS}) sa algoritmom upravljanja te se uspostavlja komunikacija između Arduina i ROS-a.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=5cm]{img/fer_logo.jpg}
+\caption{Shema ROS čvorova}
+\label{fig:cvoroviROS}
+\end{figure}
+
+\subsubsection{Implementacija PID regulatora}
+Komponente i sam PID regulator objašnjeni su u poglavlju \ref{PIDreg}. U dodatku je kod koji prikazuje implementaciju PID regulatora Python skriptom.
+%\appendix
+%\chapter{Implementacija PID regulatora}
+%\lstinputlisting[language=Python]{code/pid.py}
+
+\subsubsection{Algoritam upravljanja}
+Sam algoritam upravljanja opisan je Python skriptom. Na samom početku skripte 
+\lstinputlisting[language=Python, firstline=1, lastline=10]{code/control_pid.py}
+
+\subsubsection{Komunikacija između Arduina i ROS-a}
+Arduino se koristi za generiranje PWM signala koji se šalje na kontroler. U ovom poglavlju bit će opisani Arduino IDE program. No prvi korak je instalirati Arduino IDE te \emph{rosserial arduino} \footnote{Upute za instalaciju su dostupne na: \url{http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino IDE Setup}} paket za povezivanje ROS direktno s Arduino IDE. \emph{Rosserial} sadrži ROS komunikacijski protokol koji funkcionira preko Arduinovog serijskog porta - UART. Ovaj paket omogućuje Arduinu da bude ponopravni ROS čvor koji može izravno objavljivati i pretplatiti se na ROS informacije.
+U programu se prvo definirata potrebna sintaksa i paketi.
+\lstinputlisting[language=C, firstline=1, lastline=2]{code/pid_listening.c}
+Definiraju se varijable, odnosno frekvencija, inicijalne upravljačke veličine za generiranje PWM signala koji se šalje preko filtra i operacijskog pojačala na kontroler te korišteni pinovi. 
+\lstinputlisting[language=C, firstline=4, lastline=17]{code/pid_listening.c}
+Potrebno je definirati 
+\lstinputlisting[language=C, firstline=22, lastline=32]{code/pid_listening.c}
+U \emph{setup} funkciji, koja se izvršava samo kod pokretanja, definiraju se svi pinovi kao izlazni \engl{output}. Potrebno je namjestiti PWM frekvenciju, odnosno povečati ju kako bi signal bil stabilniji. Za ispravljanje PWM signala na pinovma 9 i 10 koristi se brojač 1, dok se za pinove 11 i 3 koristi brojačem 2. PWM frekvencija iznosi 3921.16 Hz.
+\lstinputlisting[language=C, firstline=34, lastline=44]{code/pid_listening.c}
+Glavna petlja 
+\lstinputlisting[language=C, firstline=46, lastline=58]{code/pid_listening.c}
+
 
 \subsection{Rezultati}
  
@@ -770,11 +864,20 @@ Za upravljanje se koristi robotski operativni sustav - ROS. ROS prikuplja softve
 \chapter{Zaključak}
 Zaključak.
 
+\vfill
+\hspace*{0pt}\hfill Potpis:  $\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_$\\
+\hspace*{5pt}\hfill Luka Galović
+
 \bibliographystyle{fer}
 \bibliography{literatura}
 
+\appendix
+\chapter{Python implementacija PID regulatora}
+\lstinputlisting[language=Python]{code/pid.py}
+
+
 \begin{sazetak}
-Bespilotne letjelice imaju sve veću upotrebu i važnost u svakodnevnom životu. Kroz povijest se mijenjala njihova upotreba pa postoji nekoliko vrsta. Sve većom upotrebom u poljoprivredi, geodeziji te za zabavu javila se potreba za zakonskom regulativom. Najveći izazov kod bespilotnih letjelica je njihovo upravljanje i točno pozicioniranje. Za rješavanje tog problema potrebno je dobro odrediti matematički model za sintezu sustava upravljanja. Model heksakopera je izveden korištenjem Newtonovih zakona. Korištenjem kvaterniona, u odnosu na Eulerove kutove, smanjuje se nestabilnost te ubrzava numerički izračun. Projektirani regulator za slijeđenje željene trajektorije ima raspoložive informacije o trenutnoj poziciji i orijentaciji letjelice. Glavno svojstvo letjelica je njihova nestabilnost. Kako bi se upravljalo preko računala, modificirani je kontroler heksakoptera tako da Arduino, uz dodatne elemente za filtriranje signala, generira upravljački signal. Algoritam upravljanja implementiran je u robotski operativnom sustavu - ROSu. Na kraju su prikazani rezultati algoritma. 
+Bespilotne letjelice imaju sve veću upotrebu i važnost u svakodnevnom životu. Kroz povijest se mijenjala njihova upotreba pa postoji nekoliko vrsta. Sve većom upotrebom u poljoprivredi, geodeziji te za zabavu javila se potreba za zakonskom regulativom. Najveći izazov kod bespilotnih letjelica je njihovo upravljanje i točno pozicioniranje. Za rješavanje tog problema potrebno je dobro odrediti matematički model za sintezu sustava upravljanja. Model heksakoptera je izveden korištenjem Newtonovih zakona. Korištenjem kvaterniona, u odnosu na Eulerove kutove, smanjuje se nestabilnost te ubrzava numerički izračun. Projektirani regulator za slijeđenje željene trajektorije ima raspoložive informacije o trenutnoj poziciji i orijentaciji letjelice. Glavno svojstvo letjelica je njihova nestabilnost. Kako bi se upravljalo preko računala, modificirani je kontroler heksakoptera tako da Arduino, uz dodatne elemente za filtriranje signala, generira upravljački signal. Algoritam upravljanja implementiran je u robotski operativnom sustavu - ROSu. Na kraju su prikazani rezultati algoritma. 
 
 \kljucnerijeci{Bespilotne letjelice, upravljanje, matematički model, heksakopter, kvaternioni, Eulerovi kutovi, trajektorija, Arduino, ROS.}
 \end{sazetak}
@@ -782,13 +885,11 @@ Bespilotne letjelice imaju sve veću upotrebu i važnost u svakodnevnom životu.
 % TODO: Navedite naslov na engleskom jeziku.
 \engtitle{Design of a Path Tracking Controller for Unmanned Aerial Vehicle in Global Vision System}
 \begin{abstract}
-The use and importance of Unmanned Aerial Vehicles are increasing in everyday life. Throughout history, their use has been changed and there are several types. Legal regulations had to be published because of their increasing use in agriculture, geodesy and for entertainment. The biggest challenge for unmanned aerial vehicles is control and accurate positioning.
+The use and importance of unmanned aerial vehicles are increasing in everyday life. Throughout history, their use has been changed and there are several types. Legal regulations had to be published because of their increasing use in agriculture, geodesy and for entertainment. The biggest challenge for unmanned aerial vehicles is control and accurate positioning.
 To solve this problem, it is necessary to define a mathematical model for the synthesis of the control system. The model of flying hexacopter is derived using classical Newton laws. By using quaternions, relative to the Euler angles, instability decreases and the numerical calculations accelerate. The designed controller for the trajectory tracking has available information on the current position and orientation of the aircraft. The main property of such devices is their instability. In order to control the hexacopter from the computer, the hexachopter controller is modified so that an Arduino, with some additional elements for filtering signals, can generate a control signal. Algorithm for control is implemented in the robotic operating system - ROS. Results of the control algorithm are presented in the end of the paper.
 
 \keywords{Unmanned Aerial Vehicle, control, mathematical model, hexacopter, quaternions, Euler angles, trajectory, Arduino, ROS.}
 \end{abstract}\\
 
-\hspace*{0pt}\hfill Potpis:  $\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_$\\
-\hspace*{5pt}\hfill Luka Galović
 
 \end{document}

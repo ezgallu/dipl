@@ -9,6 +9,7 @@
 !*/
 # Recursively allow files under subtree
 !/img/**
+!/code/**
 # You can be specific with these rules
 !.//**
 !.gitignore
