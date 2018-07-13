@@ -22,7 +22,7 @@
 
 \lstset{ 
   backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code%
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
   captionpos=b,                    % sets the caption-position to bottom
@@ -45,7 +45,7 @@
   stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
   stringstyle=\color{mymauve},     % string literal style
   tabsize=2,	                   % sets default tabsize to 2 spaces
-  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+  %title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
@@ -80,8 +80,8 @@
 \chapter{Uvod}
 Ulaskom u novo stoljeće svjedočimo nastavku razvoja, usavršavanja i stvaranja novih tehnologija koja su pomoć u različitim ljudskim aktivnostima. Iako pojam bespilotnih letjelica postoji već dugi niz godina, one su tek u bliskoj prošlosti postale pojam svakodnevnice. Dugi niz godina bespilotne letjelice su se koristile, nažalost, samo u vojnim svrhama zbog čega su stradavali i nedužni civili zbog čega se njihov razvoj držao u tajnosti. Samo saznanje da se koriste u vojsci upućuje na to da je puno vremena i novaca uloženo u njihov razvoj, preciznost, nosivost te izdržljivost.\\
 Danas se uz nagli trend upoznavanja s tehnologijama bespilotnih letjelica, kao i digitalnih zapisa i pohranjivanja memorije svakodnevnih događaja namjena korištenja promijenila te su uvedeni novi pojmovi poput \glqq dronovi\grqq --- suvremena riječ koja zapravo opisuje nekoliko vrsta bespilotnih letjelica. Glavna područja njihovih korištenja su: javna sigurnost, zabava, nadzor i inspekcija, informacije, znanost o Zemlji.\\
-Korištenje  bespilotnih letjelica, naročito u civilne svrhe, bilježi eksponencijalan rast, kako u pogledu njihovog broja, veličine i težine, tako i u pogledu sve brojnijih mogućnosti njihove primjene \citep{EUR-Lex}. Cilj je razviti jeftinije i sposobnije bespilotne letjelice. U skoroj budućnosti tehnologija će se usavršiti pa će manje letjelice moći prenositi sve veću opremu, tako npr.~poštanski paketi će se dostavljati pomoću letjelica.\\
-Motiv izrade ovog rada leži u širokoj primjeni (kako u različitim granama industrije i istraživanja tako i za zabavu). Cilj ovog rada je shvatiti rad bespilotne letjelice te izrada sustava za slijeđenje željene trajektorije. Izazov je kretati se zadanom trajektorijom znajući da postoje razne vanjske smetnje koje utječu na upravljanje. U teorijskom dijelu će se opisati razvoj, svrha odnosno tipovi bespilotnih letjelica, dok će se detaljnije razraditi njezin model te odrediti matematički model prikladan za sintezu sustava upravljanja. Projektirat će se regulator za slijeđenje reference, uz pretpostavku raspoloživosti informacije o trenutnoj poziciji te orijentaciji. Provjera projektiranog sustava je u simulaciji odnosno eksperimentalno u laboratorijskim uvjetima.
+Korištenje  bespilotnih letjelica, naročito u civilne svrhe, bilježi eksponencijalan rast, kako u pogledu njihovog broja, veličine i težine, tako i u pogledu sve brojnijih mogućnosti njihove primjene \citep{EUR-Lex}. Cilj je razviti jeftinije i sposobnije bespilotne letjelice. U skoroj budućnosti tehnologija će se usavršiti pa će manje letjelice moći prenositi sve veću opremu, tako npr.~poštanski paketi će se dostavljati pomoću letjelica. Motiv izrade ovog rada leži u širokoj primjeni (kako u različitim granama industrije i istraživanja tako i za zabavu). \\
+Cilj ovog rada je shvatiti rad bespilotne letjelice te izrada sustava za slijeđenje željene trajektorije. Izazov je kretati se zadanom trajektorijom znajući da postoje razne vanjske smetnje koje utječu na upravljanje. Za to je potrebno implementirati algoritam upravljanja. Cilj upravljanja je stabilizirati sustav oko reference ili prema trajektoriji. To se postiže povratnim informacijama, odnosno mjerenoj poziciji. Za implementaciju algoritma potrebno je dobro razraditi dinamički model. Dronovi imaju šest stupnjeva slobode gibanja i četiri upravljačke veličine, što znači da su dronovi nestabilni sustavi. Jedini pokretni dijelovi su propeleri. U teorijskom dijelu će se opisati razvoj, svrha odnosno tipovi bespilotnih letjelica, dok će se detaljnije razraditi njezin model te odrediti matematički model prikladan za sintezu sustava upravljanja. Projektirat će se regulator za slijeđenje reference, uz pretpostavku raspoloživosti informacije o trenutnoj poziciji te orijentaciji. Provjera projektiranog sustava je eksperimentalno u laboratorijskim uvjetima.
 
 \section{Bespilotne letjelice}
 Bespilotne letjelice (UAV\footnote{UAV \engl{Unmanned Aerial Vehicle} – opći je pojam koji označava zapravo sve vrste bespilotnih letjelica koje se kolokvijalno najčešće nazivaju dronovima. Pod tim se obično spominju dvije vrste letjelica kojima ne trebaju ljudski piloti, prve su tzv. kvadrikopteri \engl{quadcopter}, letjelice s četiri elise pomoću kojih dron može lebdjeti na mjestu i kretati se u raznim smjerovima. Drugi tip bespilotnih letjelica su izgleda projektila ili zrakoplova kojim se upravlja iz baze i povezani su uglavnom s vojnim operacijama.}) su, najjednostavnije rečeno, letjelice koje su sposobne izvršiti kontinuirani let bez prisutnosti pilota \citep{UAV}. Postoje razni oblici i veličine, no najčešće su dizajnirane za točno specifične uloge.\\
@@ -218,7 +218,7 @@ U poljoprivredi se pomoću dronova ili drugih vrsta bespilotnih letjelice za tu 
 \caption{Upotreba letjelica u poljoprivredi\protect\footnotemark}
 \label{fig:letjelicaUPoljoprivredi}
 \end{figure}
-\footnotetext{Izvor: https://geospatialmedia.s3.amazonaws.com/wp-content/uploads/2017/08/140911-drones-editorial.jpg}\\
+\footnotetext{Izvor: https://geospatialmedia.s3.amazonaws.com/wp-content/uploads/2017/08/140911-drones-editorial.jpg}
 U geodeziji, bespilotne letjelice mogu snimati teren te se na temelju toga može izraditi 3D prikaz, razni digitalni modeli terena i površine itd. Dronovi su korisni jer mogu doći do nepristupačnih terena i područja te obaviti potrebno snimanje  i mjerenje.  Nadalje,  bespilotne letjelice  mogu  biti korisne kod mjerenja infrastrukture i vrše točan, brz i pouzdan nadzor nad objektima zajedno sa preciznim i učinkovitim ugrađenim kamerama \citep{GeoTron}\\
 Praćenje  okoliša,  snimanje  šuma,  procjena  kvalitete  zraka,  kontrola   i nadzor nad kritičnom infrastrukturom (npr.~odlagališta  i otpadne  vode)  te  mnoge  druge  mogućnosti  vezane  uz  okoliš  karakteristične  su  dronove. Prednost je u tome što takva snimanja i prikupljanja podataka nisu skupa te ne postoje veliki financijski troškovi, a ne ovise niti o vremenskim uvjetima.\\
 Također, bespilotne letjelice se koriste i za civilnu sigurnost jer se mogu koristiti za policijski nadzor, zaštitu državnih granica te razne druge nadzore i operacije \citep{GeoTron}. Uz sve navedeno, većina današnjih korisnika, kupuje i koriste dronove ponajviše za zabavu sa željom prikupljanja fotografija s određenih visina. 
@@ -347,28 +347,28 @@ Postoje nekoliko načina sinteze sustava upravljanja, odnosno sinteze regulatora
 \end{itemize}
 \subsubsection{PID regulator}\label{PIDreg}
 PID regulator ima najkompleksnije i najopsežnije regulacijsko djelovanje. Ovaj tip regulatora pogodan je za regulacijske sustave gdje se javljaju velika kašnjenja koja se moraju eliminirati na najbrži mogući način. Dodanom D komponentom PID regulator rezultira boljom regulacijskom dinamikom --- znatno bržim odzivom. I komponenta PID regulatora spriječava pojavu statičke pogreške. 
-Da bi se postigli zadovoljavajući rezultati regulacije, osim upotrebe  prikladnog regulatora, još je važnije da regulacijski parametri $K_P$, $K_D$ i $K_i$ budu prikladno namješteni, odnosno $T_V$ i $T_n$ komponente regulacijskih parametara $K_D$ i $K_i$.
+Da bi se postigli zadovoljavajući rezultati regulacije, osim upotrebe  prikladnog regulatora, još je važnije da regulacijski parametri $K_P$, $K_D$ i $K_i$ budu prikladno namješteni, odnosno $T_D$ i $T_I$ komponente regulacijskih parametara $K_D$ i $K_i$.
 U praksi regulatori se uobičajeno namještaju na temelju vrijednosti dobivenih iz iskustva.
 Jedan od pristupa je upotreba Ziegler-Nichols metode, odnosno njihove tzv. konačne metode \engl{ultimate method}.
 Ova metoda se može primjeniti jedino u regulacijskim sustavima koji dopuštaju određene (podnošljive) oscilacije izlaznih signala.
 Za ovu metodu postoji sljedeća procedura postupanja:
 \begin{itemize}
-\item na regulatoru postaviti $K_P$ i $T_V$ u najnižu vrijednost, a $T_n$ u najvišu vrijednost (na ovaj način postiže se najmanji mogući utjecaj regulatora na sustav)
+\item na regulatoru postaviti $K_P$ i $T_D$ u najnižu vrijednost, a $T_I$ u najvišu vrijednost (na ovaj način postiže se najmanji mogući utjecaj regulatora na sustav)
 \item namjesti regulacijski sustav ručno (započeti regulacijsku petlju)
 \item postaviti upravljanu veličinu na ručno namještenu vrijednost i prebaci na automatski režim rada
 \item započeti povećavanje vrijednosti $K_P$ dok izlazni signal ne postigne harmonične 
 oscilacije
 \item ako namještena vrijednost $K_P$ je kritični koeficijent proporcionalnog djelovanja $K_{P,crit}$
 \item odrediti vremenski raspon jedne pune oscilacijske amplitude i označi ga kao $T_{crit}$
-\item pomnožiti vrijednosti $K_{P,crit}$ i $T_{crit}$ s vrijednostima datim u tablici \ref{tbl:konstantePID} i unesti dobivene vrijednosti za $K_P$, $T_n$ i $T_V$ u regulator
-\item ako je potrebno ponovo namjestiti vrijednosti $K_P$ i $T_n$ sve dok regulacijsko djelovanje na pokaže zadovoljavajući dinamički odziv
+\item pomnožiti vrijednosti $K_{P,crit}$ i $T_{crit}$ s vrijednostima datim u tablici \ref{tbl:konstantePID} i unesti dobivene vrijednosti za $K_P$, $T_I$ i $T_D$ u regulator
+\item ako je potrebno ponovo namjestiti vrijednosti $K_P$ i $T_I$ sve dok regulacijsko djelovanje na pokaže zadovoljavajući dinamički odziv
 \end{itemize}
 \begin{table}[htb]
 \caption{Namještanje vrijednosti prema Ziegler-Nichols metodi}
 \label{tbl:konstantePID}
 \centering
 \begin{tabular}{lccc} \toprule
-& $\mathbf{K_P}$ & $\mathbf{T_n}$ & $\mathbf{T_v}$\\ \midrule
+& $\mathbf{K_P}$ & $\mathbf{T_I}$ & $\mathbf{T_D}$\\ \midrule
 P & $0,50\cdot K_{P,crit}$ & $-$ & $-$ \\
 PI & $0,45\cdot K_{P,crit}$ & $0,85\cdot T_{crit}$ & $-$ \\
 PID & $0,59\cdot K_{P,crit}$ & $0,50\cdot T_{crit}$ & $0,12\cdot T_{crit}$ \\ \bottomrule
@@ -433,10 +433,31 @@ Ovdje je bitno uočiti da je postupkom linearizacije dobiven model koji više ni
 \section{Komponente i način rada bespilotne letjelice}
 U današnje vrijeme poseban značaj i široku primjenu dobila je vrsta bespilotnih letjelica koje nazivamo multirotori,  a za koju  se skoro uvijek koristi naziv  dronovi.  Stoga ćemo  u nastavku nešto šire obraditi ovu vrstu bespilotnih letjelica.\\
 Multirotor je letjelica s minimalno 3 rotirajuća tijela (elise). Ova konfiguracija letjelice naziva se Trikopter, i on je po načinu upravljanja drugačiji od ostalih multirotora kao što su quadkopter   (4   motora),   heksakopter   (6   motora),   oktokopter   (8   motora)   itd.   Jedino   kod konstruktivne konfiguracije  trikoptera  jedan  motor  mora  biti pomičan,  kod  svih  ostalih konfiguracija  motori  su  fiksni.  Pojavom pristupačnih motora bez četkica \engl{brushless}  te unapređenjem baterije  i minimiziranjem elektroničkih  komponenti  došlo  je  do  ekspanzije multirotor letjelica na tržištu. Razvoj kontrolera leta omogućio je jednostavno upravljanje sa inače složenim sustavom upravljanja, što je rezultiralo masovnom proizvodnjom i korištenjem multirotora u razne svrhe.\\
-Pozicioniranje  motora  jedan  iznad  odnosno ispod drugoga nudi određene prednosti i nedostatke  kod  multirotora  sastavljenih  u  „X“.  \citet{Zilic}  navodi  da  prednosti  ove konfiguracije su smanjenje dimenzija letjelica i nešto lakša konstrukcija što olakšava transport, a glavni nedostatak je smanjene efikasnosti rada motora koja pada i do 20\% u odnosu na istu konfiguraciju  elektroničkih  komponenti  postavljenih  kao  standardni  oktakopter.  Osnovni elementi  multirotora  su  motori,  propeleri, upravljač leta,  baterija  i  konstrukcija  koja  sve  to povezuje   u   cjelinu   popularno   nazvan   okvir   \engl{frame}.  Za  multirotore  poboljšanih karakteristika koriste se motori bez četkica gdje su namotaji u središtu motora i imaju ulogu statora, a permanentni magneti su smješteni po obodu motora i imaju ulogu rotora. Glavna odlika ovih motora je pouzdan rad, jak okretni moment, i velika brzina odaziva na promjenu broja okretaja motora. Ova zadnja karakteristika je ključni element za upravljanje multirotorom, jer se upravljanje svodi na brze promjene broja okretaja motora.\\
-Da bi multirotor uopće mogao funkcionirati i biti upravljiv mora imati upravljač leta. To je elektronski uređaj koji u sebi ima ugrađen elektronski kompas, žiroskop, akcelerometar (mjerač ubrzanja) i često barometar. Svaki bolji upravljač ima i GPS \engl{Global Positioning System} modul za očitavanja položaja. Obrađujući podatke od navedenih senzora upravljač šalje signale pojedinim motorima da smanje ili povećaju broj okretaja te na taj način održava stabilan let  multirotora.  Mnogi upravljači imaju mogućnost priključka vanjskog senzora  (npr.~sonar), koji će dati podatak o udaljenosti od neke prepreke. \citep{Zilic}\\
-Svi navedeni dijelovi multirotora smještaju se u konstrukciju. Pravilo koje se  mora poštovati je uravnoteženost multirotora po svim osima. Što je multirotor uravnoteženiji to će motori koristiti manje energije za upravljanje i stabilizaciju pa će cijela letjelica biti efikasnija. Multirotori su u mogućnosti izvoditi programirani let. To znači da se putem programa unaprijed odrede točke na koje treba doći sa definiranom visinom i brzinom između točaka. Preciznost održavanja visine omogućava upravljač koji,  kako  je  ranije  navedeno,  pored  ostalih  senzora, ima i  barometar koji mu omogućuje letenje na  točno zadanoj  visini. \citep{Zilic}
-\section{Simulacijski dio}\label{sec:SimulacijskiDio}
+Motori mogu biti raspoređeni u „+“ ili „X“. Prikaz rasporeda motora kod heksakoptera su prikazani slikom \ref{fig:rasporedMotora}. Pozicioniranje  motora  jedan  iznad  odnosno ispod drugoga nudi određene prednosti i nedostatke  kod  multirotora  sastavljenih  u  „X“.
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{img/raspored.jpg}
+\caption{Raspored motora heksakoptera\protect\footnotemark}
+\label{fig:rasporedMotora}
+\end{figure}
+\footnotetext{Izvor: \url{http://www.arducopter.co.uk/uploads/6/7/0/2/6702064/1322957_orig.jpg}}
+\citet{Zilic}  navodi  da  prednosti  ove konfiguracije su smanjenje dimenzija letjelica i nešto lakša konstrukcija što olakšava transport, a glavni nedostatak je smanjene efikasnosti rada motora koja pada i do 20\% u odnosu na istu konfiguraciju  elektroničkih  komponenti  postavljenih  kao  standardni  oktakopter.  Osnovni elementi  multirotora  su  motori,  propeleri, upravljač leta,  baterija  i  konstrukcija  koja  sve  to povezuje   u   cjelinu   popularno   nazvan   okvir   \engl{frame}.  Za  multirotore  poboljšanih karakteristika koriste se motori bez četkica gdje su namotaji u središtu motora i imaju ulogu statora, a permanentni magneti su smješteni po obodu motora i imaju ulogu rotora. Glavna odlika ovih motora je pouzdan rad, jak okretni moment, i velika brzina odaziva na promjenu broja okretaja motora. Ova zadnja karakteristika je ključni element za upravljanje multirotorom, jer se upravljanje svodi na brze promjene broja okretaja motora.\\
+Da bi multirotor uopće mogao funkcionirati i biti upravljiv mora imati upravljač leta. To je elektronski uređaj koji u sebi ima ugrađen elektronski kompas, žiroskop, akcelerometar (mjerač ubrzanja) i često barometar. Svaki bolji upravljač ima i GPS \engl{Global Positioning System} modul za očitavanja položaja. Obrađujući podatke od navedenih senzora upravljač šalje signale pojedinim motorima da smanje ili povećaju broj okretaja te na taj način održava stabilan let  multirotora.  Mnogi upravljači imaju mogućnost priključka vanjskog senzora  (npr.~sonar), koji daje podatak o udaljenosti od neke prepreke. \citep{Zilic}\\
+Svi navedeni dijelovi multirotora smještaju se u konstrukciju. Pravilno je držati uravnoteženost multirotora po svim osima. Što je multirotor uravnoteženiji to će motori koristiti manje energije za upravljanje i stabilizaciju pa će cijela letjelica biti efikasnija. Multirotori su u mogućnosti izvoditi programirani let. To znači da se putem programa unaprijed odrede točke na koje treba doći sa definiranom visinom i brzinom između točaka. Bolju preciznost održavanja visine omogućava upravljač koji, pored  ostalih  senzora, ima i  barometar koji mu omogućuje letenje na  točno zadanoj  visini. \citep{Zilic}\\
+\subsection{Petlje upravljanja}
+Što se tiče samog upravljanja drona, odnosno pračenja trajektorije potrebne su dvije petlje. Unutarnja upravljačka petlja, odnosno prije spomenuti upravljač leta, upravlja visinom leta te nagibima multirotora. Ulazi u unutarnju petlju mogu se podijeliti na dva dijela --- na dio koji određuje zadatak \engl{task}, te na informacije koje daju senzori. Dijagram kontrole prikazan je slikom \ref{fig:dijagramKontrola}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=14cm]{img/control_loop.png}
+\caption{Dijagram kontrole drona}
+\label{fig:dijagramKontrola}
+\end{figure}
+Varijable koje određuju zadatak su željena nadmorska visina i kut zavrtanja \engl{yaw} drona treba postići te željeni kutovi valjanja \engl{roll} i nagibanja \engl{pitch} koji se izračunavaju u vanjskoj upravljačkoj petlji. Senzori daju mjerenu nadmorsku visinu, kut valjanja \engl{roll}, kut nagiba \engl{pitch} i kut zavrtanja \engl {yaw}. Unutarnja izlazna petlja sadrži četiri upravljačke varijable. S informacijama iz senzora i dobrog algoritma kontrolera leta kontrola drona je bolja.
+Vanjska upravljačka petlja je potrebna jer su dron u podređenom sustavu i nije moguće izravno kontrolirati sve motore na dronu. Kao što je već rečeno, unutarnja petlja izravno kontrolira motore, zadavajući tri kuta i nadmorsku visinu. Za indirektno kontroliranje $X_E$ i $Y_E$ položaja koristi se vanjska petlja. Vanjska upravljačka petlja, kao svoje izlaze, daje željeni kut valjanja \engl{roll} i nagibanja \engl{pitch} koji se prosljeđuju unutarnjoj petlje za definiranje željenog položaja $X_E$ i $Y_E$. Vanjska upravljačka petlja je superiorna unutrašnjoj upravljačkoj petlji.
+Za dobro upravljanje dronom potrebno je poznavati i matematički model.
+
+
+\section{Teoretski dio}\label{sec:SimulacijskiDio}
 Svrha ovog poglavlja je preko matematičkih jednadžbi opisati dinamičko ponašanje heksakoptera koje se koriste za projektiranje, preko odgovarajućih metoda, kontrolera  za stabilizaciju i kontroler za slijeđenje željene trajektorije. Izabran je heksakopter jer je on korišten u eksperimentalnom dijelu. Heksakopter se sastoji od šest rotora koji su smješteni na vrhovima šesterokuta koji su jednako udaljeni od centra mase, odnosno od tri para suprotno rotirajućih i fiksno dijagonalno postavljenih elisa.  Kontrolira se podešavanjem kutne brzine rotora (vrtnja samo u jednom smjeru) koji se okreću pomoću električnih motora. To uvelike olakšava postupke projektiranja. Povećanjem broja rotora povećava se nosivot i olakšava upravljanje kod kvara jednog od motora. Pretpostavlja se da je letjelica kruto tijelo tako da se dinamika može izvesti diferencijalnim jednadžbama iz Newton-Euler i Euler-Lagrange jednadžbi. Eulerov kut parametrizacije trodimenzionalnih rotacija sadrži singularne točke u koordinatnom prostoru koji mogu uzrokovati pogreške i u dinamičkom modelu i kontroli. Da bi se spriječio singularitet, rotacija letjelice je parametrizirana kvaternionima. Ovom parametrizacijom u obzir je uzeta linearnost kvaterniona, njihova stabilnost i učinkovitost (potrebno manje vremena za obradu tijekom simulacije). Vrijedi napomenuti da su kvaternioni i Eulerovi kutevi povezani. Robusno matematičko modeliranje zajedno s učinkovitim upravljanjem osigurava lagan i siguran let. \citep{MathematicalModeling}
 \begin{figure}[htb]
 \centering
@@ -444,13 +465,14 @@ Svrha ovog poglavlja je preko matematičkih jednadžbi opisati dinamičko ponaš
 \caption{Model heksakoptera\protect\footnotemark}
 \label{fig:model}
 \end{figure}
-\footnotetext{Članak}
+\footnotetext{Izvor: \url{https://www.researchgate.net/profile/V_Artale/publication/269073664/figure/fig1/AS:392210915840007@1470521777957/The-body-frame-of-an-hexacopter.ppm}}
+
 \subsection{Eulerovi kutovi}\label{sec:Euler}
 Shematski prikaz heksakoptera prikazan je na slici~\ref{fig:model}. Da bi opisali gibanje heksakoptera potrebna su dva referentna sustava:\begin{itemize}
 \item nepomični globalni koordinatni sustav,
 \item pokretni lokalni koordinatni sustav heksakoptera.
 \end{itemize}
-Nultočka nepomičnog globalnog koordinatnog sustava postavljena je u jednoj točci (npr.~kut prostorije) te su osi tog koordinatnog sustava ortogonalne te raspoređene prema \emph{desnoj orijentaciji} u kojem je apsolutna linearna pozicija izražena kao $(\mathbf{x,y,z})$. Za određivanje orijentacije letjelice potrebno je definirati pokretni koordinatni sustava $(X_p,Y_p,Z_p)$ koji se giba zajedno s heksakopterom, a centar tog koordinatnog sustava nalazi se u centru mase heksakoptera i orijentirani je kao na slici~\ref{fig:model}. Smjer ortonormiranih vektora $X_p,Y_p,Z_p$ u svakom se trenutku može izraziti u odnosu prema nepomičnom globalnom koordinatnom sustavu. Slijed rotacija oko ortonormiranih vektora pomičnog koordinatnog sustava predstavljen je tzv.~Eulerovim kutovima --- skretanje \engl{roll} $\phi$, poniranje \engl{pitch} $\theta$ i valjanje \engl{yaw} $\psi$. Radi jednostavnosti označimo pokretni vektor pozicije i Eulerove kutove s $\xi = [x ~y ~z]^T$ i $\eta = [\phi ~\theta ~\psi]^T$. Transformaciju iz  lokalnog u globalni koordinatni sustav realizirana je s dobro znanom matricom rotacije \textbf{R} (izraz \ref{eq:matRot}) koja je ortogonalna.
+Nultočka nepomičnog globalnog koordinatnog sustava postavljena je u jednoj točci (npr.~kut prostorije) te su osi tog koordinatnog sustava ortogonalne te raspoređene prema \emph{desnoj orijentaciji} u kojem je apsolutna linearna pozicija izražena kao $(\mathbf{x,y,z})$. Za određivanje orijentacije letjelice potrebno je definirati pokretni koordinatni sustava $(X_p,Y_p,Z_p)$ koji se giba zajedno s heksakopterom, a centar tog koordinatnog sustava nalazi se u centru mase heksakoptera i orijentirani je kao na slici~\ref{fig:model}. Smjer ortonormiranih vektora $X_p,Y_p,Z_p$ u svakom se trenutku može izraziti u odnosu prema nepomičnom globalnom koordinatnom sustavu. Slijed rotacija oko ortonormiranih vektora pomičnog koordinatnog sustava predstavljen je tzv.~Eulerovim kutovima --- valjanje \engl{roll} $\phi$, nagibanje \engl{pitch} $\theta$ i zavrtanje \engl{yaw} $\psi$. Radi jednostavnosti označimo pokretni vektor pozicije i Eulerove kutove s $\xi = [x ~y ~z]^T$ i $\eta = [\phi ~\theta ~\psi]^T$. Transformaciju iz  lokalnog u globalni koordinatni sustav realizirana je s dobro znanom matricom rotacije \textbf{R} (izraz \ref{eq:matRot}) koja je ortogonalna.
 \begin{equation}
 	\begin{bmatrix}
 	\cos\theta\cos\psi & \cos\psi\sin\theta\sin\phi-\cos\phi\sin\psi & \cos\phi\cos\psi\sin\theta+\sin\phi\sin\psi \\
@@ -516,7 +538,7 @@ U ovom odjeljku prikazan je matematički model heksakoptera.  Dinamika šest ele
 \subsubsection{Newton-Euler jednadžbe}
 Gibanje krutog tijela može se razložiti na translacijsku i rotacijsku komponentu. Stoga, kako bi se opisala dinamika heksakoptera, pretpostavka je da je letjelica kruto tijelo pa se za izračun koriste Newton-Eulerove jednadžbe koje reguliraju linearno i kružno gibanje. Sila koja djeluje na heksakopter prikazana je \ref{eq:Sila}, gdje se pretpostavlja da je $m$ konstantna masa.
 \begin{align}
-\mathbf{F}&=\mathbf{\frac{d(m~v_B)}{dt}+\nu\times (m~v_b)} \label{eq:Sila}
+\mathbf{F}&=\mathbf{\frac{d(m~v_B)}{dt}+\nu\times (m~v_B)} \label{eq:Sila}
 \end{align}
 Svaki rotor $i$ ima kutnu brzinu $\omega_i$ koja stvara silu $\mathbf{f_i}=k[0 ~0 ~\omega^2_i]$, gdje je $k$ konstanta potiska, dakle ukupan potisak \engl{thrust} $\mathbf{T_B}$ dan je s \ref{eq:TB} i \ref{eq:Tsila}
 \begin{align}
@@ -553,17 +575,20 @@ Iz geometrijske strukture heksakoptera i od komponenata $\mathbf{f_i}$ i $\mathb
 	\end{bmatrix}
 	=
 	\begin{bmatrix}
-	\frac{3}{4}kl(\omega^2_2+\omega^2_3-\omega^5_2-\omega^2_6) \\
+	\frac{3}{4}kl(\omega^2_2+\omega^2_3-\omega^2_5-\omega^2_6) \\
 	kl(-\omega^2_1-\frac{\omega^2_2}{4}+\frac{\omega^2_3}{4}+\omega^2_4+\frac{\omega^2_5}{4}-\frac{\omega^2_6}{4}) \\
 	b(-\omega^2_1+\omega^2_2-\omega^2_3+\omega^2_4-\omega^2_5+\omega^2_6)+I_M(\dot{\omega^2_1}+\dot{\omega^2_2}+\dot{\omega^2_3}+\dot{\omega^2_4}+\dot{\omega^2_5}+\dot{\omega^2_6})
 	\end{bmatrix}
 	\label{eq:matTau}
 \end{equation}
-Ovdje je $l$ udaljenost između rotora i središta mase heksakoptera, a $\dot{x}\omega_i$ predstavlja vremensku derivaciju $\omega_i(t)$\footnote{Vremenska derivacija: $\frac{d\omega_i(t)}{dt}$}. Nadalje, jednadžba koja određuje dinamiku rotacije može se zapisati kao \ref{eq:rotDin} gdje $\mathbf{\Gamma}$ predstavlja žiroskopske sile i $\mathbf{\tau_B}$ vanjski okretni moment.
+Ovdje je $l$ udaljenost između rotora i središta mase heksakoptera, a $\dot{x}_{\omega_i}$ predstavlja vremensku derivaciju $\omega_i(t)$\footnote{Vremenska derivacija: $\frac{d\omega_i(t)}{dt}$}. Nadalje, jednadžba koja određuje dinamiku rotacije može se zapisati kao \ref{eq:rotDin} gdje $\mathbf{\Gamma}$ predstavlja žiroskopske sile i $\mathbf{\tau_B}$ vanjski okretni moment.
 \begin{align}
 \mathbf{I~\dot{\nu}+\nu\times(I~\nu)}+\Gamma&=\mathbf{\tau_B} \label{eq:rotDin}
 \end{align}
-Nakon kratkog izračuna dobije se \ref{eq:vDot} u kojoj je $\omega_{\Gamma}=\omega_1-\omega_2+\omega_3-\omega_4+\omega_5-\omega_6$.
+Nakon kratkog izračuna dobije se \ref{eq:vDot} u kojoj je 
+\begin{align}
+\omega_{\Gamma} &= \omega_1-\omega_2+\omega_3-\omega_4+\omega_5-\omega_6 \label{eq:omegaV}
+\end{align}
 \begin{equation}
 	\dot{\nu} = \mathbf{I^{-1}} \Bigg(
 	\begin{bmatrix}
@@ -677,6 +702,7 @@ d_x &= K_{x,P}~(x_d-x)+K_{x,D}~(\dot{x}_d-\dot{x})+K_{x,I} \int_0^t {\mathrm{(x_
 d_y &= K_{y,P}~(y_d-y)+K_{y,D}~(\dot{y}_d-\dot{y})+K_{y,I} \int_0^t {\mathrm{(y_d-y)}\,\mathrm{d}s} \label{eq:PIDdy} \\
 d_z &= K_{z,P}~(z_d-z)+K_{z,D}~(\dot{z}_d-\dot{z})+K_{z,I} \int_0^t {\mathrm{(z_d-z)}\,\mathrm{d}s} \label{eq:PIDdy}
 \end{align}
+\subsubsection{Kvaternioni}
 Razlika između klasičnih pristupa linearizacije, poput Lyapunove linearizacije ili linearizacije najmanjim kvadratima, i pristupa putem kvaterniona je u kvaternionskoj pogrešci $q_e$ --- ona je definirana kao razlika između željene orijentacije i trenutne izraženih preko kvaterniona. To dovodi do izraza \ref{eq:PIDqe1}-\ref{eq:PIDqe4} gdje je $\bf q_d$ kvaternion koji odgovara željenoj \emph{yaw} orijentaciji te kvaternion $\bf q$ koji odgovara trenutnoj orijentaciji. 
 \begin{align}
 q_{e,1} &= -q_{d,0}q_1 -q_{d,3}q_2 + q_{d,2}q_3 + q_{d,1}q_0 \label{eq:PIDqe1} \\
@@ -706,10 +732,43 @@ T &= \frac{m(d_z + g)}{2~(q^2_0 + q^2_3)-1} \label{eq:T} \\
 q_1 &= \frac{m(d_z q_3 - d_y q_0)}{(q^2_0 + q^2_3)~2T} \label{eq:q1} \\
 q_2 &= \frac{m(d_z q_0 - d_y q_3)}{(q^2_0 + q^2_3)~2T} \label{eq:q2}
 \end{align}
-Valja se prisjetiti da se heksakopterom upravlja podešavanjem brzina vrtnje elisa koji se pokreću elektromotorima. 
+Valja ponovo istaknuti da se heksakopterom upravlja podešavanjem brzina vrtnje propelera koji se pokreću elektromotorima. 
 
+\subsubsection{Eulerovi kutevi}
+Odnosno gledajući Eulerove kuteve jednadžbe akceleracija su \ref{eq:X}-\ref{eq:Z}, gdje su $\ddot{X}, \ddot{Y}, \ddot{Z}$ akceleracije u fiksnom koordinatnom sustavu, a $omega_{\Gamma}$ je izražena izrazom \ref{eq:omegaV}.
+\begin{align}
+\ddot{X} &= (\cos\psi \sin\theta \cos\phi + sin\psi \sin\phi)\frac{U_1}{m} \label{eq:X} \\
+\ddot{Y} &= (\sin\psi \sin\theta \cos\phi - cos\psi \sin\phi)\frac{U_1}{m} \label{eq:Y} \\
+\ddot{Z} &= -g + (\cos\theta \cos\phi)\frac{U_1}{m} \label{eq:Z} \\
+\dot{p} &= \frac{I_{yy}-I_{zz}}{I_{xx}}qr - \frac{J_{TP}}{I_{xx}}q\omega_{\Gamma} + \frac{U_2}{I_{xx}} \label{eq:p} \\
+\dot{q} &= \frac{I_{zz}-I_{xx}}{I_{yy}}pr - \frac{J_{TP}}{I_{yy}}p\omega_{\Gamma} + \frac{U_3}{I_{yy}} \label{eq:q} \\
+\dot{r} &= \frac{I_{xx}-I_{yy}}{I_{zz}}pq  + \frac{U_4}{I_{zz}} \label{eq:r} \\
+\end{align}
+Izrazima \ref{eq:p}-\ref{eq:r} su prikazane kutne akceleracije u odnosu na fiksni koordinatni sustav. $J_{TP}$ je momenti inercije koji stvara propeler, dok je $\omega_{\Gamma}$ ukupna brzina propelera.  
+Upravljačke veličine $U_1, U_2, U_3$ i $U_4$, prikazane izrazima \ref{eq:U1}-\ref{eq:U4}, su funkcije kvadratnih kutnih brzina gdje je $l$ udaljenost rotora od centra mase, $b$ je koeficijent potiska, a $d$ je koeficijent otpora.
+\begin{align}
+U_1 &= T = k~(\omega^2_1+\omega^2_2 +\omega^2_3+\omega^2_4+\omega^2_5+\omega^2_6) \label{eq:U1} \\
+U_2 &= \tau_{\phi} =\frac{3}{4}kl(\omega^2_2+\omega^2_3-\omega^2_5-\omega^2_6) \label{eq:U2} \\
+U_3 &= \tau_{\theta} = kl(-\omega^2_1-\frac{\omega^2_2}{4}+\frac{\omega^2_3}{4}+\omega^2_4+\frac{\omega^2_5}{4}-\frac{\omega^2_6}{4}) \label{eq:U3} \\
+U_4 &= \tau_{\psi}= b(-\omega^2_1+\omega^2_2-\omega^2_3+\omega^2_4-\omega^2_5+\omega^2_6)+I_M(\dot{\omega^2_1}+\dot{\omega^2_2}+\dot{\omega^2_3}+\dot{\omega^2_4}+\dot{\omega^2_5}+\dot{\omega^2_6}) \label{eq:U4} 
+\end{align}
+Cilj stabilizacije je pronalaženje vrijednosti kutne brzine vrtnje propelera koji zadržava poziciju i orijentaciju. To se postiže preko inverzne kinematike, odnosno dinamike. No preko inverzne kinematike nije uvijek moguć izračun te nije uvijek jedinstvena. Dinamika heksakoptera mora biti pojednostavljena kako bi se mogla implementirati u algoritam upravljanja. Jednadžbe \ref{eq:X}-\ref{eq:r} mogu biti pojednostavljene uzimajući u obzir sljedeće pretpostavke:
+\begin{itemize}
+\item Kutni udjeli akceleraciji su vrlo složeni jer ovise o nekoliko parametara, od čega su većina vektorski produkti kutnih brzina. Imajući na umu da je heksakopter većinu vremena lebdi, takve male promjene u kutevima, odnosno njezini udjeli mogu se zanemariti.
+\item Kutne akceleracije su povezane s promjenom kuteva u odnosu na lokalni koordinatni sustav drona. Transformacijska matrica $T$ definira odnos između brzina u odnosu na lokalni i globalni koordinatni sustav. Pošto je heksakopter blizu lebdenja $T$ je jedinična matrica, čineći tako jednadžbe kutnih ubrzanja jednakima u oba koordinatna sustava. 
+\item Upravljački algoritam daje upravljačke signale motorima. S četiri upravljačke veličine nije moguće upravljati više od 4 stupnja slobode. Unutarnja petlja upravlja položajem i visinom, dok vanjska petlja upravlja pozicijom heksakoptera davajući referencu unutrašnjoj petlji.
+\end{itemize}
+Pojednostavljene jednadžbe dane su izrazima \ref{eq:Z2}-\ref{eq:kut3}.
+\begin{align}
+\ddot{Z} &= -g + (\cos\theta \cos\phi)\frac{U_1}{m} \label{eq:Z2} \\
+\ddot{\phi} &= \frac{U_2}{I_{xx}} \label{eq:kut1} \\
+\ddot{\theta} &= \frac{U_3}{I_{yy}} \label{eq:kut2} \\
+\ddot{\psi} &= \frac{U_4}{I_{zz}} \label{eq:kut3} 
+\end{align}
+Ulazi u upravljački algoritam su podaci iz senzora (ili izračunati podaci iz dinamičkog modela) i referenca. Izlazi iz upravljačkog algoritma su kutne brzine šest propelera koje zadaju vrijednost napona koja preko pulsno širinske modulacije - \engl{pulse-width modulation - PWM} pokreće motore propelera. Heksakopter ne dopušta izravnu kontrolu svih stupnjeva slobode. Upravljanje X i Y pozicije postiže se indirektno kroz kontrolu kuteva valjanja \engl{roll} i nagibanja \engl{pitch} u vanjskoj petlji. 
+Vanjska upravljačka petlja analizira podatke iz senzora i podatke o željenoj referenci te daje na izlazu vrijednosti za unutarnju upravljačku petlju koja zatim upravlja kutevima valjanja\engl{roll}, nagibanja \engl{pitch}
+i zavrtanja \engl{yaw}. Unutarnja upravljačka petlja jezgra upravljačkog algoritma. Analizira podatke iz senzora i vanjske upravljačke petlje, te zajedno s željenim podacima o visini daje izlaz. Izlazi iz unutarnje upravljačke petlje su upravljačke varijable koje stabiliziraju heksakopter smanjujući pogrešku između reference i stvarnog položaja. Izrazima \ref{eq:U1}-\ref{eq:U4} izražavaju se upravljačke veličine za potrebna ubrzanja koje možemo pisati \ref{eq:omega1}-\ref{eq:omega6}. Za regulaciju tih ubrzanja koristi se PID regulator.
 
-\subsection{Matlab}
 
 \section{Eksperimentalni dio}
 U ovom poglavlju obrađen je eksperimentalni dio, tj.~provjera kvalitete projektiranog sustava upravljanja u laboratorijskim uvjetima. 
@@ -719,8 +778,7 @@ Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (po
 \includegraphics[width=8cm]{img/heksakopterMJX.JPG}
 \caption{Heksakopter MJX X800 RC sa svojim kontrolerom}
 \label{fig:MJX X800 RC}
-\end{figure}
-
+\end{figure}\\
 Za potrebe eksperimenta potrebno je modificirati samog drona te odabrati način upravljanja preko računala. Postoje dva načina:
 \begin{enumerate}
 \item Slanjem upravljačkih signala putem radio signala\label{sec:radio}
@@ -742,7 +800,7 @@ Modifikacija heksakoptera je u smislu dodavanja markera za njegovo praćenje u s
 \caption{Svjetleća dioda visoke snage\protect\footnotemark}
 \label{fig:LED}
 \end{figure}
-\footnotetext{Izvor: http://www.ledlightmake.com/bmz\_cache/infrared\%20850nm\%20led\%203W.jpg}
+\footnotetext{Izvor: http://www.ledlightmake.com/bmz\_cache/infrared\%20850nm\%20led\%203W.jpg}\\
 One su postavljene na gornji dio heksakoptera, a napajaju se iz baterije koja pokreće motore samog heksakoptera. Potrebno je koristiti što lakše dijelove kako težina ne bi previše utjecala na samo upravljanje. Modificirani heksakopter može se vidjeti na \ref{fig:modificirani dron}.
 \begin{figure}[htb]
 \centering
@@ -839,23 +897,27 @@ Komponente i sam PID regulator objašnjeni su u poglavlju \ref{PIDreg}. U dodatk
 %\chapter{Implementacija PID regulatora}
 %\lstinputlisting[language=Python]{code/pid.py}
 
+\subsubsection{Komunikacija između Arduina i ROS-a}
+Arduino se koristi za generiranje PWM signala koji se šalje na kontroler. U ovom poglavlju bit će opisani Arduino IDE program. No prvi korak je instalirati Arduino IDE te \emph{rosserial arduino} \footnote{Upute za instalaciju su dostupne na: \url{http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino IDE Setup}} paket za povezivanje ROS direktno s Arduino IDE. \emph{Rosserial} sadrži ROS komunikacijski protokol koji funkcionira preko Arduinovog serijskog porta - UART. Ovaj paket omogućuje Arduinu da bude ponopravni ROS čvor koji može izravno objavljivati i pretplatiti se na ROS informacije. Nakon što se program spusti na Arduino u terminalu se pokrene serijska komunikacija naredbom:
+\begin{lstlisting}
+rosrun rosserial_python serial_node.py
+\end{lstlisting}
+U Arduino programu se prvo definira potrebni paketi.
+\lstinputlisting[language=C, firstline=1, lastline=2]{code/pid_listening.c}
+Definiraju se varijable, odnosno frekvencija, inicijalne upravljačke veličine za generiranje PWM signala koji se šalje preko filtra i operacijskog pojačala na kontroler te korišteni pinovi. Arduino na svojim izlazima može dati maksimalno 5V što se postiže postavljanjem vrijednosti PWM signala na 255. Tako npr.~napon iznosa 3.10 V se postiže postavljenjem vrijednosti PWM signala na 179.
+\lstinputlisting[language=C, firstline=4, lastline=17]{code/pid_listening.c}
+Potrebno je definirati pretplatu \engl{subscriber} na čvor \engl{node} koji postavlja vrijednosti za PWM signal. \emph{Subscriber} ima pozivajući funkciju koja kod promjene u čvoru uzima vrijednosti i sprema ih u varijable.
+\lstinputlisting[language=C, firstline=22, lastline=32]{code/pid_listening.c}
+U \emph{setup} funkciji, koja se izvršava samo kod pokretanja, definiraju se svi pinovi kao izlazni \engl{output}. Potrebno je namjestiti PWM frekvenciju, odnosno povečati ju kako bi signal bio stabilniji. Za ispravljanje PWM signala na pinovma 9 i 10 koristi se brojač 1, dok se za pinove 11 i 3 koristi brojačem 2. PWM frekvencija iznosi 3921.16 Hz. Također je potrebno jednom inicijalizirati ROS čvor za obradu, 
+\lstinputlisting[language=C, firstline=33, lastline=44]{code/pid_listening.c}
+Glavna petlja zadanom frekvencijom postavlja nove vrijednosti PWM signala.
+\lstinputlisting[language=C, firstline=45, lastline=58]{code/pid_listening.c}
+
 \subsubsection{Algoritam upravljanja}
 Sam algoritam upravljanja opisan je Python skriptom. Na samom početku skripte 
 \lstinputlisting[language=Python, firstline=1, lastline=10]{code/control_pid.py}
 
-\subsubsection{Komunikacija između Arduina i ROS-a}
-Arduino se koristi za generiranje PWM signala koji se šalje na kontroler. U ovom poglavlju bit će opisani Arduino IDE program. No prvi korak je instalirati Arduino IDE te \emph{rosserial arduino} \footnote{Upute za instalaciju su dostupne na: \url{http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino IDE Setup}} paket za povezivanje ROS direktno s Arduino IDE. \emph{Rosserial} sadrži ROS komunikacijski protokol koji funkcionira preko Arduinovog serijskog porta - UART. Ovaj paket omogućuje Arduinu da bude ponopravni ROS čvor koji može izravno objavljivati i pretplatiti se na ROS informacije.
-U programu se prvo definirata potrebna sintaksa i paketi.
-\lstinputlisting[language=C, firstline=1, lastline=2]{code/pid_listening.c}
-Definiraju se varijable, odnosno frekvencija, inicijalne upravljačke veličine za generiranje PWM signala koji se šalje preko filtra i operacijskog pojačala na kontroler te korišteni pinovi. 
-\lstinputlisting[language=C, firstline=4, lastline=17]{code/pid_listening.c}
-Potrebno je definirati 
-\lstinputlisting[language=C, firstline=22, lastline=32]{code/pid_listening.c}
-U \emph{setup} funkciji, koja se izvršava samo kod pokretanja, definiraju se svi pinovi kao izlazni \engl{output}. Potrebno je namjestiti PWM frekvenciju, odnosno povečati ju kako bi signal bil stabilniji. Za ispravljanje PWM signala na pinovma 9 i 10 koristi se brojač 1, dok se za pinove 11 i 3 koristi brojačem 2. PWM frekvencija iznosi 3921.16 Hz.
-\lstinputlisting[language=C, firstline=34, lastline=44]{code/pid_listening.c}
-Glavna petlja 
-\lstinputlisting[language=C, firstline=46, lastline=58]{code/pid_listening.c}
-
+Important to notice that we have crashed lots of times when starting to test/debug this system. Most of the crashes are due to the desktop computer "hanging out"... then the vehicle stops receiving the information and will keep the last command. A auto-landing feature is needed, this feature will be added on version 2.
 
 \subsection{Rezultati}
  

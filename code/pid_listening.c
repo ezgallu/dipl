@@ -27,8 +27,7 @@ void droneInputCb( const geometry_msgs::Quaternion& control_msg ){
   vyaw = control_msg.w;
 }
 
-// pubs and subs
-ros::Publisher droneSpeed("drone_speed", &drone_speed_msg);
+// Subscriber
 ros::Subscriber<geometry_msgs::Quaternion> droneInputSub("control/drone_input", droneInputCb );
 
 void setup() {
@@ -44,11 +43,6 @@ void setup() {
 }
 
 void loop() {
-  drone_speed_msg.x = vx;
-  drone_speed_msg.y = vy;
-  drone_speed_msg.z = vz;
-  drone_speed_msg.w = vyaw;
-  droneSpeed.publish( &drone_speed_msg );
   nh.spinOnce();
   analogWrite(pin_thrust, (int)vz);
   analogWrite(pin_x, (int)vx);
