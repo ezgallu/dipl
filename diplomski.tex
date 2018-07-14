@@ -69,7 +69,22 @@
 \includepdf[pages=-]{img/izvornik.pdf}
 
 % Dodavanje zahvale ili prazne stranice. Ako ne želite dodati zahvalu, naredbu ostavite radi prazne stranice.
-\zahvala{Svima koji žele naučiti koristiti \LaTeX{}.}
+\zahvala{
+Veliku  zahvalnost,  u  prvom  redu,  dugujem  svom  mentoru  prof.dr.sc.  Jadranku Matušku koji mi  je  omogućio  svu  potrebnu  opremu  i  pomogao  svojim  stručnim savjetima  pri  izradi  ovog  diplomskog rada.
+	
+Također zahvaljujem doc.dr.sc. Šandoru Ilešu na pomoći i stručnim savjetima na nekim ključnim mjestima ovog rada.\\
+
+Zahvalu želim izraziti kolegi Bojanu Spahiji, čiji diplomski rad je vezan za izradu sustava globalne vizije, na strpljenju, podršci te pomoći. \\
+
+Dodatno se  zahvaljujem svim  svojim  prijateljima  i  prijateljicama,  koji  su  uvijek  bili  uz  mene i bez kojih cijeli ovaj tijek mog studiranja ne bi prošao tako lako i zabavno. \\
+
+Posebnu  zahvalnost  iskazujem  cijeloj  svojoj  obitelji  koja  me  je  uvijek  podržavala  i  upućivala na pravi put.
+
+I na kraju, najveću zaslugu za ono što sam postigao pripisujem svojim roditeljima i sestri, koji su 
+uvijek bili TU, uz mene, bez obzira da li se radilo o teškim ili sretnim trenucima i bez kojih 
+sve ovo što sam dosad postigao ne bi bilo moguće.\\
+
+Velika HVALA svima! }
 
 \tableofcontents
 % Tu možete staviti popis slika i tablica
@@ -914,32 +929,64 @@ Glavna petlja zadanom frekvencijom postavlja nove vrijednosti PWM signala.
 \lstinputlisting[language=C, firstline=45, lastline=58]{code/pid_listening.c}
 
 \subsubsection{Algoritam upravljanja}
-Sam algoritam upravljanja opisan je Python skriptom. Implementirana je samo vanjska petlja, odnosno upravljanje po poziciji i orijentaciji. Unutarnja petlja je implementirana već u samom dronu izvršavajući komande koje šalje kontroler. Naćin na koji je ona implementirana je nepoznanica pošto ne postoji neki opširni\emph{manual} za korišteni dron. Nadalje, u ovom programu se povezuju svi čvorovi sa sheme \ref{fig:cvoroviROS}. Program sadrži 3 pretplatnika, te 2 objavljivača \engl{publisher}:
+Sam algoritam upravljanja opisan je Python skriptom. Implementirana je samo vanjska petlja, odnosno upravljanje po poziciji i orijentaciji. Unutarnja petlja je implementirana već u samom dronu izvršavajući komande koje šalje kontroler. Način na koji je ona implementirana je nepoznanica pošto ne postoji neki opširni\emph{manual} za korišteni dron. Nadalje, u ovom programu se povezuju svi čvorovi sa sheme \ref{fig:cvoroviROS}. Program sadrži 3 pretplatnika, te 2 objavljivača \engl{publisher}:
 \begin{itemize}
-\item Subscriber "drone/pose_ref" --- referentna pozicija i orijentacija
-\item Subscriber "drone_position" --- izmjerena pozicija i orijentacija
+\item Subscriber "drone/pose\_ref" --- referentna pozicija i orijentacija
+\item Subscriber "drone\_position" --- izmjerena pozicija i orijentacija
 \item Subscriber "keyboard" --- kontrola preko tipkovnice
-\item Publisher "control/drone_input" --- upravljačka veličina koja se šalje na Arduino
-\item Publisher "pose_error" --- pogreška pozicioniranja
+\item Publisher "control/drone\_input" --- upravljačka veličina koja se šalje na Arduino
+\item Publisher "pose\_error" --- pogreška pozicioniranja
 \end{itemize}
-U prethodnom poglavlju opisani je pretplatnik na čvor "control/drone_input" (Arduino program), a u nastavku je programskim kodom opisani objavljivač na taj isti čvor (algoritam upravljanja). 
-\lstinputlisting[language=Python, firstline=57, lastline=59]{code/pid_controller.py}
-Ovime je pokazano kako lako u ROS-u preko čvorova dva zasebna programa komuniciraju jedan između drugog.
+U prethodnom poglavlju opisani je pretplatnik na čvor "control/drone\_input" (Arduino program), a u nastavku je programskim kodom opisani objavljivač na taj isti čvor (algoritam upravljanja). 
+\lstinputlisting[language=Python, linerange={57-59,189-190}]{code/pid_controller.py}
+Ovime je pokazano kako lako, u ROS-u preko čvorova, mogu dva zasebna programa komunicirati jedan između drugog.
+Za upravljanje vanjskom petljom potrebna su 4 PID regulatora za upravljanje po X, Y, Z poziciji te orijentaciji \emph{yaw}. No prije parametriziranja regulatora potrebno je izmjeriti potisak na kojem dron lebdi. Za tu priliku se preko tipkovnice zadaje ručno upravljačka veličina koja će osigurati lebdenje drona. Osim za zadavanje upravljačkog signala, tipkovnica se koristi i kod pripreme hardvera, tj.~pritiskom na tipku daje se signal da se algoritam može pokrenuti. Uz to se preko tipkovnice zbog sigurnosti, odnosno mogućeg neočekivanog rada, mogu isključiti svi motori. Ova funkcionalnost je potrebna jer se na drugi način ne mogu isključiti motori. Razlog tome je što dron izvršava onu naredbu koju je zadnju prihvatio od kontrolera, pa se onda može samo fizički zaustaviti. 
+\lstinputlisting[language=Python, linerange={137-139}]{code/pid_controller.py}
+Za čitanje s tipkovnice koristi se paket \emph{pynput} koji je potrebno prethodno instalirati.
+Koristi se diskretizirani PID regulator  čija izvedba je prikazana u dodatku, a potrebno ga je ubaciti \engl{import} u Python skriptu.  Prilikom pokretanja jednom se inicijaliziraju PID kontroleri. 
+\lstinputlisting[language=Python, linerange={30-33}]{code/pid_controller.py}
+Ovdje se parametri (koeficijenti) određuju eksperimentalno. 
+Petlja, odnosno algoritam koji se stalno vrti je prikazan sljedećim isječkom koda. Na vrijednost potiska ne utječe orijentacija pa ga je najlakše odrediti. U ovisnosti o orijentaciji potrebno je dobro namjestiti, preko geometrije, veličine za kontrolu u odnosu na X i Y os.   
+\lstinputlisting[language=Python, linerange={123-170,189-190}]{code/pid_controller.py}
+Također dodani je predfilter za filtriranje reference i mjernih podataka.
+\begin{lstlisting}
+def prefilter(x_k, x_k_1, a):
+	""" First order filter.
+	:param x_k: Current value
+	:param x_k_1: Previous value
+	:param a: Filter constant	"""
+	
+	return (1 - a) * x_k_1 + a * x_k \end{lstlisting}
 
-Za ovakvo upravljanje potrebna su 4 PID regulatora za upravljanje po X, Y, Z poziciji te orijentaciji \emph{yaw}. 
 
+\subsubsection{Redoslijed pokretanja}
+\begin{enumerate}
+	\item Pokreće se terminal te zatim ROS naredbom
+	\begin{lstlisting}
+	roscore	\end{lstlisting}
+	\item Pokreće se serijska komunikacija između računala i Arduina
+	\begin{lstlisting}
+	rosrun rosserial_python serial_node.py	\end{lstlisting}
+	\item Spajaju se WiiMote-vi koji služe kao indikatori položaja (nakon naredbe potrebno je stisnuti tipke 1 i 2 na WiiMotu). Paket je modificiran tako da se prilikom spajanja proslijeđuje ID zbog razlikovanja čvorova.
+	\begin{lstlisting}
+	rosrun wiimote wiimote_node2.py _id:=1
+	rosrun wiimote wiimote_node2.py _id:=2	\end{lstlisting}
+	\item Pokretanje neuronske mreže koja iz podataka iz WiiMote-ova izračunava točan poziciju i orijentaciju.
+	\begin{lstlisting}
+	rosrun diplomski wii_neural.py \end{lstlisting}
+	\item Kontroler se postavlja tako da šalje vrijednosti koje su na kontroleru (zbog početnog kalibriranja prilikom \emph{wake up} signala). Dron se uključuje te se izvodi \emph{wake up} signal. Nakon povezivanja kontrolera i drona tako da kontroler prihvaća vrijednosti od računala pokreće se algoritam upravljanja i čitač s tipkovnice.
+	\begin{lstlisting}
+	rosrun diplomski pid_controller.py
+	rosrun diplomski keyboard.py \end{lstlisting}
+\end{enumerate}
 
-Prvi korak je odrediti potisak na kojem dron lebdi. 
-\lstinputlisting[language=Python, firstline=1, lastline=10]{code/pid_controller.py}
-
-Important to notice that we have crashed lots of times when starting to test/debug this system. Most of the crashes are due to the desktop computer "hanging out"... then the vehicle stops receiving the information and will keep the last command. A auto-landing feature is needed, this feature will be added on version 2.
 
 \subsection{Rezultati}
  
 
 
 \chapter{Zaključak}
-Zaključak.
+Upravljanje dronom izvršeno je na relativno jeftinoj opremi. Dron je malih dimenzija i male snage što uvelike utječe prilikom dodavanja dodatnog tereta na njega (dodavanjem LED indikatora promijenio se centar mase pa tako i dinamika samog drona). Detekcija pozicije dobiva se preko jeftinog WiiMota, u odnosu na profesionalnije kamere koje su puno skuplje, što utječe na točnost mjerenja i na veličinu radnog prostora. Radni prostor je relativno mali. Iako je zadovoljio potrebe eksperimenta za neke ozbiljnije testove i trajektorije potrebni je ipak nešto veći radni prostor. Problem nešto lošijeg indikatora mogao bi se riješiti estimacijom pozicije drona, no u ovom slučaju teško je odrediti točan matematički model, zbog promjena centra mase, momenata inercije, koji bi Kalmanofiltar koristio za estimaciju stavljajući veću težinu na dobiveni matematički model. Prethodno navedene promjene trebalo bi kompenzirati u unutarnjoj upravljačkoj petlji koja je riješena već u samom kontroleru i dronu te se stoga ne može mijenjati, tj.~korisnik nema pristupa. Kako se ne bi previše promijenila masa drona dodavanjem nove baterije, koja je potrebna za napajanje LED indikatora, korištena je postojeća koja napaja i motore. Kako su LED indikatori velike snage, baterija je dodatno opterećena što ima nekog utjecaja na snagu motora. Iz eksperimenata može se uočiti da se dron ne ponaša jednako prilikom različitih razina napunjenosti baterije. Samim time što je činjenica da se dronom upravlja preko kontrolera, ne može se sa sigurnošću potvrditi kako se promjena upravljačke veličine u kontroleru izvrši na dronu, tj.~da li je linearnom promjenom upravljačke veličine i odziv linearan. Rješenje ovog problema, što je ujedno i nastavak budućeg razvoja, jest izrada većeg drona (što znači i težeg koji će manje promijeniti centar mase dodavanjem indikatora), sa snažnijim motorima koji neće osjetiti promjenu mase te vlastitim sklopovljem koje će izvršavati algoritam upravljanja unutarnje petlje (postoje \emph{open-source} algoritmi koji se mogu lako modificirati). Prilagođavanjem unutarnje i vanjske petlje upravljanja dolazi se do srži problema, te su mogući i napredniji načini upravljanja.
 
 \vfill
 \hspace*{0pt}\hfill Potpis:  $\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_$\\
