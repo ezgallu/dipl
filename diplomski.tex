@@ -883,7 +883,7 @@ Jedna bitna stvar za napomenuti je kako svi dronovi trebaju primiti od kontroler
 
 
 \subsection{Računalo s algoritmom upravljanja}\label{sec:algoritam}
-Za upravljanje se koristi robotski operativni sustav - ROS\footnote{Više informacija je dostupno na: \url{http://wiki.ros.org/}}. ROS prikuplja softverske okvire za razvoj robotskog softvera. ROS nije operacijski sustav, ali pruža usluge oblikovane za heterogene računalne skupine kao što su hardverska apstrakcija, niska razina kontrole uređaja, implementacija uobičajeno korištenih funkcija, prijenos poruka između procesa i upravljanje paketima. Obrada se odvija u čvorovima \engl{nodes} koji mogu primati, postavljati, kontrolirati,  držati i aktivirati razne informacije iz različitih senzora i aktuatora. Unatoč važnosti reaktivnosti i niske latencije u kontroli robota, tako i bespilotnih letjelica, ROS sam po sebi nije \emph{real-time} operacijski sustav, iako je moguće integrirati ROS s \emph{real-time} kodom. U ovom projektu korišteni je \emph{ROS Kinetic Kame}\footnote{Više o instalaciji na: \url{http://wiki.ros.org/kinetic/Installation/Ubuntu}} koji se može instalirati na \emph{Ubuntu  (16.04 LTS)} distribuciji \emph{Linuxa}. Nakon instalacije potrebnih paketa povezuju se čvorovi (prikazani slikom \ref{fig:cvoroviROS}) sa algoritmom upravljanja te se uspostavlja komunikacija između Arduina i ROS-a.
+Za upravljanje se koristi robotski operativni sustav - ROS\footnote{Više informacija je dostupno na: \url{http://wiki.ros.org/}}. ROS prikuplja softverske okvire za razvoj robotskog softvera. ROS nije operacijski sustav, ali pruža usluge oblikovane za heterogene računalne skupine kao što su hardverska apstrakcija, niska razina kontrole uređaja, implementacija uobičajeno korištenih funkcija, prijenos poruka između procesa i upravljanje paketima. Obrada se odvija u čvorovima \engl{nodes} koji mogu primati, postavljati, kontrolirati,  držati i aktivirati razne informacije iz različitih senzora i aktuatora. Unatoč važnosti reaktivnosti i niske latencije u kontroli robota, tako i bespilotnih letjelica, ROS sam po sebi nije \emph{real-time} operacijski sustav, iako je moguće integrirati ROS s \emph{real-time} kodom. U ovom projektu korišteni je \emph{ROS Kinetic Kame}\footnote{Više o instalaciji na: \url{http://wiki.ros.org/kinetic/Installation/Ubuntu}} koji se može instalirati na \emph{Ubuntu  (16.04 LTS)} distribuciji \emph{Linuxa}. Nakon instalacije potrebnih paketa povezuju se čvorovi (prikazani slikom \ref{fig:cvoroviROS}) s algoritmom upravljanja te se uspostavlja komunikacija između Arduina i ROS-a.
 \begin{figure}[htb]
 \centering
 \includegraphics[width=5cm]{img/fer_logo.jpg}
@@ -892,7 +892,7 @@ Za upravljanje se koristi robotski operativni sustav - ROS\footnote{Više inform
 \end{figure}
 
 \subsubsection{Implementacija PID regulatora}
-Komponente i sam PID regulator objašnjeni su u poglavlju \ref{PIDreg}. U dodatku je kod koji prikazuje implementaciju PID regulatora Python skriptom.
+Komponente i sam PID regulator u objašnjeni su u poglavlju \ref{PIDreg}. U dodatku je kod koji prikazuje implementaciju diskretnog PID regulatora Python skriptom.
 %\appendix
 %\chapter{Implementacija PID regulatora}
 %\lstinputlisting[language=Python]{code/pid.py}
@@ -906,7 +906,7 @@ U Arduino programu se prvo definira potrebni paketi.
 \lstinputlisting[language=C, firstline=1, lastline=2]{code/pid_listening.c}
 Definiraju se varijable, odnosno frekvencija, inicijalne upravljačke veličine za generiranje PWM signala koji se šalje preko filtra i operacijskog pojačala na kontroler te korišteni pinovi. Arduino na svojim izlazima može dati maksimalno 5V što se postiže postavljanjem vrijednosti PWM signala na 255. Tako npr.~napon iznosa 3.10 V se postiže postavljenjem vrijednosti PWM signala na 179.
 \lstinputlisting[language=C, firstline=4, lastline=17]{code/pid_listening.c}
-Potrebno je definirati pretplatu \engl{subscriber} na čvor \engl{node} koji postavlja vrijednosti za PWM signal. \emph{Subscriber} ima pozivajući funkciju koja kod promjene u čvoru uzima vrijednosti i sprema ih u varijable.
+Potrebno je definirati pretplatu \engl{subscriber} na čvor \engl{node} koji postavlja vrijednosti za generiranje PWM signal. \emph{Subscriber} ima pozivajući funkciju koja kod promjene u čvoru uzima vrijednosti i sprema ih u varijable.
 \lstinputlisting[language=C, firstline=22, lastline=32]{code/pid_listening.c}
 U \emph{setup} funkciji, koja se izvršava samo kod pokretanja, definiraju se svi pinovi kao izlazni \engl{output}. Potrebno je namjestiti PWM frekvenciju, odnosno povečati ju kako bi signal bio stabilniji. Za ispravljanje PWM signala na pinovma 9 i 10 koristi se brojač 1, dok se za pinove 11 i 3 koristi brojačem 2. PWM frekvencija iznosi 3921.16 Hz. Također je potrebno jednom inicijalizirati ROS čvor za obradu, 
 \lstinputlisting[language=C, firstline=33, lastline=44]{code/pid_listening.c}
@@ -914,8 +914,23 @@ Glavna petlja zadanom frekvencijom postavlja nove vrijednosti PWM signala.
 \lstinputlisting[language=C, firstline=45, lastline=58]{code/pid_listening.c}
 
 \subsubsection{Algoritam upravljanja}
-Sam algoritam upravljanja opisan je Python skriptom. Na samom početku skripte 
-\lstinputlisting[language=Python, firstline=1, lastline=10]{code/control_pid.py}
+Sam algoritam upravljanja opisan je Python skriptom. Implementirana je samo vanjska petlja, odnosno upravljanje po poziciji i orijentaciji. Unutarnja petlja je implementirana već u samom dronu izvršavajući komande koje šalje kontroler. Naćin na koji je ona implementirana je nepoznanica pošto ne postoji neki opširni\emph{manual} za korišteni dron. Nadalje, u ovom programu se povezuju svi čvorovi sa sheme \ref{fig:cvoroviROS}. Program sadrži 3 pretplatnika, te 2 objavljivača \engl{publisher}:
+\begin{itemize}
+\item Subscriber "drone/pose_ref" --- referentna pozicija i orijentacija
+\item Subscriber "drone_position" --- izmjerena pozicija i orijentacija
+\item Subscriber "keyboard" --- kontrola preko tipkovnice
+\item Publisher "control/drone_input" --- upravljačka veličina koja se šalje na Arduino
+\item Publisher "pose_error" --- pogreška pozicioniranja
+\end{itemize}
+U prethodnom poglavlju opisani je pretplatnik na čvor "control/drone_input" (Arduino program), a u nastavku je programskim kodom opisani objavljivač na taj isti čvor (algoritam upravljanja). 
+\lstinputlisting[language=Python, firstline=57, lastline=59]{code/pid_controller.py}
+Ovime je pokazano kako lako u ROS-u preko čvorova dva zasebna programa komuniciraju jedan između drugog.
+
+Za ovakvo upravljanje potrebna su 4 PID regulatora za upravljanje po X, Y, Z poziciji te orijentaciji \emph{yaw}. 
+
+
+Prvi korak je odrediti potisak na kojem dron lebdi. 
+\lstinputlisting[language=Python, firstline=1, lastline=10]{code/pid_controller.py}
 
 Important to notice that we have crashed lots of times when starting to test/debug this system. Most of the crashes are due to the desktop computer "hanging out"... then the vehicle stops receiving the information and will keep the last command. A auto-landing feature is needed, this feature will be added on version 2.
 
