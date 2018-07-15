@@ -127,7 +127,7 @@ Unatoč tome, vojska i dalje koristi dronove i  bespilotne letjelice jer vjeruju
  
 
 \subsection{Vrste}
-Prema \citet{UAVSystems} postoje  3  vrste  letjelica  bez  pilota,  isključujući 
+Prema \citet{Systems} postoje  3  vrste  letjelica  bez  pilota,  isključujući 
 projektile: \begin{itemize}
 \item Bespilotne letjelice \engl{Unmanned Aerial Vehicle - UAV} (slika \ref{fig:UAV letjelica})
 \item Letjelice na daljinsko upravljanje \engl{ Remotely Piloted Vehicle - RPV} (slika \ref{fig:RPV letjelica})
@@ -155,7 +155,7 @@ Kao što je već spomenuto, bespilotna letjelica je letjelica ili zrakoplov bez 
 Neke  od  bespilotnih  letjelica  su:  Altair,  Global  Hawk,  X47-A, Prowler II, X45-A UCAV, Fire Scout, Predator A i Predator B, ER/MP UAS, I-GNAT, Mariner, Army I-GNAT ER i drugi.
 \begin{figure}[htb]
 \centering
-\includegraphics[width=8cm]{img/UAV.png}
+\includegraphics[width=7cm]{img/UAV.png}
 \caption{UAV letjelica\protect\footnotemark}
 \label{fig:UAV letjelica}
 \end{figure}
@@ -182,7 +182,7 @@ Vrsta bespilotnih letjelica, poznatijih kao dronovi su zračni bespilotni sustav
 \end{figure}
 \footnotetext{Izvor: http://www.bluebird-electric.net/artificial\_intelligence\_autonomous\_robotics/robotics\_artificial\_intell-igence\_autonomous\_pictures/uav\_drone\_photo\_recon\_camera\_multi\_rotor\_helicopter.jpg}
 Na  slici~\ref{fig:dron}  nalazi  se  slika 
-drona. Današnja najvažnija primjena dronova je stvaranje mapa, odnosno snimaka iz zraka. Dronovi su  vrlo dobri u izradi karata, daleko više od drugih tehnologija za istu primjenu. Nadalje, odlični su u fotografiranju i računalnoj  obradi  tih  fotografija \citep[str.~10]{Drones}. Većina dronova koriste razne senzore kako  bi  napravili  procjenu  stanja,  odnosno  koriste  MEMS \engl{Microelectromechanical} čipove  za  mjerenje  ubrzanja  i rotacije. Neki od njih nose sustav za mjerenje udaljenosti od tla te također mogu imati barometre za  mjerenje  tlaka  zraka.  Uz  to,  dronovi  mogu  imati  na  sebi senzore  za  prijenos  topline  pa  i manetometre za mjerenje zemljinog magnetskog polja. No najveća većina njih posjeduje GPS senzore jer MEMS senzori koji se koriste na takvim jeftinim letjelicama nisu dovoljni precizni. No, GPS ne može ažurirati svoju poziciju dovoljno često te ima svoje oscilacije pa je najbolja kombinacija  upravo  spomenutih  senzora \citep[str.~13]{Drones}.\\
+drona. Današnja najvažnija primjena dronova je stvaranje mapa, odnosno snimaka iz zraka. Dronovi su  vrlo dobri u izradi karata, daleko više od drugih tehnologija za istu primjenu. Nadalje, odlični su u fotografiranju i računalnoj  obradi  tih  fotografija \citep[str.~10]{Drones}. Većina dronova koriste razne senzore kako  bi  napravili  procjenu  stanja,  odnosno  koriste  MEMS \engl{Microelectromechanical} čipove  za  mjerenje  ubrzanja  i rotacije. Neki od njih nose sustav za mjerenje udaljenosti od tla te također mogu imati barometre za  mjerenje  tlaka  zraka.  Uz  to,  dronovi  mogu  imati  na  sebi senzore  za  prijenos  topline  pa  i manetometre za mjerenje zemljinog magnetskog polja. No najveća većina njih posjeduje GPS \engl{Global Positioning System} senzore jer MEMS senzori koji se koriste na takvim jeftinim letjelicama nisu dovoljni precizni. No, GPS ne može ažurirati svoju poziciju dovoljno često te ima svoje oscilacije pa je najbolja kombinacija  upravo  spomenutih  senzora \citep[str.~13]{Drones}.\\
 Nadalje, na slici~\ref{fig:konfiguracijaDrona} nalazi se primjer jedne od konfiguracija drona s više motora. Sastoji  se  od  spomenutih  motora  i  propelera,  kontrolera  za  let,  GPS  senzora,  baterije, elektroničkog kontrolera za brzinu, prijemnika, ploče za napajanje i telemetrijskog modula. 
 \begin{figure}[htb]
 \centering
@@ -878,22 +878,26 @@ Sada kada su određene veličine analognih signala potrebno je fizički prekinut
   \label{fig:kontrolerVani}
 \end{minipage}
 \end{figure}\\
-Nakon što je sve određeno i izvedeno Arduino se spaja na kontroler. Preko Arduina se zadaju upravljački naponi, no potrebno je dodati još nekoliko elemenata. Prilikom korištenja naredbe \emph{analogWrite} Arduino generira signal koji je potreban, no na taj način se ne može upravljati dronom iako se mjerenjem tog signala ispostavlja da je točan. Zaključak je da taj signal nije dovoljno \emph{stabilan} za upravljački signal te zbog tog trebamo koristiti dodatni krug za izglađivanje. Za izglađivanje se koristi LM324AN koji sadrži 4 operacijska pojačala, jer je potrebno zadati 4 upravljačke veličine. Operacijskim pojačalima potrebno je prethodno staviti otpornik ($4.7k\Omega$ ) i kondenzator ($10 \mu F$). Dodano je i vanjsko napajanje koje iz \emph{mreže} preko ispravljača napona ispravlja napon na istosmjernih 12V nakon čega se preko stabilizatora napona stabilizira napon na 5V te se takav koristi za operacijska pojačala i Arduino. Između ulaza i GND stabilizatora stavlja se kondenzator od $10\mu F$, a između izlaza i GND stabilizatora kondenzator od $1\mu F$. Na ulaz LM324AN dovodi se upravljački signal generiran Arduinom te se takav izglačani signal dovodi na dronov kontroler. Način spajanja prikazan je na slici \ref{fig:spajanje}.
+Nakon što je sve određeno i izvedeno Arduino se spaja na kontroler. Preko Arduina se zadaju upravljački naponi, no potrebno je dodati još nekoliko elemenata. Prilikom korištenja naredbe \emph{analogWrite} Arduino generira signal koji je potreban, no na taj način se ne može upravljati dronom iako se mjerenjem tog signala ispostavlja da je točan. Zaključak je da taj signal nije dovoljno \emph{stabilan} za upravljački signal te zbog tog trebamo koristiti dodatni krug za izglađivanje. Za izglađivanje se koristi LM324AN koji sadrži 4 operacijska pojačala, jer je potrebno zadati 4 upravljačke veličine. Operacijskim pojačalima potrebno je prethodno staviti otpornik ($4.7k\Omega$ ) i kondenzator ($10 \mu F$). Dodano je i vanjsko napajanje koje iz \emph{mreže} preko ispravljača napona ispravlja napon na istosmjernih 12V nakon čega se preko stabilizatora napona stabilizira napon na 5V te se takav koristi za operacijska pojačala i Arduino. Između ulaza i GND stabilizatora stavlja se kondenzator od $10\mu F$, a između izlaza i GND stabilizatora kondenzator od $1\mu F$. Na ulaz LM324AN dovodi se upravljački signal generiran Arduinom te se takav izglačani signal dovodi na dronov kontroler. Shema RC filtar s operacijskim pojačalom je prikazan slikom \ref{fig:filtar}, a njegov način spajanja s Arduina davajući izlaze za kontroler prikazan je na slici \ref{fig:spajanje}.
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=8cm]{img/pojacalo.png}
+	\caption{Shema RC filtra s operacijskim pojačalo}
+	\label{fig:filtar}
+\end{figure}
 \begin{figure}[htb]
 \centering
-\includegraphics[width=5cm]{img/fer_logo.jpg}
-\caption{Način spajanja Arduina i kontrolera\protect\footnotemark}
+\includegraphics[width=9cm]{img/arduino.png}
+\caption{Shema načina spajanja}
 \label{fig:spajanje}
 \end{figure}
-\footnotetext{niš}
 Jedna bitna stvar za napomenuti je kako svi dronovi trebaju primiti od kontrolera signal za buđenje \engl{Wake up signal}, koji je drugačiji za različite proizvođače, kako bi se s njime moglo upravljati. U ovom slučaju \emph{Wake up} signal je zadavanje maksimalne pa minimalne vrijednosti \emph{thrusta}, odnosno pomak lijeve gljive skroz prema gore pa skroz prema dolje. Također, ovaj kontroler ima opciju za fino podešavanje pa je prilikom \emph{Wake up} signala potrebno imati kratkospojene vodove kako bi se kontroler točno podesio. Ako se to ne napravi nakon simuliranog \emph{Wake up} signala, izgubi se mogućnost upravljanja drona prema naprijed i prema desno. Upravljanje preko Arduina treba biti jednako kao i fizičko upravljanje preko kontrolera, tako treba napomenuti da je prilikom slanja nove upute \engl{command} potrebno upravljački signal staviti u sredinu te ga tek zatim postaviti u drugu vrijednost (ovo vrijedi samo kod prelaska kroz srednju vrijednost). Vrlo važno je zapamtiti da se dron prvo treba prizemljiti te tek onda ugasiti motore i kontroler. Ukoliko se kontroler ugasi prilikom rada na dronu ostaju zadnje poslane upute. Time može doći do oštećenja opreme i prostora oko drona. Slikom \ref{fig:cijeli sustav} se prikazuje cijeli navedeni sustav, a poglavljem \ref{sec:algoritam} bit će opisani algoritam i softverski dio.
 \begin{figure}[htb]
 \centering
-\includegraphics[width=5cm]{img/fer_logo.jpg}
-\caption{Spajanje računala, Arduina i kontrolera\protect\footnotemark}
+\includegraphics[width=11cm]{img/spajanje.JPG}
+\caption{Spajanje računala, Arduina i kontrolera}
 \label{fig:cijeli sustav}
 \end{figure}
-\footnotetext{niš}
 
 
 
@@ -901,7 +905,7 @@ Jedna bitna stvar za napomenuti je kako svi dronovi trebaju primiti od kontroler
 Za upravljanje se koristi robotski operativni sustav - ROS\footnote{Više informacija je dostupno na: \url{http://wiki.ros.org/}}. ROS prikuplja softverske okvire za razvoj robotskog softvera. ROS nije operacijski sustav, ali pruža usluge oblikovane za heterogene računalne skupine kao što su hardverska apstrakcija, niska razina kontrole uređaja, implementacija uobičajeno korištenih funkcija, prijenos poruka između procesa i upravljanje paketima. Obrada se odvija u čvorovima \engl{nodes} koji mogu primati, postavljati, kontrolirati,  držati i aktivirati razne informacije iz različitih senzora i aktuatora. Unatoč važnosti reaktivnosti i niske latencije u kontroli robota, tako i bespilotnih letjelica, ROS sam po sebi nije \emph{real-time} operacijski sustav, iako je moguće integrirati ROS s \emph{real-time} kodom. U ovom projektu korišteni je \emph{ROS Kinetic Kame}\footnote{Više o instalaciji na: \url{http://wiki.ros.org/kinetic/Installation/Ubuntu}} koji se može instalirati na \emph{Ubuntu  (16.04 LTS)} distribuciji \emph{Linuxa}. Nakon instalacije potrebnih paketa povezuju se čvorovi (prikazani slikom \ref{fig:cvoroviROS}) s algoritmom upravljanja te se uspostavlja komunikacija između Arduina i ROS-a.
 \begin{figure}[htb]
 \centering
-\includegraphics[width=5cm]{img/fer_logo.jpg}
+\includegraphics[width=13cm]{img/diagram.png}
 \caption{Shema ROS čvorova}
 \label{fig:cvoroviROS}
 \end{figure}
@@ -919,13 +923,13 @@ rosrun rosserial_python serial_node.py
 \end{lstlisting}
 U Arduino programu se prvo definira potrebni paketi.
 \lstinputlisting[language=C, firstline=1, lastline=2]{code/pid_listening.c}
-Definiraju se varijable, odnosno frekvencija, inicijalne upravljačke veličine za generiranje PWM signala koji se šalje preko filtra i operacijskog pojačala na kontroler te korišteni pinovi. Arduino na svojim izlazima može dati maksimalno 5V što se postiže postavljanjem vrijednosti PWM signala na 255. Tako npr.~napon iznosa 3.10 V se postiže postavljenjem vrijednosti PWM signala na 179.
+Definiraju se varijable, odnosno frekvencija, inicijalne upravljačke veličine za generiranje PWM signala koji se šalje preko filtra i operacijskog pojačala na kontroler te korišteni pinovi. Arduino na svojim izlazima može dati maksimalno 5V što se postiže postavljanjem vrijednosti \emph{duty cycle} PWM signala na 255. Tako npr.~napon iznosa 3.10 V se postiže postavljenjem vrijednosti \emph{duty cycle} PWM signala na 179.
 \lstinputlisting[language=C, firstline=4, lastline=17]{code/pid_listening.c}
-Potrebno je definirati pretplatu \engl{subscriber} na čvor \engl{node} koji postavlja vrijednosti za generiranje PWM signal. \emph{Subscriber} ima pozivajući funkciju koja kod promjene u čvoru uzima vrijednosti i sprema ih u varijable.
+Potrebno je definirati pretplatu \engl{subscriber} na čvor \engl{node} koji postavlja vrijednosti \emph{duty cycle} za generiranje PWM signal. \emph{Subscriber} ima pozivajući funkciju koja kod promjene u čvoru uzima vrijednosti i sprema ih u varijable.
 \lstinputlisting[language=C, firstline=22, lastline=32]{code/pid_listening.c}
 U \emph{setup} funkciji, koja se izvršava samo kod pokretanja, definiraju se svi pinovi kao izlazni \engl{output}. Potrebno je namjestiti PWM frekvenciju, odnosno povećati ju kako bi signal bio stabilniji. Za ispravljanje PWM signala na pinovma 9 i 10 koristi se brojač 1, dok se za pinove 11 i 3 koristi brojačem 2. PWM frekvencija iznosi 3921.16 Hz. Također je potrebno jednom inicijalizirati ROS čvor za obradu, 
 \lstinputlisting[language=C, firstline=33, lastline=44]{code/pid_listening.c}
-Glavna petlja zadanom frekvencijom postavlja nove vrijednosti PWM signala.
+Glavna petlja zadanom frekvencijom postavlja nove \emph{duty cycle} vrijednosti PWM signala.
 \lstinputlisting[language=C, firstline=45, lastline=58]{code/pid_listening.c}
 
 \subsubsection{Algoritam upravljanja}
@@ -943,7 +947,7 @@ Ovime je pokazano kako lako, u ROS-u preko čvorova, mogu dva zasebna programa k
 Za upravljanje vanjskom petljom potrebna su 4 PID regulatora za upravljanje po X, Y, Z poziciji te orijentaciji \emph{yaw}. No prije parametriziranja regulatora potrebno je izmjeriti potisak na kojem dron lebdi. Za tu priliku se preko tipkovnice zadaje ručno upravljačka veličina koja će osigurati lebdenje drona. Osim za zadavanje upravljačkog signala, tipkovnica se koristi i kod pripreme hardvera, tj.~pritiskom na tipku daje se signal da se algoritam može pokrenuti. Uz to se preko tipkovnice zbog sigurnosti, odnosno mogućeg neočekivanog rada, mogu isključiti svi motori. Ova funkcionalnost je potrebna jer se na drugi način ne mogu isključiti motori. Razlog tome je što dron izvršava onu naredbu koju je zadnju prihvatio od kontrolera, pa se onda može samo fizički zaustaviti. 
 \lstinputlisting[language=Python, linerange={137-139}]{code/pid_controller.py}
 Za čitanje s tipkovnice koristi se paket \emph{pynput} koji je potrebno prethodno instalirati.
-Koristi se diskretizirani PID regulator  čija izvedba je prikazana u dodatku, a potrebno ga je ubaciti \engl{import} u Python skriptu.  Prilikom pokretanja jednom se inicijaliziraju PID kontroleri. 
+Koristi se diskretizirani PID regulator izvedeb kao u dodatku.  Prilikom pokretanja inicijaliziraju se PID kontroleri. 
 \lstinputlisting[language=Python, linerange={30-33}]{code/pid_controller.py}
 Ovdje se parametri (koeficijenti) određuju eksperimentalno. 
 Petlja, odnosno algoritam koji se stalno vrti je prikazan sljedećim isječkom koda. Na vrijednost potiska ne utječe orijentacija pa ga je najlakše odrediti. U ovisnosti o orijentaciji potrebno je dobro namjestiti, preko geometrije, veličine za kontrolu u odnosu na X i Y os.   
@@ -986,7 +990,7 @@ def prefilter(x_k, x_k_1, a):
 
 
 \chapter{Zaključak}
-Upravljanje dronom izvršeno je na relativno jeftinoj opremi. Dron je malih dimenzija i male snage što uvelike utječe prilikom dodavanja dodatnog tereta na njega (dodavanjem LED indikatora promijenio se centar mase pa tako i dinamika samog drona). Detekcija pozicije dobiva se preko jeftinog WiiMota, u odnosu na profesionalnije kamere koje su puno skuplje, što utječe na točnost mjerenja i na veličinu radnog prostora. Radni prostor je relativno mali. Iako je zadovoljio potrebe eksperimenta za neke ozbiljnije testove i trajektorije potrebni je ipak nešto veći radni prostor. Problem nešto lošijeg indikatora mogao bi se riješiti estimacijom pozicije drona, no u ovom slučaju teško je odrediti točan matematički model, zbog promjena centra mase, momenata inercije, koji bi Kalmanofiltar koristio za estimaciju stavljajući veću težinu na dobiveni matematički model. Prethodno navedene promjene trebalo bi kompenzirati u unutarnjoj upravljačkoj petlji koja je riješena već u samom kontroleru i dronu te se stoga ne može mijenjati, tj.~korisnik nema pristupa. Kako se ne bi previše promijenila masa drona dodavanjem nove baterije, koja je potrebna za napajanje LED indikatora, korištena je postojeća koja napaja i motore. Kako su LED indikatori velike snage, baterija je dodatno opterećena što ima nekog utjecaja na snagu motora. Iz eksperimenata se može uočiti da se dron ne ponaša jednako prilikom različitih razina napunjenosti baterije. Samim time što je činjenica da se dronom upravlja preko kontrolera, ne može se sa sigurnošću potvrditi kako se promjena upravljačke veličine u kontroleru izvrši na dronu, tj.~da li je linearnom promjenom upravljačke veličine i odziv linearan. Rješenje ovog problema, što je ujedno i nastavak budućeg razvoja, jest izrada većeg drona (što znači i težeg koji će manje promijeniti centar mase dodavanjem indikatora), sa snažnijim motorima koji neće osjetiti promjenu mase te vlastitim sklopovljem koje će izvršavati algoritam upravljanja unutarnje petlje (postoje \emph{open-source} algoritmi koji se mogu lako modificirati). Prilagođavanjem unutarnje i vanjske petlje upravljanja dolazi se do srži problema, te su mogući i napredniji načini upravljanja.
+Upravljanje dronom izvršeno je na relativno jeftinoj opremi. Dron je malih dimenzija i male snage što uvelike utječe prilikom dodavanja dodatnog tereta na njega (dodavanjem LED indikatora promijenio se centar mase pa tako i dinamika samog drona). Detekcija pozicije dobiva se preko jeftinog WiiMota, u odnosu na profesionalnije kamere koje su puno skuplje, što utječe na točnost mjerenja i na veličinu radnog prostora. Radni prostor je relativno mali. Iako je zadovoljio potrebe eksperimenta za neke ozbiljnije testove i trajektorije potrebni je ipak nešto veći radni prostor. Problem nešto lošijeg indikatora mogao bi se riješiti estimacijom pozicije drona, no u ovom slučaju teško je odrediti točan matematički model, zbog promjena centra mase, momenata inercije, koji bi Kalmanofiltar koristio za estimaciju stavljajući veću težinu na dobiveni matematički model. Prethodno navedene promjene trebalo bi kompenzirati u unutarnjoj upravljačkoj petlji koja je riješena već u samom kontroleru i dronu te se stoga ne može mijenjati, tj.~korisnik nema pristupa. Kako se ne bi previše promijenila masa drona dodavanjem nove baterije, koja je potrebna za napajanje LED indikatora, korištena je postojeća koja napaja i motore. Kako su LED indikatori velike snage, baterija je dodatno opterećena što ima nekog utjecaja na snagu motora. Iz eksperimenata se može uočiti da se dron ne ponaša jednako prilikom različitih razina napunjenosti baterije. Samim time što je činjenica da se dronom upravlja preko kontrolera, ne može se sa sigurnošću potvrditi kako se promjena upravljačke veličine u kontroleru izvrši na dronu, tj.~da li je linearnom promjenom upravljačke veličine i odziv linearan. Rješenje ovog problema, što je ujedno i nastavak budućeg razvoja, jest izrada većeg drona (većim dronom se dodatnom masom manje mijenja centar mase), sa snažnijim motorima koji neće osjetiti promjenu mase te vlastitim sklopovljem (odgovarajuća frekvencija i komunikacija) koje će izvršavati algoritam upravljanja unutarnje petlje (postoje \emph{open-source} algoritmi koji se mogu lako modificirati). Prilagođavanjem unutarnje i vanjske petlje upravljanja dolazi se do srži problema, te su mogući i napredniji načini upravljanja.
 
 \vfill
 \hspace*{0pt}\hfill Potpis:  $\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_$\\
