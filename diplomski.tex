@@ -12,6 +12,8 @@
 \usepackage{siunitx}
 \usepackage{subcaption}
 \usepackage[final]{pdfpages}
+\usepackage{mwe}
+\usepackage{subfig}
 
 \usepackage{listings}
 \usepackage{color}
@@ -89,14 +91,14 @@ Velika HVALA svima! }
 \tableofcontents
 % Tu možete staviti popis slika i tablica
 \listoffigures
-%\listoftables
+\listoftables
 
 
 \chapter{Uvod}
 Ulaskom u novo stoljeće svjedočimo nastavku razvoja, usavršavanja i stvaranja novih tehnologija koja su pomoć u različitim ljudskim aktivnostima. Iako pojam bespilotnih letjelica postoji već dugi niz godina, one su tek u bliskoj prošlosti postale pojam svakodnevnice. Dugi niz godina bespilotne letjelice su se koristile, nažalost, samo u vojnim svrhama zbog čega su stradavali i nedužni civili zbog čega se njihov razvoj držao u tajnosti. Samo saznanje da se koriste u vojsci upućuje na to da je puno vremena i novaca uloženo u njihov razvoj, preciznost, nosivost te izdržljivost.\\
 Danas se uz nagli trend upoznavanja s tehnologijama bespilotnih letjelica, kao i digitalnih zapisa i pohranjivanja memorije svakodnevnih događaja namjena korištenja promijenila te su uvedeni novi pojmovi poput \glqq dronovi\grqq --- suvremena riječ koja zapravo opisuje nekoliko vrsta bespilotnih letjelica. Glavna područja njihovih korištenja su: javna sigurnost, zabava, nadzor i inspekcija, informacije, znanost o Zemlji.\\
 Korištenje  bespilotnih letjelica, naročito u civilne svrhe, bilježi eksponencijalan rast, kako u pogledu njihovog broja, veličine i težine, tako i u pogledu sve brojnijih mogućnosti njihove primjene \citep{EUR-Lex}. Cilj je razviti jeftinije i sposobnije bespilotne letjelice. U skoroj budućnosti tehnologija će se usavršiti pa će manje letjelice moći prenositi sve veću opremu, tako npr.~poštanski paketi će se dostavljati pomoću letjelica. Motiv izrade ovog rada leži u širokoj primjeni (kako u različitim granama industrije i istraživanja tako i za zabavu). \\
-Cilj ovog rada je shvatiti rad bespilotne letjelice te izrada sustava za slijeđenje željene trajektorije. Izazov je kretati se zadanom trajektorijom znajući da postoje razne vanjske smetnje koje utječu na upravljanje. Za to je potrebno implementirati algoritam upravljanja. Cilj upravljanja je stabilizirati sustav oko reference ili prema trajektoriji. To se postiže povratnim informacijama, odnosno mjerenoj poziciji. Za implementaciju algoritma potrebno je dobro razraditi dinamički model. Dronovi imaju šest stupnjeva slobode gibanja i četiri upravljačke veličine, što znači da su dronovi nestabilni sustavi. Jedini pokretni dijelovi su propeleri. U teorijskom dijelu će se opisati razvoj, svrha odnosno tipovi bespilotnih letjelica, dok će se detaljnije razraditi njezin model te odrediti matematički model prikladan za sintezu sustava upravljanja. Projektirat će se regulator za slijeđenje reference, uz pretpostavku raspoloživosti informacije o trenutnoj poziciji te orijentaciji. Provjera projektiranog sustava je provedena eksperimentalno u laboratorijskim uvjetima.
+Cilj ovog rada je shvatiti rad bespilotne letjelice te izrada sustava za slijeđenje željene trajektorije. Izazov je kretati se zadanom trajektorijom znajući da postoje razne vanjske smetnje koje utječu na upravljanje. Za to je potrebno implementirati algoritam upravljanja. Cilj upravljanja je stabilizirati sustav oko reference ili prema trajektoriji. To se postiže povratnim informacijama, odnosno mjerenoj poziciji. Za implementaciju algoritma potrebno je dobro razraditi dinamički model. Dronovi imaju šest stupnjeva slobode gibanja i četiri upravljačke veličine, što znači da su dronovi nestabilni sustavi. Jedini pokretni dijelovi su propeleri. U teorijskom dijelu će se opisati razvoj, svrha odnosno tipovi bespilotnih letjelica, dok će se detaljnije razraditi njezin model te odrediti matematički model prikladan za sintezu sustava upravljanja. Projektirat će se regulator za slijeđenje reference, uz pretpostavku raspoloživosti informacije o trenutnoj poziciji te orijentaciji. Provjera projektiranog sustava je provedena simulacijski te pokušana eksperimentalno u laboratorijskim uvjetima.
 
 \section{Bespilotne letjelice}
 Bespilotne letjelice (UAV\footnote{UAV \engl{Unmanned Aerial Vehicle} – opći je pojam koji označava zapravo sve vrste bespilotnih letjelica koje se kolokvijalno najčešće nazivaju dronovima. Pod tim se obično spominju dvije vrste letjelica kojima ne trebaju ljudski piloti, prve su tzv. kvadrikopteri \engl{quadcopter}, letjelice s četiri elise pomoću kojih dron može lebdjeti na mjestu i kretati se u raznim smjerovima. Drugi tip bespilotnih letjelica su izgleda projektila ili zrakoplova kojim se upravlja iz baze i povezani su uglavnom s vojnim operacijama.}) su, najjednostavnije rečeno, letjelice koje su sposobne izvršiti kontinuirani let bez prisutnosti pilota \citep{UAV}. Postoje razni oblici i veličine, no najčešće su dizajnirane za točno specifične uloge.\\
@@ -790,7 +792,7 @@ U ovom poglavlju obrađen je eksperimentalni dio, tj.~provjera kvalitete projekt
 Cijena modernih bespilotnih letjelica doseže nekoliko desetaka tisuća kuna (postoje i skuplje) koje imaju ugrađeno mnogo senzora. U našem eksperimentalnom dijelu korištena je jeftinija verzija koja nema toliko senzora, pa su zbog tog korišteni dodatni vizualni senzori koji određuju položaj letjelice u prostoru. Korišten je heksakopter MJX X800 RC koji je prikazan na slici \ref{fig:MJX X800 RC} zajedno sa svojim kontrolerom (njegova cijena je oko 40\$). Također odabrano je programsko okruženje ROS preko kojeg će se cijeli sustav upravljati. 
 \begin{figure}[htb]
 \centering
-\includegraphics[width=8cm]{img/heksakopterMJX.JPG}
+\includegraphics[width=8cm]{img/heksakopterMJX1.jpg}
 \caption{Heksakopter MJX X800 RC sa svojim kontrolerom}
 \label{fig:MJX X800 RC}
 \end{figure}\\
@@ -821,13 +823,13 @@ One su postavljene na gornji dio heksakoptera, a napajaju se iz baterije koja po
 \centering
 \begin{subfigure}{.48\textwidth}
   \centering
-  \includegraphics[width=.9\linewidth]{img/dron_gore.JPG}
+  \includegraphics[width=.9\linewidth]{img/dron_gore1.jpg}
   \caption{Gornji dio - vidljive svjetleće diode}
   \label{fig:gornji}
 \end{subfigure}
 \begin{subfigure}{.48\textwidth}
   \centering
-  \includegraphics[width=.9\linewidth]{img/dron_dole.JPG}
+  \includegraphics[width=.9\linewidth]{img/dron_dole1.jpg}
   \caption{Donji dio - spajanje na bateriju}
   \label{fig:donji}
 \end{subfigure}
@@ -842,13 +844,13 @@ Za točno određivanje položaja heksakoptera u prostoru potreban je sustav kame
 \centering
 \begin{minipage}{.4\textwidth}
   \centering
-  \includegraphics[width=.5\linewidth]{img/wiimote.JPG}
+  \includegraphics[width=.5\linewidth]{img/wiimote1.jpg}
   \captionof{figure}{Wii Remote}
   \label{fig:Wii Remote}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=.9\linewidth]{img/pixy.JPG}
+  \includegraphics[width=.9\linewidth]{img/pixy1.jpg}
   \captionof{figure}{Pixy kamera}
   \label{fig:Pixy kamera}
 \end{minipage}
@@ -867,13 +869,13 @@ Sada kada su određene veličine analognih signala potrebno je fizički prekinut
 \centering
 \begin{minipage}{.6\textwidth}
   \centering
-  \includegraphics[width=.8\linewidth]{img/modificiranje.JPG}
+  \includegraphics[width=.8\linewidth]{img/modificiranje1.jpg}
   \captionof{figure}{Modificiranje kontrolera}
   \label{fig:kontrolerUnutra}
 \end{minipage}%
 \begin{minipage}{.4\textwidth}
   \centering
-  \includegraphics[width=.5\linewidth]{img/modificirani.JPG}
+  \includegraphics[width=.5\linewidth]{img/modificirani1.jpg}
   \captionof{figure}{Modificirani kontroler}
   \label{fig:kontrolerVani}
 \end{minipage}
@@ -894,7 +896,7 @@ Nakon što je sve određeno i izvedeno Arduino se spaja na kontroler. Preko Ardu
 Jedna bitna stvar za napomenuti je kako svi dronovi trebaju primiti od kontrolera signal za buđenje \engl{Wake up signal}, koji je drugačiji za različite proizvođače, kako bi se s njime moglo upravljati. U ovom slučaju \emph{Wake up} signal je zadavanje maksimalne pa minimalne vrijednosti \emph{thrusta}, odnosno pomak lijeve gljive skroz prema gore pa skroz prema dolje. Također, ovaj kontroler ima opciju za fino podešavanje pa je prilikom \emph{Wake up} signala potrebno imati kratkospojene vodove kako bi se kontroler točno podesio. Ako se to ne napravi nakon simuliranog \emph{Wake up} signala, izgubi se mogućnost upravljanja drona prema naprijed i prema desno. Upravljanje preko Arduina treba biti jednako kao i fizičko upravljanje preko kontrolera, tako treba napomenuti da je prilikom slanja nove upute \engl{command} potrebno upravljački signal staviti u sredinu te ga tek zatim postaviti u drugu vrijednost (ovo vrijedi samo kod prelaska kroz srednju vrijednost). Vrlo važno je zapamtiti da se dron prvo treba prizemljiti te tek onda ugasiti motore i kontroler. Ukoliko se kontroler ugasi prilikom rada na dronu ostaju zadnje poslane upute. Time može doći do oštećenja opreme i prostora oko drona. Slikom \ref{fig:cijeli sustav} se prikazuje cijeli navedeni sustav, a poglavljem \ref{sec:algoritam} bit će opisani algoritam i softverski dio.
 \begin{figure}[htb]
 \centering
-\includegraphics[width=11cm]{img/spajanje.JPG}
+\includegraphics[width=11cm]{img/spajanje1.jpg}
 \caption{Spajanje računala, Arduina i kontrolera}
 \label{fig:cijeli sustav}
 \end{figure}
@@ -986,7 +988,96 @@ def prefilter(x_k, x_k_1, a):
 
 
 \subsection{Rezultati}
- 
+Podešavanje parametara PID regulatora na stvarnom sustavu iziskuje vremena. Pošto je radni prostor nedovoljno velik, pa dron izleti iz njega, u ovom poglavlju bit će prikazani simulacijski rezultati. Način na koji bi se ovaj problem mogao eksperimentalno riješiti je fiksirati kretanje drona na samo jednu os.
+Za simulaciju upravljanja drona korišteni je Matlab, odnosno Simulink. Simulink shemom opisani je matematičkim model heksakoptera koji je prikazan na slici \ref{fig:matlab_model}. Matematičko model je opisani izrazima \ref{eq:X} - \ref{eq:kut3}.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=14cm]{img/matlab_model.jpg}
+\caption{Matlab shema matematičkog modela}
+\label{fig:matlab_model}
+\end{figure}
+Korišteni parametri za simulaciju prikazani su tablicom \ref{tbl:parametriDrona}.
+\begin{table}[htb]
+\caption{Parametri drona}
+\label{tbl:parametriDrona}
+\centering
+\begin{tabular}{lcccr} \toprule
+Masa [kg] & Udaljenost motora [m] & $I_{xx}$ & $I_{yy}$ & $I_{zz}$\\ \midrule
+$0,75$ & $0,25$ & $0,019688$ & $0,019688$ & $0,039380$ \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Za upravljanje se koriste PID regulatori. Shema cijelog sustava za praćenje trajektorije prikazana je na slici \ref{fig:matlab_control}.
+\begin{figure}[htb]
+\centering
+\includegraphics[width=15cm]{img/matlab_control.jpg}
+\caption{Matlab shema praćenja trajektorije}
+\label{fig:matlab_control}
+\end{figure}
+Ugađanjem parametara PID regulatora dolazi se do vrijednosti prikazanih u tablici \ref{tbl:parametriPID}.
+\begin{table}[htb]
+\caption{Korišteni parametri PID regulatora}
+\label{tbl:parametriPID}
+\centering
+\begin{tabular}{cccc} \toprule
+Upravljačka veličina& $\mathbf{K_P}$ & $\mathbf{K_I}$ & $\mathbf{K_D}$\\ \midrule
+$\mathbf{U_1}$ & $10$ & $5$ & $10$ \\
+$\mathbf{U_2}$ & $5$ & $1$ & $1$ \\
+$\mathbf{U_3}$ & $5$ & $1$ & $1$ \\
+$\mathbf{U_4}$ & $5$ & $1$ & $1$ \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Na kraju je potrebno definirati trajektoriju. Napravljene su dvije simulacije. Razlika između njih je što se zadana orijentacija, odnosno kut zavrtanja \engl{yaw}, iz $0$ promijeni u $pi/16 [rad]$ odnosno $11,25 [\deg]$.
+Dron se u $t=0 s$ po Z osi diže na 2 m, a u $t=5 s$ na 3 m. Za referencu po X i Y osi zadaje se sinusoida, amplitude 5. Početna pozicija drona je u [5,0,0], što znači da će trajektorija bit kružnica oko točke (0,0) gledajući X-Y ravninu.
+Sa slikama \ref{fig:mjerenje1_XYZ} prikazana je razlika između reference i pozicije po X, Y i Z osima dobivene preko matematičkog modela. Prikazano je samo jedno mjerenje jer su razlike gotovo identične. 
+\begin{figure}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=13cm]{img/mjerenje1_X.png}
+\caption{X os}
+\label{fig:mjerenje1_X}
+\end{subfigure}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=13cm]{img/mjerenje1_Y.png}
+\caption{Y os}
+\label{fig:mjerenje1_Y}
+\end{subfigure}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=13cm]{img/mjerenje1_Z.png}
+\caption{Z os}
+\label{fig:mjerenje1_Z}
+\end{subfigure}\\[1ex]
+\caption{Praćenje trajektorije po X, Y i Z osi}
+\label{fig:mjerenje1_XYZ}
+\end{figure}
+Izlazne vrijednosti iz matematičkog modela, odnosno vanjske petlje upravljanja, su kutovi valjanja, nagibanja i zavrtanja. Na slikama \ref{fig:mjerenja_kutevi} su prikazani ti kutovi za dvije simulacije. Sa slike su vidljive male promjene kod kutova valjanja i nagibanja zbog male promjene kuta zavrtanja. 
+\begin{figure}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=13cm]{img/mjerenje1_kut.png}
+\caption{Mjerenje 1}
+\label{fig:mjerenje1_kut}
+\end{subfigure}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=13cm]{img/mjerenje2_kut.png}
+\caption{Mjerenje 2 - promjena kuta zavrtanja}
+\label{fig:mjerenje2_kut}
+\end{subfigure}\\[1ex]
+\caption{Kutovi valjanja, nagibanja i zavrtanja za dvije simulacije}
+\label{fig:mjerenja_kutevi}
+\end{figure}
+Praćenje trajektorije po X, Y i Z osi sa slike \ref{fig:mjerenje1_XYZ} u 3D prostoru prikazana je slikom \ref{fig:mjerenje_3D}. Sa ove slike je vidljivo da simulirana trajektorija prati referencu uz neki konstantanu pogrešku zbog toga jer se referenca konstantno mijenja pa dron ima premalo vremena da stigne u tu poziciju. Može se uočiti da prilikom pokretanja, kad je dron lebdio u zraku, ima drugačiju putanju nego prilikom konstantnog kretanja po kružnici. To se javlja zbog momenta inercije. Možemo zaključiti da projektirani sustav dobro prati trajektoriju. Ovime se vidi da bi se dobrim podešavanjem PID kontrolera u eksperimentu mogla pratiti trajektorija. 
+\begin{figure}
+\centering
+\includegraphics[width=15cm]{img/mjerenje2_3D.png}
+\caption{Praćenje trajektorije u 3D koordinatnom sustavu}
+\label{fig:mjerenje_3D}
+\end{figure}
+
 
 
 \chapter{Zaključak}
